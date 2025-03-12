@@ -6,7 +6,7 @@ type Props = {
   variant?: 'primary' | 'secondary'
 } & TouchableOpacityProps
 
-export function Button({ value, disabled, variant = 'primary', className, ...props }: Props) {
+export function Button({ value, disabled, className, variant = 'primary', ...props }: Props) {
   return (
     <TouchableOpacity
       className={cn(
