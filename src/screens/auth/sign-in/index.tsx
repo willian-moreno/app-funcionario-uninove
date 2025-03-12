@@ -69,7 +69,14 @@ export function SignIn() {
                 returnKeyLabel="Próximo"
                 returnKeyType="next"
                 readOnly={isSubmitting}
-                onSubmitEditing={() => passwordRef.current?.focus()}
+                onSubmitEditing={async () =>
+                  await new Promise((resolve) =>
+                    setTimeout(() => {
+                      passwordRef.current?.focus()
+                      resolve()
+                    }, 50),
+                  )
+                }
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
