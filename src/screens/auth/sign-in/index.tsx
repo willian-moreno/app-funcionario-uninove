@@ -91,7 +91,7 @@ export function SignIn() {
                 returnKeyLabel="Entrar"
                 returnKeyType="send"
                 readOnly={isSubmitting}
-                onSubmitEditing={() => handleSubmit(handleSignIn)}
+                onSubmitEditing={handleSubmit(handleSignIn)}
                 onBlur={onBlur}
                 onChangeText={onChange}
               />
