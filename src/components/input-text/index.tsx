@@ -7,7 +7,7 @@ export function InputText({ className, ...props }: Props) {
   return (
     <TextInput
       className={cn(
-        'h-14 w-full rounded-sm bg-white px-4 text-lg text-sky-800 shadow-xl shadow-black/25',
+        'h-14 w-full rounded-sm bg-white px-4 text-lg text-sky-800 shadow shadow-slate-800/10',
         'placeholder:text-slate-300',
         className,
       )}
