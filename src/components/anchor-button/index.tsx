@@ -8,7 +8,13 @@ type Props = {
 export function AnchorButton({ value, disabled, className, ...props }: Props) {
   return (
     <TouchableOpacity className={cn(className)} activeOpacity={disabled ? 1 : 0.7} {...props}>
-      <Text className={cn('font-sans text-lg text-sky-800 underline')}>{value}</Text>
+      <Text
+        className={cn('font-sans text-lg text-sky-800 underline', {
+          'text-sky-800/25': disabled,
+        })}
+      >
+        {value}
+      </Text>
     </TouchableOpacity>
   )
 }
