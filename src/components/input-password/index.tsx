@@ -1,11 +1,13 @@
 import { Ionicons } from '@expo/vector-icons'
 import { cn } from '@utils/cn'
-import { useState } from 'react'
+import { RefObject, useState } from 'react'
 import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native'
 
-type Props = {} & TextInputProps
+type Props = {
+  inputRef?: RefObject<TextInput> | null
+} & TextInputProps
 
-export function InputPassword({ className, ...props }: Props) {
+export function InputPassword({ className, inputRef, ...props }: Props) {
   const [isInvisible, setIsInvisible] = useState(true)
 
   function handleInvertVisibility() {
@@ -15,6 +17,7 @@ export function InputPassword({ className, ...props }: Props) {
   return (
     <View className="flex h-14 w-full flex-row gap-x-4 rounded-sm bg-white pl-4 shadow shadow-slate-800/10">
       <TextInput
+        ref={inputRef}
         className={cn(
           'h-14 flex-1 bg-white text-lg text-sky-800',
           'placeholder:text-slate-300',
