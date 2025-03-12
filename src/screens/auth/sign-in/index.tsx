@@ -4,6 +4,7 @@ import { InputPassword } from '@components/input-password'
 import { InputText } from '@components/input-text'
 import { Label } from '@components/label'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigation } from '@react-navigation/native'
 import { useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, TextInput, View } from 'react-native'
@@ -38,12 +39,18 @@ export function SignIn() {
 
   const passwordRef = useRef<TextInput>(null)
 
+  const navigation = useNavigation()
+
   async function handleSignIn() {
     if (!isValid) {
       return
     }
 
     await new Promise((resolve) => setTimeout(resolve, 3000))
+  }
+
+  function handleNavigateToResetPasswordFirstStageScreen() {
+    navigation.navigate('reset_password_first_stage')
   }
 
   return (
@@ -116,6 +123,7 @@ export function SignIn() {
           value="Esqueci minha senha / Primeiro acesso"
           className="mx-auto mt-3"
           disabled={isSubmitting}
+          onPress={handleNavigateToResetPasswordFirstStageScreen}
         />
       </View>
     </View>
