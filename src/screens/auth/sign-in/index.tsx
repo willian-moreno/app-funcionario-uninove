@@ -27,6 +27,7 @@ export function SignIn() {
     control,
     handleSubmit,
     formState: { isValid, isSubmitting },
+    setValue,
   } = useForm<SignInForm>({
     resolver: zodResolver(signInForm),
     values: {
@@ -53,6 +54,10 @@ export function SignIn() {
     navigation.navigate('reset_password_first_stage')
   }
 
+  function sanitizeRegistration(value: string) {
+    setValue('registration', value.replace(/\D+/, ''), { shouldValidate: true })
+  }
+
   return (
     <View className="flex-1">
       <Text className="font-bold text-4xl text-sky-900">Entre na sua conta de funcionário</Text>
@@ -66,7 +71,7 @@ export function SignIn() {
             control={control}
             name="registration"
             rules={{ required: true }}
-            render={({ field: { value, onChange, onBlur } }) => (
+            render={({ field: { value, onBlur } }) => (
               <InputText
                 value={value}
                 placeholder="000000"
@@ -85,7 +90,7 @@ export function SignIn() {
                   )
                 }
                 onBlur={onBlur}
-                onChangeText={onChange}
+                onChangeText={sanitizeRegistration}
               />
             )}
           />
