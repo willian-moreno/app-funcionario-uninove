@@ -15,8 +15,8 @@ export function AuthLayout({ children }: Props) {
       <KeyboardAvoiding.Root className="bg-sky-100">
         <KeyboardAvoiding.View>
           <KeyboardAvoiding.Scroll>
-            <View className="mx-auto flex w-52 flex-1">
-              <LogoSvg height={100} style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+            <View className="mx-auto -mt-6 flex w-52">
+              <LogoSvg height={130} style={{ marginTop: 'auto', marginBottom: 'auto' }} />
             </View>
             {children}
             <Footer variant="auth" />
