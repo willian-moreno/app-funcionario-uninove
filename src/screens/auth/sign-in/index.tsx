@@ -58,6 +58,19 @@ export function SignIn() {
     setValue('registration', value.replace(/\D+/, ''), { shouldValidate: true })
   }
 
+  async function onRegistrationSubmitEditing() {
+    await new Promise((resolve) => setTimeout(resolve, 50))
+
+    if (!passwordRef.current) {
+      return
+    }
+
+    const valueLength = String(passwordRef.current).length
+
+    passwordRef.current.focus()
+    passwordRef.current.setSelection(valueLength, valueLength)
+  }
+
   return (
     <View className="flex-1">
       <Text className="font-bold text-4xl text-sky-900">Entre na sua conta de funcionário</Text>
@@ -81,14 +94,7 @@ export function SignIn() {
                 returnKeyLabel="Próximo"
                 returnKeyType="next"
                 readOnly={isSubmitting}
-                onSubmitEditing={async () =>
-                  await new Promise((resolve) =>
-                    setTimeout(() => {
-                      passwordRef.current?.focus()
-                      resolve()
-                    }, 50),
-                  )
-                }
+                onSubmitEditing={onRegistrationSubmitEditing}
                 onBlur={onBlur}
                 onChangeText={sanitizeRegistration}
               />
