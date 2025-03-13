@@ -1,12 +1,12 @@
 import { cn } from '@utils/cn'
-import { SafeAreaView, SafeAreaViewProps } from 'react-native-safe-area-context'
+import { View, ViewProps } from 'react-native'
 
-type Props = {} & SafeAreaViewProps
+type Props = {} & ViewProps
 
 export function Root({ children, className, ...props }: Props) {
   return (
-    <SafeAreaView className={cn('flex-1', className)} {...props}>
+    <View className={cn('flex-1', className)} {...props}>
       {children}
-    </SafeAreaView>
+    </View>
   )
 }
