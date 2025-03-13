@@ -7,7 +7,7 @@ type Props = {
   inputRef?: RefObject<TextInput> | null
 } & TextInputProps
 
-export function InputPassword({ className, inputRef, readOnly, ...props }: Props) {
+export function PasswordInput({ className, inputRef, readOnly, ...props }: Props) {
   const [isInvisible, setIsInvisible] = useState(true)
 
   function handleInvertVisibility() {

@@ -1,13 +1,13 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
-import { InputPassword } from '@components/input-password'
-import { InputText } from '@components/input-text'
 import { Label } from '@components/label'
+import { PasswordInput } from '@components/password-input'
+import { TextInput } from '@components/text-input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
 import { useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
-import { Text, TextInput, View } from 'react-native'
+import { TextInput as NativeTextInput, Text, View } from 'react-native'
 import { z } from 'zod'
 
 const signInForm = z.object({
@@ -38,7 +38,7 @@ export function SignIn() {
 
   const isSubmitDisabled = !isValid || isSubmitting
 
-  const passwordRef = useRef<TextInput>(null)
+  const passwordRef = useRef<NativeTextInput>(null)
 
   const navigation = useNavigation()
 
@@ -85,7 +85,7 @@ export function SignIn() {
             name="registration"
             rules={{ required: true }}
             render={({ field: { value, onBlur } }) => (
-              <InputText
+              <TextInput
                 value={value}
                 placeholder="000000"
                 keyboardType="numeric"
@@ -108,7 +108,7 @@ export function SignIn() {
             name="password"
             rules={{ required: true }}
             render={({ field: { value, onChange, onBlur } }) => (
-              <InputPassword
+              <PasswordInput
                 inputRef={passwordRef}
                 value={value}
                 placeholder="*****"
