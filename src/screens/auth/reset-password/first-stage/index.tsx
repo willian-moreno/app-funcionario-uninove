@@ -105,6 +105,7 @@ export function ResetPasswordFirstStage() {
                 placeholder="000000"
                 keyboardType="numeric"
                 inputMode="numeric"
+                textContentType="username"
                 maxLength={6}
                 returnKeyLabel="Próximo"
                 returnKeyType="next"
@@ -129,6 +130,7 @@ export function ResetPasswordFirstStage() {
                 placeholder="000.000.000-00"
                 keyboardType="numeric"
                 inputMode="numeric"
+                textContentType="none"
                 maxLength={14}
                 returnKeyLabel="Próximo"
                 returnKeyType="next"
@@ -153,6 +155,7 @@ export function ResetPasswordFirstStage() {
                 placeholder="00/00/0000"
                 keyboardType="numeric"
                 inputMode="numeric"
+                textContentType="birthdate"
                 maxLength={10}
                 returnKeyLabel="Próximo"
                 returnKeyType="next"
@@ -177,6 +180,7 @@ export function ResetPasswordFirstStage() {
                 placeholder="00/00/0000"
                 keyboardType="numeric"
                 inputMode="numeric"
+                textContentType="none"
                 maxLength={10}
                 returnKeyLabel="Enviar"
                 returnKeyType="send"

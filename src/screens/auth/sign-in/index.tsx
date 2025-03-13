@@ -90,6 +90,7 @@ export function SignIn() {
                 placeholder="000000"
                 keyboardType="numeric"
                 inputMode="numeric"
+                textContentType="username"
                 maxLength={6}
                 returnKeyLabel="Próximo"
                 returnKeyType="next"
@@ -112,6 +113,8 @@ export function SignIn() {
                 inputRef={passwordRef}
                 value={value}
                 placeholder="*****"
+                inputMode="text"
+                textContentType="password"
                 maxLength={100}
                 returnKeyLabel="Entrar"
                 returnKeyType="send"
