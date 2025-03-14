@@ -10,12 +10,16 @@ import { Controller, useForm } from 'react-hook-form'
 import { Text, TextInput, View } from 'react-native'
 import { z } from 'zod'
 
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&!])[A-Za-z\d@#$%&!]{8,100}$/
-
 const resetPasswordForm = z
   .object({
-    newPassword: z.string().regex(passwordRegex, 'Senha possui formato inválido.'),
-    confirmNewPassword: z.string().regex(passwordRegex, 'Senha possui formato inválido.'),
+    newPassword: z
+      .string()
+      .min(8, 'Senha precisa conter no mínimo 8 caracteres')
+      .max(100, 'Senha precisa conter no máximo 100 caracteres'),
+    confirmNewPassword: z
+      .string()
+      .min(8, 'Senha precisa conter no mínimo 8 caracteres')
+      .max(100, 'Senha precisa conter no máximo 100 caracteres'),
   })
   .superRefine((data, ctx) => {
     if (data.confirmNewPassword !== data.newPassword) {
@@ -64,7 +68,7 @@ export function ResetPasswordThirdStage() {
     },
     {
       text: 'Possuir um dos caracteres: @#$%&!',
-      isValid: /[@#$%&!]/.test(newPassword),
+      isValid: /[^a-zA-Z0-9]/.test(newPassword),
     },
     {
       text: 'Mínimo de 8 dígitos',
@@ -119,7 +123,7 @@ export function ResetPasswordThirdStage() {
                 })}
               />
               <Text
-                className={cn('font-sans-medium text-lg text-sky-800', {
+                className={cn('font-sans-semibold text-lg tracking-tight text-sky-800', {
                   'text-sky-400': rule.isValid,
                 })}
               >

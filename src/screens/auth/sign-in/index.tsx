@@ -14,10 +14,8 @@ const signInForm = z.object({
   registration: z.string().regex(/^\d{6}$/, 'Matrícula possui formato inválido.'),
   password: z
     .string()
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%&!])[A-Za-z\d@#$%&!]{8,100}$/,
-      'Senha possui formato inválido.',
-    ),
+    .min(8, 'Senha precisa conter no mínimo 8 caracteres')
+    .max(100, 'Senha precisa conter no máximo 100 caracteres'),
 })
 
 type SignInForm = z.infer<typeof signInForm>
