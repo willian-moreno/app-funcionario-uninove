@@ -73,8 +73,10 @@ export function SignIn() {
 
   return (
     <View className="flex-1">
-      <Text className="font-bold text-4xl text-sky-900">Entre na sua conta de funcionário</Text>
-      <Text className="my-5 font-sans text-xl text-sky-800">
+      <Text className="font-sans-bold text-4xl text-sky-900">
+        Entre na sua conta de funcionário
+      </Text>
+      <Text className="font-sans-regular my-5 text-xl text-sky-800">
         Insira sua matrícula abaixo para fazer login em sua conta.
       </Text>
       <View className="mt-auto gap-y-5">
