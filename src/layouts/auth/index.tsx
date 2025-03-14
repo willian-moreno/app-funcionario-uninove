@@ -19,7 +19,7 @@ export function AuthLayout({ children }: Props) {
               <LogoSvg height={150} style={{ marginTop: 'auto', marginBottom: 'auto' }} />
             </View>
             {children}
-            <Footer variant="auth" />
+            <Footer variant="diluted" />
           </KeyboardAvoiding.Scroll>
         </KeyboardAvoiding.View>
       </KeyboardAvoiding.Root>

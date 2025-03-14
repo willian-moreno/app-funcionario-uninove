@@ -2,7 +2,7 @@ import { cn } from '@utils/cn'
 import { Text, View } from 'react-native'
 
 type Props = {
-  variant?: 'default' | 'auth'
+  variant?: 'default' | 'diluted'
 }
 
 export function Footer({ variant = 'default' }: Props) {
@@ -14,7 +14,7 @@ export function Footer({ variant = 'default' }: Props) {
       <Text
         className={cn('font-sans-regular mx-auto text-base', {
           'text-sky-800': variant === 'default',
-          'text-sky-800/50': variant === 'auth',
+          'text-sky-800/50': variant === 'diluted',
         })}
       >
         ® 1972 - {currentYear} UNINOVE.
@@ -22,7 +22,7 @@ export function Footer({ variant = 'default' }: Props) {
       <Text
         className={cn('font-sans-regular mx-auto text-base', {
           'text-sky-800': variant === 'default',
-          'text-sky-800/50': variant === 'auth',
+          'text-sky-800/50': variant === 'diluted',
         })}
       >
         Todos os direitos reservados
@@ -30,7 +30,7 @@ export function Footer({ variant = 'default' }: Props) {
       <Text
         className={cn('font-sans-regular mx-auto text-sm', {
           'text-sky-800': variant === 'default',
-          'text-sky-800/50': variant === 'auth',
+          'text-sky-800/50': variant === 'diluted',
         })}
       >
         v. {version}
