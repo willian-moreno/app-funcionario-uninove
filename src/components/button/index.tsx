@@ -32,7 +32,7 @@ export function Button({
     >
       {!isLoading ? (
         <Text
-          className={cn('font-sans-regular text-xl', {
+          className={cn('font-sans-semibold text-xl', {
             'text-white': variant === 'primary',
             'text-sky-800': variant === 'secondary',
             'text-sky-800/25': variant === 'secondary' && disabled,

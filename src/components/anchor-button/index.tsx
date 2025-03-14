@@ -9,7 +9,7 @@ export function AnchorButton({ value, disabled, className, ...props }: Props) {
   return (
     <TouchableOpacity className={cn(className)} activeOpacity={disabled ? 1 : 0.7} {...props}>
       <Text
-        className={cn('font-sans-medium text-lg tracking-wide text-sky-800 underline', {
+        className={cn('font-sans-semibold text-lg text-sky-800 underline', {
           'text-sky-800/25': disabled,
         })}
       >

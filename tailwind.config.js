@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
         'sans-regular': ["OpenSans_400Regular", "sans-serif"],
-        'sans-medium': ["OpenSans_500Bold", "sans-serif"],
+        'sans-semibold': ["OpenSans_600SemiBold", "sans-serif"],
         'sans-bold': ["OpenSans_700Bold", "sans-serif"],
       }
     },
