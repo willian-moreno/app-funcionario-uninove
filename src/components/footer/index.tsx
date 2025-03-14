@@ -1,5 +1,4 @@
 import { cn } from '@utils/cn'
-import { useMemo } from 'react'
 import { Text, View } from 'react-native'
 
 type Props = {
@@ -7,8 +6,8 @@ type Props = {
 }
 
 export function Footer({ variant = 'default' }: Props) {
-  const currentYear = useMemo(() => new Date().getFullYear(), [])
-  const version = useMemo(() => require('./../../../package.json').version, [])
+  const currentYear = new Date().getFullYear()
+  const version = require('./../../../package.json').version
 
   return (
     <View className="mt-5 w-full">
