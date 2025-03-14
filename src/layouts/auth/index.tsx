@@ -11,7 +11,7 @@ type Props = {
 export function AuthLayout({ children }: Props) {
   return (
     <>
-      <StatusBar style="dark" backgroundColor="transparent" translucent />
+      <StatusBar style="dark" backgroundColor="#f0f9ff" />
       <KeyboardAvoiding.Root className="bg-sky-50">
         <KeyboardAvoiding.View>
           <KeyboardAvoiding.Scroll>
