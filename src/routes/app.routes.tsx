@@ -11,7 +11,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 export function AppRoutes() {
   return (
     <Navigator
-      initialRouteName="fingerprint_sign_in"
+      initialRouteName="sign_in"
       screenOptions={{ headerShown: false, animation: 'fade_from_bottom' }}
     >
       <Screen name="sign_in" layout={AuthLayout} component={SignIn} />
