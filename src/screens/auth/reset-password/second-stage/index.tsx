@@ -49,7 +49,10 @@ export function ResetPasswordSecondStage() {
           Antes de cadastrar uma senha, digite o PIN enviado para o seu e-mail:
         </Text>
         <View className="flex w-full flex-1 flex-row items-center gap-2">
-          <Ionicons name="mail-outline" size={24} className="pointer-events-none text-sky-400" />
+          <Ionicons
+            name="mail-outline"
+            className="pointer-events-none text-3xl leading-none text-sky-400"
+          />
           <AnchorButton
             className="font-sans-bold text-lg text-sky-800"
             value="wil***nam@uninove.br"

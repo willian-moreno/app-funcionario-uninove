@@ -117,8 +117,7 @@ export function ResetPasswordThirdStage() {
             <View key={rule.text} className="flex w-full flex-1 flex-row items-center gap-2">
               <Ionicons
                 name={rule.isValid ? 'checkmark-circle-outline' : 'ellipse-outline'}
-                size={24}
-                className={cn('pointer-events-none text-sky-800', {
+                className={cn('pointer-events-none text-3xl leading-none text-sky-800', {
                   'text-sky-400': rule.isValid,
                 })}
               />

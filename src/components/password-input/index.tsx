@@ -43,8 +43,7 @@ export function PasswordInput({ className, inputRef, readOnly, ...props }: Props
       >
         <Ionicons
           name={isInvisible ? 'eye-outline' : 'eye-off-outline'}
-          size={24}
-          className="pointer-events-none text-slate-300"
+          className="pointer-events-none text-3xl leading-none text-slate-300"
         />
       </TouchableOpacity>
     </View>
