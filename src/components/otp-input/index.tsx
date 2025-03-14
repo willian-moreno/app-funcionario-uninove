@@ -1,6 +1,13 @@
 import { cn } from '@utils/cn'
 import { useEffect, useRef, useState } from 'react'
-import { NativeSyntheticEvent, TextInput, TextInputKeyPressEventData, View } from 'react-native'
+import {
+  NativeSyntheticEvent,
+  ReturnKeyTypeOptions,
+  TextInput,
+  TextInputKeyPressEventData,
+  TextInputSubmitEditingEventData,
+  View,
+} from 'react-native'
 
 type OTPInputType = 'text' | 'number' | 'password'
 
@@ -9,7 +16,10 @@ type Props = {
   type?: OTPInputType
   length?: number
   readOnly?: boolean
+  returnKeyLabel?: string
+  returnKeyType?: ReturnKeyTypeOptions
   onChangeText?: (text: string) => void
+  onSubmitEditing?: (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => void
 }
 
 const typesConfig: Record<
@@ -46,9 +56,13 @@ export function OTPInput({
   type = 'number',
   length = 4,
   readOnly = false,
+  returnKeyLabel,
+  returnKeyType,
+  onSubmitEditing,
   onChangeText = () => {},
 }: Props) {
   const [value, setValue] = useState(defaultValue)
+
   const [values, setValues] = useState<{ position: number; value: string }[]>(() => {
     return Array.from({ length }).map((_, index) => ({
       position: index,
@@ -60,7 +74,7 @@ export function OTPInput({
 
   const { keyboardType, inputMode, secureTextEntry, sanitizeOnPressing } = typesConfig[type]
 
-  function handleInputKeyPress(
+  function onInputKeyPress(
     event: NativeSyntheticEvent<TextInputKeyPressEventData>,
     currentPosition: number,
   ) {
@@ -78,10 +92,10 @@ export function OTPInput({
       return
     }
 
-    handleUpdateValuePosition(previousPosition, '')
+    updateValuePosition(previousPosition, '')
   }
 
-  function handleUpdateValuePosition(currentPosition: number, value: string) {
+  function updateValuePosition(currentPosition: number, value: string) {
     const sanitizedValue = sanitizeOnPressing(value)
 
     setValues((state) => {
@@ -101,17 +115,14 @@ export function OTPInput({
   }
 
   function focusNextEmptyField() {
-    const nextPositionToFocus = values.findIndex(({ value }) => value === '')
+    const nextPosition = value.length === length ? length - 1 : value.length
 
-    if (nextPositionToFocus === -1) {
-      return
-    }
-
-    inputsRef.current.get(nextPositionToFocus)?.focus()
+    inputsRef.current.get(nextPosition)?.focus()
   }
 
   useEffect(() => {
     const newValue = values.map(({ value }) => value).join('')
+
     setValue(newValue)
   }, [values])
 
@@ -122,32 +133,33 @@ export function OTPInput({
   }, [value])
 
   return (
-    <View className="flex-1">
-      <View className="flex w-full flex-1 flex-row flex-wrap items-center gap-2">
-        {values.map(({ position, value }) => (
-          <TextInput
-            key={position}
-            ref={(el) => inputsRef.current.set(position, el)}
-            value={value}
-            className={cn(
-              'flex h-14 w-full min-w-9 flex-1 rounded-sm bg-white px-4 text-center text-lg text-sky-800 shadow shadow-slate-800/10',
-              'placeholder:text-slate-300',
-            )}
-            autoCapitalize="none"
-            underlineColorAndroid="transparent"
-            maxLength={1}
-            keyboardType={keyboardType}
-            inputMode={inputMode}
-            secureTextEntry={secureTextEntry}
-            textContentType="oneTimeCode"
-            readOnly={readOnly}
-            onKeyPress={(event) => handleInputKeyPress(event, position)}
-            onChangeText={(value) => {
-              handleUpdateValuePosition(position, value)
-            }}
-          />
-        ))}
-      </View>
+    <View className="flex w-full flex-1 flex-row flex-wrap items-center gap-2">
+      {values.map(({ position, value }) => (
+        <TextInput
+          key={position}
+          ref={(el) => inputsRef.current.set(position, el)}
+          value={value}
+          className={cn(
+            'flex h-14 w-full min-w-9 flex-1 rounded-sm bg-white px-4 text-center text-lg text-sky-800 shadow shadow-slate-800/10',
+            'placeholder:text-slate-300',
+          )}
+          autoCapitalize="none"
+          underlineColorAndroid="transparent"
+          maxLength={length}
+          keyboardType={keyboardType}
+          inputMode={inputMode}
+          secureTextEntry={secureTextEntry}
+          textContentType="oneTimeCode"
+          readOnly={readOnly}
+          returnKeyLabel={position + 1 === length ? returnKeyLabel : ''}
+          returnKeyType={position + 1 === length ? returnKeyType : 'default'}
+          onSubmitEditing={position + 1 === length ? onSubmitEditing : () => {}}
+          onKeyPress={(event) => onInputKeyPress(event, position)}
+          onChangeText={(value) => {
+            updateValuePosition(position, value)
+          }}
+        />
+      ))}
     </View>
   )
 }
