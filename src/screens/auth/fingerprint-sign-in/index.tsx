@@ -39,7 +39,7 @@ export function FingerprintSignIn() {
     }
 
     const status = await authenticateAsync({
-      promptMessage: 'Entrar com biometria',
+      promptMessage: 'Use seu método de desbloqueio',
       fallbackLabel: 'Biometria não reconhecida',
       cancelLabel: 'Cancelar',
     })
