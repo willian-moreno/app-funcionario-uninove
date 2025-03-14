@@ -62,7 +62,15 @@ export function ResetPasswordSecondStage() {
             name="pin"
             rules={{ required: true }}
             render={({ field: { value, onChange } }) => (
-              <OTPInput value={value} type="number" length={4} onChangeText={onChange} />
+              <OTPInput
+                value={value}
+                type="number"
+                length={4}
+                returnKeyLabel="Enviar"
+                returnKeyType="send"
+                onSubmitEditing={handleSubmit(handleResetPasswordSecondStage)}
+                onChangeText={onChange}
+              />
             )}
           />
         </View>
