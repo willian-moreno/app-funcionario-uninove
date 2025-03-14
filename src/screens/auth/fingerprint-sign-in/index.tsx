@@ -52,13 +52,24 @@ export function FingerprintSignIn() {
   }
 
   async function handleSignOut() {
-    navigation.navigate('sign_in')
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [{ name: 'sign_in' }],
-      }),
-    )
+    Alert.alert('Sair da conta', 'Tem certeza que deseja sair da conta?', [
+      {
+        text: 'Confirmar',
+        onPress: () => {
+          navigation.navigate('sign_in')
+          navigation.dispatch(
+            CommonActions.reset({
+              index: 1,
+              routes: [{ name: 'sign_in' }],
+            }),
+          )
+        },
+      },
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+    ])
   }
 
   useEffect(() => {
