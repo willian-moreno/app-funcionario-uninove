@@ -13,7 +13,7 @@ export function Footer({ variant = 'default' }: Props) {
   return (
     <View className="mt-5 w-full">
       <Text
-        className={cn('mx-auto font-sans text-base', {
+        className={cn('font-sans-regular mx-auto text-base', {
           'text-sky-800': variant === 'default',
           'text-sky-800/50': variant === 'auth',
         })}
@@ -21,7 +21,7 @@ export function Footer({ variant = 'default' }: Props) {
         ® 1972 - {currentYear} UNINOVE.
       </Text>
       <Text
-        className={cn('mx-auto font-sans text-base', {
+        className={cn('font-sans-regular mx-auto text-base', {
           'text-sky-800': variant === 'default',
           'text-sky-800/50': variant === 'auth',
         })}
@@ -29,7 +29,7 @@ export function Footer({ variant = 'default' }: Props) {
         Todos os direitos reservados
       </Text>
       <Text
-        className={cn('mx-auto font-sans text-sm', {
+        className={cn('font-sans-regular mx-auto text-sm', {
           'text-sky-800': variant === 'default',
           'text-sky-800/50': variant === 'auth',
         })}
