@@ -12,7 +12,7 @@ export function AuthLayout({ children }: Props) {
   return (
     <>
       <StatusBar style="dark" backgroundColor="transparent" translucent />
-      <KeyboardAvoiding.Root className="bg-sky-100">
+      <KeyboardAvoiding.Root className="bg-sky-50">
         <KeyboardAvoiding.View>
           <KeyboardAvoiding.Scroll>
             <View className="mx-auto flex w-52">

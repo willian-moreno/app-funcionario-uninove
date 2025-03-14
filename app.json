@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#e0f2fe"
+      "backgroundColor": "#f0f9ff"
     },
     "ios": {
       "supportsTablet": true
@@ -18,7 +18,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#e0f2fe"
+        "backgroundColor": "#f0f9ff"
       },
       "package": "com.uninove.appfuncionario"
     },
@@ -32,7 +32,7 @@
         {
           "image": "./assets/splash-icon.png",
           "resizeMode": "contain",
-          "backgroundColor": "#e0f2fe"
+          "backgroundColor": "#f0f9ff"
         }
       ]
     ]
