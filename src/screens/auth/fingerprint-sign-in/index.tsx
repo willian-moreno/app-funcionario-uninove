@@ -1,50 +1,25 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
 import { Ionicons } from '@expo/vector-icons'
+import { useBiometrics } from '@hooks/use-biometrics'
 import { CommonActions, useNavigation } from '@react-navigation/native'
-import {
-  authenticateAsync,
-  AuthenticationType,
-  hasHardwareAsync,
-  isEnrolledAsync,
-  supportedAuthenticationTypesAsync,
-} from 'expo-local-authentication'
-import { useEffect, useState } from 'react'
 import { Alert, Text, View } from 'react-native'
 
 export function FingerprintSignIn() {
-  const [isFingerprintAvailable, setIsFingerprintAvailable] = useState(false)
+  const { isFingerprintAvailable, isBiometricEnrolled, authenticate } = useBiometrics()
 
   const navigation = useNavigation()
 
-  async function verifyAvailableAuthentication() {
-    const isScannerAvailable = await hasHardwareAsync()
-    const supportedTypes = await supportedAuthenticationTypesAsync()
-    const isFingerprintSupported = supportedTypes.includes(AuthenticationType.FINGERPRINT)
-
-    if (!isScannerAvailable || !isFingerprintSupported) {
-      return
-    }
-
-    setIsFingerprintAvailable(true)
-  }
-
   async function handleSignIn() {
-    const isBiometricEnrolled = await isEnrolledAsync()
-
     if (!isBiometricEnrolled) {
       Alert.alert('Autenticação', 'Nenhuma biometria cadastrada no dispositivo.')
 
       return
     }
 
-    const status = await authenticateAsync({
-      promptMessage: 'Use seu método de desbloqueio',
-      fallbackLabel: 'Biometria não reconhecida',
-      cancelLabel: 'Cancelar',
-    })
+    const success = await authenticate()
 
-    if (!status.success) {
+    if (!success) {
       return
     }
 
@@ -76,10 +51,6 @@ export function FingerprintSignIn() {
     )
   }
 
-  useEffect(() => {
-    verifyAvailableAuthentication()
-  }, [])
-
   return (
     <View className="flex-1 gap-5">
       <View className="flex-1 items-center justify-center gap-5">
@@ -87,7 +58,7 @@ export function FingerprintSignIn() {
           name="finger-print-outline"
           className="pointer-events-none text-8xl leading-none text-sky-400"
         />
-        <Text className="font-sans-bold text-center text-3xl text-sky-900">
+        <Text className="text-center font-sans-bold text-3xl text-sky-900">
           Use a biometria para desbloquear o app
         </Text>
       </View>
