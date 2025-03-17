@@ -1,5 +1,5 @@
 import { cn } from '@utils/cn'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 
 type Props = {
@@ -26,6 +26,8 @@ export function SwitchButton({
     setIsActive(newState)
     onChangeValue(newState)
   }
+
+  useEffect(() => setIsActive(value), [value])
 
   return (
     <TouchableOpacity
