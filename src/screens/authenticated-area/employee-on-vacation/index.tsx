@@ -11,7 +11,10 @@ export function EmployeeOnVacation() {
 
   return (
     <View className="flex-1 gap-5">
-      <ProfileButton fullUserName="Willian Moreno" onPress={() => {}} />
+      <View className="flex-row items-center gap-2">
+        <ProfileButton fullUserName="Willian Alves Moreno" onPress={() => {}} />
+        <Text className="font-sans-bold text-2xl text-sky-800">Olá, Willian</Text>
+      </View>
       <View className="mt-auto gap-2">
         <Text className="font-sans-bold text-xl text-sky-800">
           Aproveite suas férias para descansar e recarregar as energias.
