@@ -4,9 +4,11 @@ import { Label } from '@components/label'
 import { PasswordInput } from '@components/password-input'
 import { TextInput } from '@components/text-input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigation } from '@react-navigation/native'
-import { createAuthContext } from '@storage/auth/create-auth-context'
-import { useRef } from 'react'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { createAuthStorage } from '@storage/auth/create-auth-storage'
+import { removeAuthStorage } from '@storage/auth/remove-auth-storage'
+import { removeProfileStorage } from '@storage/auth/remove-profile-storage'
+import { useCallback, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TextInput as NativeTextInput, Text, View } from 'react-native'
 import { z } from 'zod'
@@ -49,7 +51,7 @@ export function SignIn() {
     await new Promise((resolve) => setTimeout(resolve, 3000))
 
     try {
-      await createAuthContext({
+      await createAuthStorage({
         user: {
           registration: '020084',
           fullName: 'Willian Alves Moreno',
@@ -85,6 +87,13 @@ export function SignIn() {
     passwordRef.current.focus()
     passwordRef.current.setSelection(valueLength, valueLength)
   }
+
+  useFocusEffect(
+    useCallback(() => {
+      removeAuthStorage()
+      removeProfileStorage()
+    }, []),
+  )
 
   return (
     <View className="flex-1">

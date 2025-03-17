@@ -3,8 +3,8 @@ import { Button } from '@components/button'
 import { Ionicons } from '@expo/vector-icons'
 import { useBiometrics } from '@hooks/use-biometrics'
 import { CommonActions, useNavigation } from '@react-navigation/native'
-import { removeAuthContext } from '@storage/auth/remove-auth-context'
-import { removeProfileConfig } from '@storage/auth/remove-profile-config'
+import { removeAuthStorage } from '@storage/auth/remove-auth-storage'
+import { removeProfileStorage } from '@storage/auth/remove-profile-storage'
 import { Alert, Text, View } from 'react-native'
 
 export function FingerprintSignIn() {
@@ -36,8 +36,8 @@ export function FingerprintSignIn() {
         {
           text: 'Confirmar',
           onPress: async () => {
-            await removeAuthContext()
-            await removeProfileConfig()
+            await removeAuthStorage()
+            await removeProfileStorage()
 
             navigation.navigate('sign_in')
             navigation.dispatch(
