@@ -5,6 +5,7 @@ import { PasswordInput } from '@components/password-input'
 import { TextInput } from '@components/text-input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigation } from '@react-navigation/native'
+import { createAuthContext } from '@storage/auth/create-auth-context'
 import { useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TextInput as NativeTextInput, Text, View } from 'react-native'
@@ -46,6 +47,18 @@ export function SignIn() {
     }
 
     await new Promise((resolve) => setTimeout(resolve, 3000))
+
+    await createAuthContext({
+      user: {
+        registration: '020084',
+        fullName: 'Willian Alves Moreno',
+        department: 'Desenvolvimento',
+        position: 'Analista de Sistemas Junior',
+        campus: 'Vergueiro',
+        dateOfAdmission: '28/03/2022',
+      },
+      accessToken: '',
+    })
   }
 
   function handleNavigateToResetPasswordFirstStageScreen() {
