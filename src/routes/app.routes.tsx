@@ -1,10 +1,12 @@
 import { AuthLayout } from '@layouts/auth'
+import { VacancieArea } from '@layouts/vacancie-area'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { FingerprintSignIn } from '@screens/auth/fingerprint-sign-in'
 import { ResetPasswordFirstStage } from '@screens/auth/reset-password/first-stage'
 import { ResetPasswordSecondStage } from '@screens/auth/reset-password/second-stage'
 import { ResetPasswordThirdStage } from '@screens/auth/reset-password/third-stage'
 import { SignIn } from '@screens/auth/sign-in'
+import { EmployeeOnVacation } from '@screens/authenticated-area/employee-on-vacation'
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
@@ -31,6 +33,7 @@ export function AppRoutes() {
         layout={AuthLayout}
         component={ResetPasswordThirdStage}
       />
+      <Screen name="employee_on_vacation" layout={VacancieArea} component={EmployeeOnVacation} />
     </Navigator>
   )
 }

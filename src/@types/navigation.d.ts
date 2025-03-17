@@ -5,6 +5,7 @@ export declare global {
       reset_password_first_stage: undefined
       reset_password_second_stage: undefined
       reset_password_third_stage: undefined
+      employee_on_vacation: undefined
     }
   }
 }
