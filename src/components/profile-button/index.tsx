@@ -1,13 +1,13 @@
 import { Text, TouchableOpacity, View } from 'react-native'
 
 type Props = {
-  userName: string
+  fullUserName: string
   onPress: () => void
 }
 
-export function ProfileButton({ userName, onPress }: Props) {
-  const firstName = userName.split(' ')[0]
-  const userNameInitials = userName
+export function ProfileButton({ fullUserName, onPress }: Props) {
+  const firstName = fullUserName.split(' ')[0]
+  const userNameInitials = fullUserName
     .split(' ')
     .map((name) => name.charAt(0).toLocaleUpperCase())
     .join('')
