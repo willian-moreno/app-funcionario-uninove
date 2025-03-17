@@ -48,17 +48,21 @@ export function SignIn() {
 
     await new Promise((resolve) => setTimeout(resolve, 3000))
 
-    await createAuthContext({
-      user: {
-        registration: '020084',
-        fullName: 'Willian Alves Moreno',
-        department: 'Desenvolvimento',
-        position: 'Analista de Sistemas Junior',
-        campus: 'Vergueiro',
-        dateOfAdmission: '28/03/2022',
-      },
-      accessToken: '',
-    })
+    try {
+      await createAuthContext({
+        user: {
+          registration: '020084',
+          fullName: 'Willian Alves Moreno',
+          department: 'Desenvolvimento',
+          position: 'Analista de Sistemas Junior',
+          campus: 'Vergueiro',
+          dateOfAdmission: '28/03/2022',
+        },
+        accessToken: '',
+      })
+    } catch (error) {
+    } finally {
+    }
   }
 
   function handleNavigateToResetPasswordFirstStageScreen() {
@@ -87,7 +91,7 @@ export function SignIn() {
       <Text className="font-sans-bold text-4xl text-sky-900">
         Entre na sua conta de funcionário
       </Text>
-      <Text className="font-sans-regular my-5 text-xl text-sky-800">
+      <Text className="my-5 font-sans-regular text-xl text-sky-800">
         Insira sua matrícula abaixo para fazer login em sua conta.
       </Text>
       <View className="mt-auto gap-y-5">
