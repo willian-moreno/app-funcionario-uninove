@@ -1,11 +1,4 @@
-type User = {
-  registration: string
-  fullName: string
-  department: string
-  position: string
-  campus: string
-  dateOfAdmission: string
-}
+import { User } from '@@types/user'
 
 export type AuthContextDTO = {
   user: User
