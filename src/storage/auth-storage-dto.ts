@@ -1,6 +1,6 @@
 import { User } from '@@types/user'
 
-export type AuthContextDTO = {
+export type AuthStorageDTO = {
   user: User
   accessToken: string
 }

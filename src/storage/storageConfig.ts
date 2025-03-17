@@ -1,4 +1,4 @@
-const AUTH_CONTEXT = '@uninove-funcionario:auth-context'
-const PROFILE_CONFIG = '@uninove-funcionario:profile-config'
+const AUTH_STORAGE_KEY = '@uninove-funcionario:auth'
+const PROFILE_STORAGE_KEY = '@uninove-funcionario:profile'
 
-export { AUTH_CONTEXT, PROFILE_CONFIG }
+export { AUTH_STORAGE_KEY, PROFILE_STORAGE_KEY }
