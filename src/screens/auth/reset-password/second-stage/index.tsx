@@ -16,6 +16,8 @@ const resetPasswordForm = z.object({
 type ResetPasswordForm = z.infer<typeof resetPasswordForm>
 
 export function ResetPasswordSecondStage() {
+  const navigation = useNavigation()
+
   const {
     control,
     formState: { isValid, isSubmitting },
@@ -28,8 +30,6 @@ export function ResetPasswordSecondStage() {
   })
 
   const isSubmitDisabled = !isValid || isSubmitting
-
-  const navigation = useNavigation()
 
   async function handleResetPasswordSecondStage() {
     if (!isValid) {

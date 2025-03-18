@@ -36,6 +36,8 @@ const resetPasswordForm = z
 type ResetPasswordForm = z.infer<typeof resetPasswordForm>
 
 export function ResetPasswordThirdStage() {
+  const navigation = useNavigation()
+
   const {
     control,
     formState: { isValid, isSubmitting },
@@ -49,9 +51,11 @@ export function ResetPasswordThirdStage() {
     },
   })
 
-  const isSubmitDisabled = !isValid || isSubmitting
-
   const newPassword = watch('newPassword')
+
+  const confirmNewPasswordRef = useRef<TextInput>(null)
+
+  const isSubmitDisabled = !isValid || isSubmitting
 
   const rules = [
     {
@@ -75,10 +79,6 @@ export function ResetPasswordThirdStage() {
       isValid: /^.{8,100}$/.test(newPassword),
     },
   ]
-
-  const confirmNewPasswordRef = useRef<TextInput>(null)
-
-  const navigation = useNavigation()
 
   async function handleResetPasswordThirdStage() {
     if (!isValid) {

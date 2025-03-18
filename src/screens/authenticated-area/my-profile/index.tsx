@@ -18,6 +18,8 @@ type Profile = {
 }
 
 export function MyProfile() {
+  const navigation = useNavigation()
+
   const { isFingerprintAvailable } = useBiometrics()
 
   const [user, setUser] = useState<User>()
@@ -31,8 +33,6 @@ export function MyProfile() {
   const isBiometricsActive = profile.isBiometricsActive && isFingerprintAvailable
   const isNewAnnouncementsActive = profile.isNewAnnouncementsActive
   const isNewNotificationsActive = profile.isNewNotificationsActive
-
-  const navigation = useNavigation()
 
   function handleGoBack() {
     const canGoBack = navigation.canGoBack()

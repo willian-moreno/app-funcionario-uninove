@@ -24,6 +24,8 @@ const resetPasswordForm = z.object({
 type ResetPasswordForm = z.infer<typeof resetPasswordForm>
 
 export function ResetPasswordFirstStage() {
+  const navigation = useNavigation()
+
   const {
     control,
     formState: { isValid, isSubmitting },
@@ -39,13 +41,11 @@ export function ResetPasswordFirstStage() {
     },
   })
 
-  const isSubmitDisabled = !isValid || isSubmitting
-
   const cpfRef = useRef<NativeTextInput>(null)
   const dateOfBirthRef = useRef<NativeTextInput>(null)
   const dateOfAdmissionRef = useRef<NativeTextInput>(null)
 
-  const navigation = useNavigation()
+  const isSubmitDisabled = !isValid || isSubmitting
 
   async function handleResetPasswordFirstStage() {
     if (!isValid) {
@@ -88,7 +88,7 @@ export function ResetPasswordFirstStage() {
 
   return (
     <View className="flex-1">
-      <Text className="font-sans-regular mb-5 text-xl text-sky-800">
+      <Text className="mb-5 font-sans-regular text-xl text-sky-800">
         Para cadastrar uma nova senha, preencha os campos abaixo:
       </Text>
 
