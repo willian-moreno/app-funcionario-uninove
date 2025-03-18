@@ -8,11 +8,14 @@ import {
 import { useEffect, useState } from 'react'
 
 export function useBiometrics() {
+  const [isBiometricVerificationLoading, setIsBiometricVerificationLoading] = useState(true)
   const [isScannerAvailable, setIsScannerAvailable] = useState(false)
   const [isFingerprintAvailable, setIsFingerprintAvailable] = useState(false)
   const [isBiometricEnrolled, setIsBiometricEnrolled] = useState(false)
 
   async function verifyAvailableAuthentication() {
+    setIsBiometricVerificationLoading(true)
+
     const isScannerAvailable = await hasHardwareAsync()
     setIsScannerAvailable(isScannerAvailable)
 
@@ -22,6 +25,8 @@ export function useBiometrics() {
 
     const isBiometricEnrolled = await isEnrolledAsync()
     setIsBiometricEnrolled(isScannerAvailable && isFingerprintSupported && isBiometricEnrolled)
+
+    setIsBiometricVerificationLoading(false)
   }
 
   async function authenticate() {
@@ -46,6 +51,7 @@ export function useBiometrics() {
     isScannerAvailable,
     isFingerprintAvailable,
     isBiometricEnrolled,
+    isBiometricVerificationLoading,
     authenticate,
   }
 }
