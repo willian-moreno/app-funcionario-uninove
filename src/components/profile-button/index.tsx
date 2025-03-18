@@ -1,16 +1,10 @@
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
 type Props = {
-  fullUserName?: string
+  userNameInitials?: string
 } & TouchableOpacityProps
 
-export function ProfileButton({ fullUserName = '', disabled, ...props }: Props) {
-  const userNameInitials = fullUserName
-    .split(' ')
-    .slice(0, 2)
-    .map((name) => name.charAt(0).toLocaleUpperCase())
-    .join('')
-
+export function ProfileButton({ userNameInitials = '', disabled, ...props }: Props) {
   return (
     <TouchableOpacity
       className="aspect-square h-16 w-16 items-center justify-center rounded-full border-4 border-slate-300 bg-sky-800"

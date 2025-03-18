@@ -5,10 +5,7 @@ import { useAuth } from '@hooks/use-auth'
 import { Dimensions, Text, View } from 'react-native'
 
 export function EmployeeOnVacation() {
-  const {
-    auth: { user },
-    isLoading: isScreenLoading,
-  } = useAuth()
+  const { auth, isLoading: isScreenLoading } = useAuth()
 
   const windowWidth = Math.round(Dimensions.get('window').width)
 
@@ -23,8 +20,8 @@ export function EmployeeOnVacation() {
   return (
     <View className="flex-1 gap-5">
       <View className="flex-row items-center gap-2">
-        <ProfileButton fullUserName={user?.fullName} onPress={() => {}} />
-        <Text className="font-sans-bold text-2xl text-sky-800">Olá, {user.firstName}</Text>
+        <ProfileButton userNameInitials={auth?.user.nameInitials} onPress={() => {}} />
+        <Text className="font-sans-bold text-2xl text-sky-800">Olá, {auth?.user.firstName}</Text>
       </View>
       <View className="mt-auto gap-2">
         <Text className="font-sans-bold text-xl text-sky-800">

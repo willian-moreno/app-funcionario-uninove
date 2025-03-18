@@ -114,7 +114,7 @@ export function MyProfile() {
       <Text className="font-sans-bold text-2xl text-sky-800">Meu perfil</Text>
 
       <View className="flex-row items-center gap-2">
-        <ProfileButton fullUserName={auth?.user.fullName} disabled />
+        <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
         <View className="flex-1">
           <Text className="font-sans-semibold text-lg leading-tight text-sky-800" numberOfLines={1}>
             {auth?.user.fullName}
