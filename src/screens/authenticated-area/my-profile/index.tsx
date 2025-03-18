@@ -48,15 +48,15 @@ export function MyProfile() {
 
   async function findStoredUser() {
     try {
-      const authContext = await findAuthStorage()
+      const auth = await findAuthStorage()
 
-      if (!authContext) {
+      if (!auth) {
         signOut()
 
         return
       }
 
-      setUser(authContext.user)
+      setUser(auth.user)
     } catch (error) {}
   }
 
