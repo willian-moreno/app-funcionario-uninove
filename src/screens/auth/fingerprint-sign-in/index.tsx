@@ -1,16 +1,13 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
 import { Ionicons } from '@expo/vector-icons'
+import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
-import { CommonActions, useNavigation } from '@react-navigation/native'
-import { removeAuthStorage } from '@storage/auth/remove-auth-storage'
-import { removeProfileStorage } from '@storage/auth/remove-profile-storage'
 import { Alert, Text, View } from 'react-native'
 
 export function FingerprintSignIn() {
+  const { signOut } = useAuth()
   const { isFingerprintAvailable, isBiometricEnrolled, authenticate } = useBiometrics()
-
-  const navigation = useNavigation()
 
   async function handleSignIn() {
     if (!isBiometricEnrolled) {
@@ -35,18 +32,7 @@ export function FingerprintSignIn() {
       [
         {
           text: 'Confirmar',
-          onPress: async () => {
-            await removeAuthStorage()
-            await removeProfileStorage()
-
-            navigation.navigate('sign_in')
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 1,
-                routes: [{ name: 'sign_in' }],
-              }),
-            )
-          },
+          onPress: async () => await signOut(),
         },
         {
           text: 'Cancelar',
