@@ -16,7 +16,7 @@ const { Navigator, Screen } = createNativeStackNavigator()
 export function AppRoutes() {
   return (
     <Navigator
-      initialRouteName="sign_in"
+      initialRouteName="employee_on_vacation"
       screenOptions={{ headerShown: false, animation: 'fade_from_bottom' }}
     >
       <Screen name="sign_in" layout={AuthLayout} component={SignIn} />
