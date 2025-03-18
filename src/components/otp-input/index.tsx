@@ -41,7 +41,7 @@ const typesConfig: Record<
     keyboardType: 'numeric',
     inputMode: 'numeric',
     secureTextEntry: false,
-    sanitizeOnPressing: (value: string) => value.replace(/\D+/, ''),
+    sanitizeOnPressing: (value: string) => value.replaceAll(/\D+/g, ''),
   },
   password: {
     keyboardType: 'default',
@@ -70,6 +70,8 @@ export function OTPInput({
     }))
   })
 
+  const [focusedInputPosition, setFocusedInputPosition] = useState<number | null>(null)
+
   const inputsRef = useRef<Map<number, TextInput | null>>(new Map())
 
   const { keyboardType, inputMode, secureTextEntry, sanitizeOnPressing } = typesConfig[type]
@@ -93,6 +95,10 @@ export function OTPInput({
     }
 
     updateValuePosition(previousPosition, '')
+
+    const nextPositionToFocus = value.length === length ? length - 1 : value.length
+
+    inputsRef.current.get(nextPositionToFocus)?.focus()
   }
 
   function updateValuePosition(currentPosition: number, value: string) {
@@ -115,6 +121,10 @@ export function OTPInput({
   }
 
   function focusNextEmptyField() {
+    if (!value.length && focusedInputPosition === null) {
+      return
+    }
+
     const nextPosition = value.length === length ? length - 1 : value.length
 
     inputsRef.current.get(nextPosition)?.focus()
@@ -153,6 +163,8 @@ export function OTPInput({
           readOnly={readOnly}
           returnKeyLabel={position + 1 === length ? returnKeyLabel : ''}
           returnKeyType={position + 1 === length ? returnKeyType : 'default'}
+          onBlur={() => setFocusedInputPosition(null)}
+          onFocus={() => setFocusedInputPosition(position)}
           onSubmitEditing={position + 1 === length ? onSubmitEditing : () => {}}
           onKeyPress={(event) => onInputKeyPress(event, position)}
           onChangeText={(value) => {
