@@ -9,6 +9,7 @@ export declare global {
       employee_on_vacation: undefined
       home: undefined
       my_profile: undefined
+      notifications: undefined
     }
   }
 }
