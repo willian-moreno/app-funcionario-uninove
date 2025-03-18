@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react'
 
 type Auth = {
   user: {
-    firstName?: string
-    nameInitials?: string
+    firstName: string
+    nameInitials: string
   } & User
   accessToken: string
 }
