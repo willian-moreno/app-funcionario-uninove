@@ -1,9 +1,7 @@
 import { User } from '@@types/user'
 import { Loading } from '@components/loading'
-import { CommonActions, useNavigation } from '@react-navigation/native'
+import { useAuth } from '@hooks/use-auth'
 import { findAuthStorage } from '@storage/auth/find-auth-storage'
-import { removeAuthStorage } from '@storage/auth/remove-auth-storage'
-import { removeProfileStorage } from '@storage/auth/remove-profile-storage'
 import { createContext, ReactNode, useEffect, useState } from 'react'
 
 type Auth = {
@@ -17,7 +15,6 @@ type Auth = {
 type AuthContextType = {
   auth: Auth
   isLoading: boolean
-  signOut: () => Promise<void>
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -27,7 +24,7 @@ type Props = {
 }
 
 export function AuthContextProvider({ children }: Props) {
-  const navigation = useNavigation()
+  const { signOut } = useAuth()
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -65,19 +62,6 @@ export function AuthContextProvider({ children }: Props) {
     }
   }
 
-  async function signOut() {
-    await removeAuthStorage()
-    await removeProfileStorage()
-
-    navigation.navigate('sign_in')
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [{ name: 'sign_in' }],
-      }),
-    )
-  }
-
   useEffect(() => {
     findStoredAuth()
   }, [])
@@ -87,7 +71,6 @@ export function AuthContextProvider({ children }: Props) {
       value={{
         auth: auth!,
         isLoading,
-        signOut,
       }}
     >
       {isLoading ? <Loading /> : children}

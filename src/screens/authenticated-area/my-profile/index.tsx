@@ -5,6 +5,7 @@ import { ProfileButton } from '@components/profile-button'
 import { Separator } from '@components/separator'
 import { SwitchButton } from '@components/switch-button'
 import { AuthContext } from '@contexts/auth-context-provider'
+import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
@@ -19,7 +20,9 @@ type Profile = {
 }
 
 export function MyProfile() {
-  const { isLoading: isAuthLoading, auth, signOut } = useContext(AuthContext)
+  const { isLoading: isAuthLoading, auth } = useContext(AuthContext)
+
+  const { signOut } = useAuth()
 
   const navigation = useNavigation()
 
