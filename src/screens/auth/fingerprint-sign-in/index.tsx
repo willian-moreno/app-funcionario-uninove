@@ -1,13 +1,15 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
-import { AuthContext } from '@contexts/auth-context-provider'
 import { Ionicons } from '@expo/vector-icons'
+import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
-import { useContext } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { Alert, Text, View } from 'react-native'
 
 export function FingerprintSignIn() {
-  const { signOut } = useContext(AuthContext)
+  const navigation = useNavigation()
+
+  const { signOut } = useAuth()
 
   const { isFingerprintAvailable, isBiometricEnrolled, authenticate } = useBiometrics()
 
@@ -24,17 +26,21 @@ export function FingerprintSignIn() {
       return
     }
 
-    Alert.alert('Status', 'Autenticado!')
+    navigation.navigate('home')
   }
 
   async function handleSignOut() {
+    console.log(signOut)
+
     Alert.alert(
       'Sair da conta',
       'Tem certeza que deseja sair da conta? Ao sair você retornará para a tela de login.',
       [
         {
           text: 'Confirmar',
-          onPress: async () => await signOut(),
+          onPress: async () => {
+            signOut()
+          },
         },
         {
           text: 'Cancelar',

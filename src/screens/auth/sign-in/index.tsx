@@ -65,6 +65,8 @@ export function SignIn() {
         },
         accessToken: '',
       })
+
+      navigation.navigate('home')
     } catch (error) {
     } finally {
     }
