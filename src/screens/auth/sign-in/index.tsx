@@ -78,7 +78,7 @@ export function SignIn() {
     try {
       const profile = await findProfileStorage()
 
-      if (!profile || !profile.isBiometricsActive) {
+      if (!profile || !profile.isBiometricActive) {
         return
       }
 

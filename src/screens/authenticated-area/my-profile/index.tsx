@@ -12,7 +12,7 @@ import { useCallback, useContext, useState } from 'react'
 import { Text, View } from 'react-native'
 
 type Profile = {
-  isBiometricsActive: boolean
+  isBiometricActive: boolean
   isNewAnnouncementsActive: boolean
   isNewNotificationsActive: boolean
 }
@@ -25,12 +25,12 @@ export function MyProfile() {
   const { isFingerprintAvailable } = useBiometrics()
 
   const [profile, setProfile] = useState<Profile>({
-    isBiometricsActive: false,
+    isBiometricActive: false,
     isNewAnnouncementsActive: false,
     isNewNotificationsActive: false,
   })
 
-  const isBiometricsActive = profile.isBiometricsActive && isFingerprintAvailable
+  const isBiometricActive = profile.isBiometricActive && isFingerprintAvailable
   const isNewAnnouncementsActive = profile.isNewAnnouncementsActive
   const isNewNotificationsActive = profile.isNewNotificationsActive
 
@@ -52,7 +52,7 @@ export function MyProfile() {
 
       if (!profile) {
         setProfile({
-          isBiometricsActive: false,
+          isBiometricActive: false,
           isNewAnnouncementsActive: false,
           isNewNotificationsActive: false,
         })
@@ -64,10 +64,10 @@ export function MyProfile() {
     } catch (error) {}
   }
 
-  async function handleToggleBiometrics(isActive: boolean) {
+  async function handleToggleBiometric(isActive: boolean) {
     try {
-      setProfile((state) => ({ ...state, isBiometricsActive: isActive }))
-      await updateProfileStorage({ ...profile, isBiometricsActive: isActive })
+      setProfile((state) => ({ ...state, isBiometricActive: isActive }))
+      await updateProfileStorage({ ...profile, isBiometricActive: isActive })
     } catch (error) {
     } finally {
       await findStoredProfile()
@@ -140,9 +140,9 @@ export function MyProfile() {
             Usar biometria para desbloquear o app e acessar a conta
           </Text>
           <SwitchButton
-            value={isBiometricsActive}
+            value={isBiometricActive}
             disabled={!isFingerprintAvailable}
-            onChangeValue={handleToggleBiometrics}
+            onChangeValue={handleToggleBiometric}
           />
         </View>
       </View>

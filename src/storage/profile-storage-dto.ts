@@ -1,5 +1,5 @@
 export type ProfileStorageDTO = {
-  isBiometricsActive: boolean
+  isBiometricActive: boolean
   isNewAnnouncementsActive: boolean
   isNewNotificationsActive: boolean
 }
