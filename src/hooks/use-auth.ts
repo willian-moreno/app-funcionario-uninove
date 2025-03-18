@@ -21,13 +21,7 @@ export function useAuth() {
       const auth = await findAuthStorage()
 
       if (!auth) {
-        navigation.navigate('sign_in')
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 1,
-            routes: [{ name: 'sign_in' }],
-          }),
-        )
+        await signOut()
 
         return
       }
