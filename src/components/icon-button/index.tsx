@@ -16,7 +16,7 @@ export function IconButton({ icon, disabled, className, ...props }: Props) {
       activeOpacity={disabled ? 1 : 0.7}
       {...props}
     >
-      <Ionicons name={icon} className="text-3xl font-semibold text-sky-800" />
+      <Ionicons name={icon} className="text-3xl font-semibold text-sky-900" />
     </TouchableOpacity>
   )
 }

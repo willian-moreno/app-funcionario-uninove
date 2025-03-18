@@ -25,7 +25,7 @@ export function PasswordInput({ className, inputRef, readOnly, ...props }: Props
       <TextInput
         ref={inputRef}
         className={cn(
-          'h-14 flex-1 bg-white text-lg text-sky-800',
+          'h-14 flex-1 bg-white text-lg text-sky-900',
           'placeholder:text-slate-300',
           className,
         )}

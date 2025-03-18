@@ -34,8 +34,8 @@ export function Button({
         <Text
           className={cn('font-sans-semibold text-xl', {
             'text-white': variant === 'primary',
-            'text-sky-800': variant === 'secondary',
-            'text-sky-800/25': variant === 'secondary' && disabled,
+            'text-sky-900': variant === 'secondary',
+            'text-sky-900/25': variant === 'secondary' && disabled,
           })}
         >
           {value}
@@ -44,8 +44,8 @@ export function Button({
         <ActivityIndicator
           className={cn({
             'text-white': variant === 'primary',
-            'text-sky-800': variant === 'secondary',
-            'text-sky-800/25': variant === 'secondary' && disabled,
+            'text-sky-900': variant === 'secondary',
+            'text-sky-900/25': variant === 'secondary' && disabled,
           })}
           size={20}
         />

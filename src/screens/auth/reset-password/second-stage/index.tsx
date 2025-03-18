@@ -43,9 +43,9 @@ export function ResetPasswordSecondStage() {
 
   return (
     <View className="flex-1">
-      <View className="mt-auto gap-y-5">
-        <Text className="font-sans-bold text-2xl text-sky-800">Verificação em 2 etapas</Text>
-        <Text className="font-sans-regular text-xl text-sky-800">
+      <View className="mt-auto gap-y-6">
+        <Text className="font-sans-bold text-2xl text-sky-900">Verificação em 2 etapas</Text>
+        <Text className="font-sans-regular text-xl text-sky-900">
           Antes de cadastrar uma senha, digite o PIN enviado para o seu e-mail:
         </Text>
         <View className="flex w-full flex-1 flex-row items-center gap-2">
@@ -54,7 +54,7 @@ export function ResetPasswordSecondStage() {
             className="pointer-events-none text-3xl leading-none text-sky-400"
           />
           <AnchorButton
-            className="font-sans-bold text-lg text-sky-800"
+            className="font-sans-bold text-lg text-sky-900"
             value="wil***nam@uninove.br"
           />
         </View>

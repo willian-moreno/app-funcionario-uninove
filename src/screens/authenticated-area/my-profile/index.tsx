@@ -22,7 +22,7 @@ export function MyProfile() {
 
   const navigation = useNavigation()
 
-  const { isFingerprintAvailable } = useBiometrics()
+  const { isFingerprintAvailable, isBiometricEnrolled } = useBiometrics()
 
   const [profile, setProfile] = useState<Profile>({
     isBiometricActive: false,
@@ -66,8 +66,8 @@ export function MyProfile() {
 
   async function handleToggleBiometric(isActive: boolean) {
     try {
-      setProfile((state) => ({ ...state, isBiometricActive: isActive }))
-      await updateProfileStorage({ ...profile, isBiometricActive: isActive })
+      setProfile((state) => ({ ...state, isBiometricActive: isActive && isBiometricEnrolled }))
+      await updateProfileStorage({ ...profile, isBiometricActive: isActive && isBiometricEnrolled })
     } catch (error) {
     } finally {
       await findStoredProfile()
@@ -105,21 +105,21 @@ export function MyProfile() {
   }
 
   return (
-    <View className="flex-1 gap-y-5">
+    <View className="flex-1 gap-y-6">
       <View className="flex-row items-center justify-between">
         <IconButton icon="arrow-back-outline" onPress={handleGoBack} />
         <IconButton icon="notifications-outline" />
       </View>
 
-      <Text className="font-sans-bold text-2xl text-sky-800">Meu perfil</Text>
+      <Text className="font-sans-bold text-2xl text-sky-900">Meu perfil</Text>
 
       <View className="flex-row items-center gap-2">
         <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
         <View className="flex-1">
-          <Text className="font-sans-semibold text-lg leading-tight text-sky-800" numberOfLines={1}>
+          <Text className="font-sans-bold text-lg leading-tight text-sky-900" numberOfLines={1}>
             {auth?.user.fullName}
           </Text>
-          <Text className="font-sans-regular text-lg leading-tight text-sky-800">
+          <Text className="font-sans-regular text-lg leading-tight text-sky-900">
             {auth?.user.registration}
           </Text>
         </View>
@@ -127,16 +127,16 @@ export function MyProfile() {
 
       <Separator orientation="horizontal" />
 
-      <View className="gap-y-5">
-        <View className="gap-y-1">
-          <Text className="text-sm font-semibold uppercase text-sky-800/50">Segurança</Text>
-          <Text className="font-sans-semibold text-xl text-sky-800">
+      <View className="gap-y-6">
+        <View className="gap-y-2">
+          <Text className="text-sm font-semibold uppercase text-sky-900/50">Segurança</Text>
+          <Text className="font-sans-semibold text-xl text-sky-900">
             Configure a segurança da sua conta
           </Text>
         </View>
 
         <View className="flex-row flex-nowrap items-center justify-between gap-2">
-          <Text className="flex-1 font-sans-regular text-xl text-sky-800">
+          <Text className="flex-1 font-sans-regular text-xl text-sky-900">
             Usar biometria para desbloquear o app e acessar a conta
           </Text>
           <SwitchButton
@@ -149,16 +149,16 @@ export function MyProfile() {
 
       <Separator orientation="horizontal" />
 
-      <View className="gap-y-5">
-        <View className="gap-y-1">
-          <Text className="text-sm font-semibold uppercase text-sky-800/50">Comunicação</Text>
-          <Text className="font-sans-semibold text-xl text-sky-800">
+      <View className="gap-y-6">
+        <View className="gap-y-2">
+          <Text className="text-sm font-semibold uppercase text-sky-900/50">Comunicação</Text>
+          <Text className="font-sans-semibold text-xl text-sky-900">
             Escolha o tipo de comunicação que você quer receber no seu dispositivo móvel
           </Text>
         </View>
 
         <View className="flex-row flex-nowrap items-center justify-between gap-2">
-          <Text className="flex-1 font-sans-regular text-xl text-sky-800">Comunicados novos</Text>
+          <Text className="flex-1 font-sans-regular text-xl text-sky-900">Comunicados novos</Text>
           <SwitchButton
             value={isNewAnnouncementsActive}
             onChangeValue={handleToggleNewAnnouncements}
@@ -166,7 +166,7 @@ export function MyProfile() {
         </View>
 
         <View className="flex-row flex-nowrap items-center justify-between gap-2">
-          <Text className="flex-1 font-sans-regular text-xl text-sky-800">Notificações novas</Text>
+          <Text className="flex-1 font-sans-regular text-xl text-sky-900">Notificações novas</Text>
           <SwitchButton
             value={isNewNotificationsActive}
             onChangeValue={handleToggleNewNotifications}

@@ -19,16 +19,16 @@ export function EmployeeOnVacation() {
   }
 
   return (
-    <View className="flex-1 gap-5">
+    <View className="flex-1 gap-y-6">
       <View className="flex-row items-center gap-2">
         <ProfileButton userNameInitials={auth?.user.nameInitials} onPress={() => {}} />
-        <Text className="font-sans-bold text-2xl text-sky-800">Olá, {auth?.user.firstName}</Text>
+        <Text className="font-sans-bold text-2xl text-sky-900">Olá, {auth?.user.firstName}</Text>
       </View>
-      <View className="mt-auto gap-2">
-        <Text className="font-sans-bold text-xl text-sky-800">
+      <View className="mt-auto gap-4">
+        <Text className="font-sans-bold text-xl text-sky-900">
           Aproveite suas férias para descansar e recarregar as energias.
         </Text>
-        <Text className="font-sans-bold text-xl text-sky-800">
+        <Text className="font-sans-bold text-xl text-sky-900">
           Você merece! Boas férias! <Text className="text-2xl">😎</Text>
         </Text>
       </View>

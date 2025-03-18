@@ -45,8 +45,8 @@ export function FingerprintSignIn() {
   }
 
   return (
-    <View className="flex-1 gap-5">
-      <View className="flex-1 items-center justify-center gap-5">
+    <View className="flex-1 gap-y-6">
+      <View className="flex-1 items-center justify-center gap-y-6">
         <Ionicons
           name="finger-print-outline"
           className="pointer-events-none text-8xl leading-none text-sky-400"
@@ -55,7 +55,7 @@ export function FingerprintSignIn() {
           Use a biometria para desbloquear o app
         </Text>
       </View>
-      <View className="gap-5">
+      <View className="gap-y-6">
         <Button value="Usar biometria" disabled={!isFingerprintAvailable} onPress={handleSignIn} />
         <AnchorButton value="Sair da conta" className="mx-auto" onPress={handleSignOut} />
       </View>

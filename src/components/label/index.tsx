@@ -7,7 +7,7 @@ type Props = {
 
 export function Label({ value, className, ...props }: Props) {
   return (
-    <Text className={cn('font-sans-semibold mb-2 text-lg text-sky-800', className)} {...props}>
+    <Text className={cn('mb-2 font-sans-semibold text-lg text-sky-900', className)} {...props}>
       {value}
     </Text>
   )

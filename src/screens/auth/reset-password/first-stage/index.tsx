@@ -88,11 +88,11 @@ export function ResetPasswordFirstStage() {
 
   return (
     <View className="flex-1">
-      <Text className="mb-5 font-sans-regular text-xl text-sky-800">
+      <Text className="mb-5 font-sans-regular text-xl text-sky-900">
         Para cadastrar uma nova senha, preencha os campos abaixo:
       </Text>
 
-      <View className="mt-auto gap-y-5">
+      <View className="mt-auto gap-y-6">
         <View className="flex-1">
           <Label value="Matrícula" />
           <Controller
