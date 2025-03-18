@@ -8,6 +8,7 @@ import { ResetPasswordSecondStage } from '@screens/auth/reset-password/second-st
 import { ResetPasswordThirdStage } from '@screens/auth/reset-password/third-stage'
 import { SignIn } from '@screens/auth/sign-in'
 import { EmployeeOnVacation } from '@screens/authenticated-area/employee-on-vacation'
+import { Home } from '@screens/authenticated-area/home'
 import { MyProfile } from '@screens/authenticated-area/my-profile'
 
 const { Navigator, Screen } = createNativeStackNavigator()
@@ -36,6 +37,7 @@ export function AppRoutes() {
         component={ResetPasswordThirdStage}
       />
       <Screen name="employee_on_vacation" layout={VacancieArea} component={EmployeeOnVacation} />
+      <Screen name="home" layout={AuthenticatedArea} component={Home} />
       <Screen name="my_profile" layout={AuthenticatedArea} component={MyProfile} />
     </Navigator>
   )
