@@ -1,8 +1,6 @@
 import { User } from '@@types/user'
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import { findAuthStorage } from '@storage/auth/find-auth-storage'
-import { removeAuthStorage } from '@storage/auth/remove-auth-storage'
-import { removeProfileStorage } from '@storage/auth/remove-profile-storage'
 import { useEffect, useState } from 'react'
 
 type Auth = { user: User; accessToken: string }
@@ -39,19 +37,6 @@ export function useAuth() {
     }
   }
 
-  async function signOut() {
-    await removeAuthStorage()
-    await removeProfileStorage()
-
-    navigation.navigate('sign_in')
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [{ name: 'sign_in' }],
-      }),
-    )
-  }
-
   useEffect(() => {
     findStoredAuth()
   }, [])
@@ -59,6 +44,5 @@ export function useAuth() {
   return {
     auth: { ...auth, user: { ...auth?.user, firstName } },
     isLoading,
-    signOut,
   }
 }
