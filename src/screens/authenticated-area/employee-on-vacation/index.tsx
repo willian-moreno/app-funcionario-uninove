@@ -3,11 +3,14 @@ import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { VacancieSvg } from '@components/vacancie-svg'
 import { AuthContext } from '@contexts/auth-context-provider'
+import { useNavigation } from '@react-navigation/native'
 import { Audio } from 'expo-av'
 import { useContext, useEffect, useState } from 'react'
 import { Dimensions, Text, View } from 'react-native'
 
 export function EmployeeOnVacation() {
+  const navigation = useNavigation()
+
   const { auth, isLoading: isScreenLoading } = useContext(AuthContext)
 
   const [sound, setSound] = useState<Audio.Sound>()
@@ -19,6 +22,10 @@ export function EmployeeOnVacation() {
   const svgDecreaseLeft = windowWidth * 0.3
   const svgWidth = windowWidth + windowWidth * 0.25
   const svgHeight = svgWidth * 0.85
+
+  async function handleNavigateToMyProfileScreen() {
+    navigation.navigate('my_profile')
+  }
 
   async function loadSound() {
     await Audio.setAudioModeAsync({
@@ -63,7 +70,10 @@ export function EmployeeOnVacation() {
   return (
     <View className="flex-1 gap-y-6">
       <View className="flex-row items-center gap-2">
-        <ProfileButton userNameInitials={auth?.user.nameInitials} onPress={() => {}} />
+        <ProfileButton
+          userNameInitials={auth?.user.nameInitials}
+          onPress={handleNavigateToMyProfileScreen}
+        />
         <Text className="font-sans-bold text-2xl text-sky-900">Olá, {auth?.user.firstName}</Text>
       </View>
       <View className="mt-auto gap-4">
