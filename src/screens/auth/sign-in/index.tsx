@@ -1,13 +1,14 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
 import { Label } from '@components/label'
+import { Loading } from '@components/loading'
 import { PasswordInput } from '@components/password-input'
 import { TextInput } from '@components/text-input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useBiometrics } from '@hooks/use-biometrics'
+import { CommonActions, useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createAuthStorage } from '@storage/auth/create-auth-storage'
-import { removeAuthStorage } from '@storage/auth/remove-auth-storage'
-import { removeProfileStorage } from '@storage/auth/remove-profile-storage'
+import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { useCallback, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TextInput as NativeTextInput, Text, View } from 'react-native'
@@ -24,6 +25,10 @@ const signInForm = z.object({
 type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
+  const navigation = useNavigation()
+
+  const { isBiometricEnrolled, isBiometricVerificationLoading } = useBiometrics()
+
   const {
     control,
     handleSubmit,
@@ -40,8 +45,6 @@ export function SignIn() {
   const isSubmitDisabled = !isValid || isSubmitting
 
   const passwordRef = useRef<NativeTextInput>(null)
-
-  const navigation = useNavigation()
 
   async function handleSignIn() {
     if (!isValid) {
@@ -67,6 +70,28 @@ export function SignIn() {
     }
   }
 
+  async function navigateToFingerprintSignInScreenIfAvailable() {
+    if (!isBiometricEnrolled) {
+      return
+    }
+
+    try {
+      const profile = await findProfileStorage()
+
+      if (!profile || !profile.isBiometricsActive) {
+        return
+      }
+
+      navigation.navigate('fingerprint_sign_in')
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 1,
+          routes: [{ name: 'fingerprint_sign_in' }],
+        }),
+      )
+    } catch (error) {}
+  }
+
   function handleNavigateToResetPasswordFirstStageScreen() {
     navigation.navigate('reset_password_first_stage')
   }
@@ -90,10 +115,13 @@ export function SignIn() {
 
   useFocusEffect(
     useCallback(() => {
-      removeAuthStorage()
-      removeProfileStorage()
-    }, []),
+      navigateToFingerprintSignInScreenIfAvailable()
+    }, [isBiometricVerificationLoading]),
   )
+
+  if (isBiometricVerificationLoading) {
+    return <Loading />
+  }
 
   return (
     <View className="flex-1">
