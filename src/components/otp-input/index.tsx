@@ -155,7 +155,7 @@ export function OTPInput({
           )}
           autoCapitalize="none"
           underlineColorAndroid="transparent"
-          maxLength={length}
+          maxLength={length - position}
           keyboardType={keyboardType}
           inputMode={inputMode}
           secureTextEntry={secureTextEntry}
