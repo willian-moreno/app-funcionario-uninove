@@ -1,11 +1,11 @@
-import { User } from '@@types/user'
 import { IconButton } from '@components/icon-button'
+import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { Separator } from '@components/separator'
 import { SwitchButton } from '@components/switch-button'
+import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
-import { CommonActions, useFocusEffect, useNavigation } from '@react-navigation/native'
-import { findAuthStorage } from '@storage/auth/find-auth-storage'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { updateProfileStorage } from '@storage/auth/update-profile-storage'
 import { useCallback, useState } from 'react'
@@ -20,9 +20,9 @@ type Profile = {
 export function MyProfile() {
   const navigation = useNavigation()
 
-  const { isFingerprintAvailable } = useBiometrics()
+  const { isLoading: isAuthLoading, auth, signOut } = useAuth()
 
-  const [user, setUser] = useState<User>()
+  const { isFingerprintAvailable } = useBiometrics()
 
   const [profile, setProfile] = useState<Profile>({
     isBiometricsActive: false,
@@ -34,30 +34,16 @@ export function MyProfile() {
   const isNewAnnouncementsActive = profile.isNewAnnouncementsActive
   const isNewNotificationsActive = profile.isNewNotificationsActive
 
-  function handleGoBack() {
+  async function handleGoBack() {
     const canGoBack = navigation.canGoBack()
 
     if (!canGoBack) {
-      signOut()
+      await signOut()
 
       return
     }
 
     navigation.goBack()
-  }
-
-  async function findStoredUser() {
-    try {
-      const auth = await findAuthStorage()
-
-      if (!auth) {
-        signOut()
-
-        return
-      }
-
-      setUser(auth.user)
-    } catch (error) {}
   }
 
   async function findStoredProfile() {
@@ -76,16 +62,6 @@ export function MyProfile() {
 
       setProfile(profile)
     } catch (error) {}
-  }
-
-  function signOut() {
-    navigation.navigate('sign_in')
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [{ name: 'sign_in' }],
-      }),
-    )
   }
 
   async function handleToggleBiometrics(isActive: boolean) {
@@ -120,10 +96,13 @@ export function MyProfile() {
 
   useFocusEffect(
     useCallback(() => {
-      findStoredUser()
       findStoredProfile()
     }, []),
   )
+
+  if (isAuthLoading) {
+    return <Loading />
+  }
 
   return (
     <View className="flex-1 gap-y-5">
@@ -135,13 +114,13 @@ export function MyProfile() {
       <Text className="font-sans-bold text-2xl text-sky-800">Meu perfil</Text>
 
       <View className="flex-row items-center gap-2">
-        <ProfileButton fullUserName={user?.fullName} disabled />
+        <ProfileButton fullUserName={auth?.user.fullName} disabled />
         <View className="flex-1">
           <Text className="font-sans-semibold text-lg leading-tight text-sky-800" numberOfLines={1}>
-            {user?.fullName}
+            {auth?.user.fullName}
           </Text>
           <Text className="font-sans-regular text-lg leading-tight text-sky-800">
-            {user?.registration}
+            {auth?.user.registration}
           </Text>
         </View>
       </View>
