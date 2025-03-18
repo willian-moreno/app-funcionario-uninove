@@ -3,12 +3,12 @@ import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { Separator } from '@components/separator'
 import { SwitchButton } from '@components/switch-button'
-import { useAuth } from '@hooks/use-auth'
+import { AuthContext } from '@contexts/auth-context-provider'
 import { useBiometrics } from '@hooks/use-biometrics'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { updateProfileStorage } from '@storage/auth/update-profile-storage'
-import { useCallback, useState } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import { Text, View } from 'react-native'
 
 type Profile = {
@@ -18,9 +18,9 @@ type Profile = {
 }
 
 export function MyProfile() {
-  const navigation = useNavigation()
+  const { isLoading: isAuthLoading, auth, signOut } = useContext(AuthContext)
 
-  const { isLoading: isAuthLoading, auth, signOut } = useAuth()
+  const navigation = useNavigation()
 
   const { isFingerprintAvailable } = useBiometrics()
 

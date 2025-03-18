@@ -1,11 +1,12 @@
 import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { VacancieSvg } from '@components/vacancie-svg'
-import { useAuth } from '@hooks/use-auth'
+import { AuthContext } from '@contexts/auth-context-provider'
+import { useContext } from 'react'
 import { Dimensions, Text, View } from 'react-native'
 
 export function EmployeeOnVacation() {
-  const { auth, isLoading: isScreenLoading } = useAuth()
+  const { auth, isLoading: isScreenLoading } = useContext(AuthContext)
 
   const windowWidth = Math.round(Dimensions.get('window').width)
 

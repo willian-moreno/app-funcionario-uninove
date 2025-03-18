@@ -1,3 +1,4 @@
+import { AuthContextProvider } from '@contexts/auth-context-provider'
 import { StatusBar } from 'expo-status-bar'
 import { View } from 'react-native'
 
@@ -9,7 +10,9 @@ export function VacancieArea({ children }: Props) {
   return (
     <>
       <StatusBar style="dark" backgroundColor="#f1f5f9" />
-      <View className="flex-1 bg-slate-100 p-6">{children}</View>
+      <View className="flex-1 bg-slate-100 p-6">
+        <AuthContextProvider>{children}</AuthContextProvider>
+      </View>
     </>
   )
 }

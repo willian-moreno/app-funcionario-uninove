@@ -1,12 +1,14 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
+import { AuthContext } from '@contexts/auth-context-provider'
 import { Ionicons } from '@expo/vector-icons'
-import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
+import { useContext } from 'react'
 import { Alert, Text, View } from 'react-native'
 
 export function FingerprintSignIn() {
-  const { signOut } = useAuth()
+  const { signOut } = useContext(AuthContext)
+
   const { isFingerprintAvailable, isBiometricEnrolled, authenticate } = useBiometrics()
 
   async function handleSignIn() {
