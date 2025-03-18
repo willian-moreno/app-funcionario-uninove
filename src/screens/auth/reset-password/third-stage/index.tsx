@@ -107,9 +107,9 @@ export function ResetPasswordThirdStage() {
 
   return (
     <View className="flex-1">
-      <View className="mt-auto gap-y-5">
-        <Text className="font-sans-bold text-2xl text-sky-800">Olá, Willian</Text>
-        <Text className="font-sans-regular text-xl text-sky-800">
+      <View className="mt-auto gap-y-6">
+        <Text className="font-sans-bold text-2xl text-sky-900">Olá, Willian</Text>
+        <Text className="font-sans-regular text-xl text-sky-900">
           Sua senha deve possuir os critérios listados a seguir:
         </Text>
         <View className="flex-1 gap-y-2">
@@ -117,12 +117,12 @@ export function ResetPasswordThirdStage() {
             <View key={rule.text} className="flex w-full flex-1 flex-row items-center gap-2">
               <Ionicons
                 name={rule.isValid ? 'checkmark-circle-outline' : 'ellipse-outline'}
-                className={cn('pointer-events-none text-3xl leading-none text-sky-800', {
+                className={cn('pointer-events-none text-3xl leading-none text-sky-900', {
                   'text-sky-400': rule.isValid,
                 })}
               />
               <Text
-                className={cn('font-sans-semibold text-lg tracking-tight text-sky-800', {
+                className={cn('font-sans-semibold text-lg tracking-tight text-sky-900', {
                   'text-sky-400': rule.isValid,
                 })}
               >

@@ -128,10 +128,10 @@ export function SignIn() {
       <Text className="font-sans-bold text-4xl text-sky-900">
         Entre na sua conta de funcionário
       </Text>
-      <Text className="my-5 font-sans-regular text-xl text-sky-800">
+      <Text className="my-5 font-sans-regular text-xl text-sky-900">
         Insira sua matrícula abaixo para fazer login em sua conta.
       </Text>
-      <View className="mt-auto gap-y-5">
+      <View className="mt-auto gap-y-6">
         <View className="flex-1">
           <Label value="Matrícula" />
           <Controller

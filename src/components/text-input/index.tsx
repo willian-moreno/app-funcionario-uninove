@@ -12,7 +12,7 @@ export function TextInput({ className, inputRef, ...props }: Props) {
       <NativeTextInput
         ref={inputRef}
         className={cn(
-          'h-14 flex-1 bg-white text-lg text-sky-800',
+          'h-14 flex-1 bg-white text-lg text-sky-900',
           'placeholder:text-slate-300',
           className,
         )}
