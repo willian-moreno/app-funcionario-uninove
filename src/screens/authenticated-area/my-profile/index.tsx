@@ -1,7 +1,9 @@
 import { Bedge } from '@components/bedge'
+import { Footer } from '@components/footer'
 import { IconButton } from '@components/icon-button'
 import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
+import { ScreenScrollView } from '@components/screen-scroll-view'
 import { Separator } from '@components/separator'
 import { SwitchButton } from '@components/switch-button'
 import { AuthContext } from '@contexts/auth-context-provider'
@@ -113,79 +115,87 @@ export function MyProfile() {
   }
 
   return (
-    <View className="flex-1 gap-y-6">
-      <View className="flex-row items-center justify-between">
-        <IconButton icon="arrow-back-outline" onPress={handleGoBack} />
-        <Bedge.Root>
-          <IconButton icon="notifications-outline" onPress={handleNavigateToNotificationsScreen} />
-          <Bedge.Dot />
-        </Bedge.Root>
+    <ScreenScrollView>
+      <View className="flex-1 gap-y-6">
+        <View className="flex-row items-center justify-between">
+          <IconButton icon="arrow-back-outline" onPress={handleGoBack} />
+          <Bedge.Root>
+            <IconButton
+              icon="notifications-outline"
+              onPress={handleNavigateToNotificationsScreen}
+            />
+            <Bedge.Dot />
+          </Bedge.Root>
+        </View>
+
+        <Text className="font-sans-bold text-2xl text-sky-900">Meu perfil</Text>
+
+        <View className="flex-row items-center gap-2">
+          <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
+          <View className="flex-1">
+            <Text className="font-sans-bold text-lg leading-tight text-sky-900" numberOfLines={1}>
+              {auth?.user.fullName}
+            </Text>
+            <Text className="font-sans-regular text-lg leading-tight text-sky-900">
+              {auth?.user.registration}
+            </Text>
+          </View>
+        </View>
+
+        <Separator orientation="horizontal" />
+
+        <View className="gap-y-6">
+          <View className="gap-y-2">
+            <Text className="text-sm font-semibold uppercase text-sky-900/50">Segurança</Text>
+            <Text className="font-sans-semibold text-xl text-sky-900">
+              Configure a segurança da sua conta
+            </Text>
+          </View>
+
+          <View className="flex-row flex-nowrap items-center justify-between gap-2">
+            <Text className="flex-1 font-sans-regular text-xl text-sky-900">
+              Usar biometria para desbloquear o app e acessar a conta
+            </Text>
+            <SwitchButton
+              value={isBiometricActive}
+              disabled={!isFingerprintAvailable}
+              onChangeValue={handleToggleBiometric}
+            />
+          </View>
+        </View>
+
+        <Separator orientation="horizontal" />
+
+        <View className="gap-y-6">
+          <View className="gap-y-2">
+            <Text className="text-sm font-semibold uppercase text-sky-900/50">Comunicação</Text>
+            <Text className="font-sans-semibold text-xl text-sky-900">
+              Escolha o tipo de comunicação que você quer receber no seu dispositivo móvel
+            </Text>
+          </View>
+
+          <View className="flex-row flex-nowrap items-center justify-between gap-2">
+            <Text className="flex-1 font-sans-regular text-xl text-sky-900">Comunicados novos</Text>
+            <SwitchButton
+              value={isNewAnnouncementsActive}
+              onChangeValue={handleToggleNewAnnouncements}
+            />
+          </View>
+
+          <View className="flex-row flex-nowrap items-center justify-between gap-2">
+            <Text className="flex-1 font-sans-regular text-xl text-sky-900">
+              Notificações novas
+            </Text>
+            <SwitchButton
+              value={isNewNotificationsActive}
+              onChangeValue={handleToggleNewNotifications}
+            />
+          </View>
+        </View>
+
+        <Separator orientation="horizontal" />
       </View>
-
-      <Text className="font-sans-bold text-2xl text-sky-900">Meu perfil</Text>
-
-      <View className="flex-row items-center gap-2">
-        <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
-        <View className="flex-1">
-          <Text className="font-sans-bold text-lg leading-tight text-sky-900" numberOfLines={1}>
-            {auth?.user.fullName}
-          </Text>
-          <Text className="font-sans-regular text-lg leading-tight text-sky-900">
-            {auth?.user.registration}
-          </Text>
-        </View>
-      </View>
-
-      <Separator orientation="horizontal" />
-
-      <View className="gap-y-6">
-        <View className="gap-y-2">
-          <Text className="text-sm font-semibold uppercase text-sky-900/50">Segurança</Text>
-          <Text className="font-sans-semibold text-xl text-sky-900">
-            Configure a segurança da sua conta
-          </Text>
-        </View>
-
-        <View className="flex-row flex-nowrap items-center justify-between gap-2">
-          <Text className="flex-1 font-sans-regular text-xl text-sky-900">
-            Usar biometria para desbloquear o app e acessar a conta
-          </Text>
-          <SwitchButton
-            value={isBiometricActive}
-            disabled={!isFingerprintAvailable}
-            onChangeValue={handleToggleBiometric}
-          />
-        </View>
-      </View>
-
-      <Separator orientation="horizontal" />
-
-      <View className="gap-y-6">
-        <View className="gap-y-2">
-          <Text className="text-sm font-semibold uppercase text-sky-900/50">Comunicação</Text>
-          <Text className="font-sans-semibold text-xl text-sky-900">
-            Escolha o tipo de comunicação que você quer receber no seu dispositivo móvel
-          </Text>
-        </View>
-
-        <View className="flex-row flex-nowrap items-center justify-between gap-2">
-          <Text className="flex-1 font-sans-regular text-xl text-sky-900">Comunicados novos</Text>
-          <SwitchButton
-            value={isNewAnnouncementsActive}
-            onChangeValue={handleToggleNewAnnouncements}
-          />
-        </View>
-
-        <View className="flex-row flex-nowrap items-center justify-between gap-2">
-          <Text className="flex-1 font-sans-regular text-xl text-sky-900">Notificações novas</Text>
-          <SwitchButton
-            value={isNewNotificationsActive}
-            onChangeValue={handleToggleNewNotifications}
-          />
-        </View>
-      </View>
-
-      <Separator orientation="horizontal" />
-    </View>
+      <Footer />
+    </ScreenScrollView>
   )
 }
