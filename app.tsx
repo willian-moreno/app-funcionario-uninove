@@ -8,7 +8,9 @@ import {
   useFonts,
 } from '@expo-google-fonts/open-sans'
 import { Routes } from '@routes/index'
+import * as ScreenOrientation from 'expo-screen-orientation'
 import { StatusBar } from 'expo-status-bar'
+import { useEffect } from 'react'
 import { View } from 'react-native'
 
 export function App() {
@@ -17,6 +19,10 @@ export function App() {
     OpenSans_600SemiBold,
     OpenSans_700Bold,
   })
+
+  useEffect(() => {
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
+  }, [])
 
   return (
     <View className="flex-1 bg-sky-50">
