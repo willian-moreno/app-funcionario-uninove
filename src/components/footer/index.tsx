@@ -1,16 +1,16 @@
 import { cn } from '@utils/cn'
-import { Text, View } from 'react-native'
+import { Text, View, ViewProps } from 'react-native'
 
 type Props = {
   variant?: 'default' | 'diluted'
-}
+} & ViewProps
 
-export function Footer({ variant = 'default' }: Props) {
+export function Footer({ className, variant = 'default', ...props }: Props) {
   const currentYear = new Date().getFullYear()
   const version = require('./../../../package.json').version
 
   return (
-    <View className="mt-5 w-full">
+    <View className={cn('mt-5 w-full', className)} {...props}>
       <Text
         className={cn('mx-auto font-sans-regular text-base', {
           'text-sky-900': variant === 'default',
