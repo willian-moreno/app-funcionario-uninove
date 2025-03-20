@@ -1,6 +1,5 @@
 import { AuthContextProvider } from '@contexts/auth-context-provider'
-import { StatusBar } from 'expo-status-bar'
-import { View } from 'react-native'
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {
   children: React.ReactNode
@@ -8,11 +7,10 @@ type Props = {
 
 export function AuthenticatedArea({ children }: Props) {
   return (
-    <>
-      <StatusBar style="dark" backgroundColor="#f1f5f9" />
-      <View className="flex-1 bg-slate-100">
+    <SafeAreaProvider>
+      <SafeAreaView className="flex-1 bg-slate-100">
         <AuthContextProvider>{children}</AuthContextProvider>
-      </View>
-    </>
+      </SafeAreaView>
+    </SafeAreaProvider>
   )
 }
