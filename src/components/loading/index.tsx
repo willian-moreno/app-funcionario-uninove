@@ -1,8 +1,11 @@
-import { ActivityIndicator, View } from 'react-native'
+import { cn } from '@utils/cn'
+import { ActivityIndicator, View, ViewProps } from 'react-native'
 
-export function Loading() {
+type Props = {} & ViewProps
+
+export function Loading({ className, ...props }: Props) {
   return (
-    <View className="flex-1 items-center justify-center bg-sky-50/70">
+    <View className={cn('flex-1 items-center justify-center', className)} {...props}>
       <ActivityIndicator className="text-sky-900" size={32} />
     </View>
   )
