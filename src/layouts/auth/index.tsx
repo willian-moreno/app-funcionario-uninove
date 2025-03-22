@@ -1,6 +1,6 @@
+import LogoSvg from '@assets/logo.svg'
 import { Footer } from '@components/footer'
 import { KeyboardAvoiding } from '@components/keyboard-avoiding'
-import { LogoSvg } from '@components/logo-svg'
 import { View } from 'react-native'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
