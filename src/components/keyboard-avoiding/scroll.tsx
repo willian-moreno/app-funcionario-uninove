@@ -1,18 +1,13 @@
+import { cn } from '@utils/cn'
 import { ScrollView, ScrollViewProps } from 'react-native'
 
 type Props = {} & ScrollViewProps
 
-export function Scroll({ children, className, contentContainerStyle, ...props }: Props) {
+export function Scroll({ children, className, contentContainerClassName, ...props }: Props) {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
-      contentContainerStyle={[
-        {
-          flexGrow: 1,
-          padding: 24,
-        },
-        contentContainerStyle,
-      ]}
+      contentContainerClassName={cn('flex-grow p-6', contentContainerClassName)}
       {...props}
     >
       {children}
