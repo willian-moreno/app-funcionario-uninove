@@ -1,3 +1,4 @@
+import NoNotificationsSvg from '@assets/no-notifications.svg'
 import { BottomSheet } from '@components/bottom-sheet'
 import { Footer } from '@components/footer'
 import { IconButton } from '@components/icon-button'
@@ -5,12 +6,12 @@ import { Loading } from '@components/loading'
 import { Separator } from '@components/separator'
 import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/use-auth'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
 import { formatInTimeZone } from 'date-fns-tz'
 import { ptBR } from 'date-fns/locale/pt-BR'
-import { useEffect, useState } from 'react'
-import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { useCallback, useEffect, useState } from 'react'
+import { Dimensions, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
 type Notification = {
@@ -39,6 +40,8 @@ export function Notifications() {
   const [activeNotification, setActiveNotification] = useState<Notification | null>(null)
 
   const isBottomSheetActive = useSharedValue(false)
+
+  const noNotificationsSvgDimension = Dimensions.get('window').width - 48
 
   async function handleGoBack() {
     const canGoBack = navigation.canGoBack()
@@ -86,70 +89,87 @@ export function Notifications() {
 
   useEffect(() => {
     if (activeNotification !== null) {
-      isBottomSheetActive.value = true
+      isBottomSheetActive.set(true)
 
       return
     }
 
-    isBottomSheetActive.value = false
+    isBottomSheetActive.set(false)
   }, [activeNotification])
 
-  return (
-    <View className="flex-1">
-      <FlatList
-        data={notifications}
-        keyExtractor={(item) => item.id.toString()}
-        showsVerticalScrollIndicator={false}
-        contentContainerClassName="p-6"
-        renderItem={({ item, index }) => (
-          <TouchableOpacity
-            className="flex-row items-center gap-x-6 py-6"
-            activeOpacity={0.7}
-            onPress={() => handleTouchNotification(item, index)}
-          >
-            <View className="pointer-events-none flex-1 gap-y-2">
-              <Text
-                className={cn('font-sans-semibold text-xl text-sky-900', {
-                  'text-sky-900/50': item.isVisualised,
-                })}
-                numberOfLines={2}
-              >
-                {item.title}
-              </Text>
-              <Text
-                className={cn('font-sans-regular text-xl text-sky-900', {
-                  'text-sky-900/50': item.isVisualised,
-                })}
-                numberOfLines={2}
-              >
-                {item.description}
-              </Text>
-              <Text
-                className={cn('font-sans-regular text-lg text-sky-900/50', {
-                  'text-sky-900/20': item.isVisualised,
-                })}
-              >
-                {formatDate(item.createdAt)}
-              </Text>
-            </View>
-            <Ionicons
-              name="chevron-forward-outline"
-              className="pointer-events-none text-xl leading-none text-sky-900"
-            />
-          </TouchableOpacity>
-        )}
-        ItemSeparatorComponent={() => <Separator orientation="horizontal" />}
-        ListHeaderComponent={
-          <View className="gap-y-6">
-            <View className="flex-row items-center justify-between">
-              <IconButton icon="arrow-back-outline" onPress={handleGoBack} />
-            </View>
+  useFocusEffect(
+    useCallback(() => {
+      isBottomSheetActive.set(false)
 
-            <Text className="font-sans-bold text-2xl text-sky-900">Notificações</Text>
-          </View>
-        }
-        ListFooterComponent={<Footer />}
-      />
+      setActiveNotification(null)
+    }, []),
+  )
+
+  return (
+    <>
+      <View className="flex-1 gap-y-6 px-6 pt-6">
+        <View className="flex-row items-center justify-between">
+          <IconButton icon="arrow-back-outline" onPress={handleGoBack} />
+        </View>
+
+        <Text className="font-sans-bold text-2xl text-sky-900">Notificações</Text>
+
+        <FlatList
+          data={notifications}
+          keyExtractor={(item) => item.id.toString()}
+          showsVerticalScrollIndicator={false}
+          contentContainerClassName="flex-grow pb-6"
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              className="flex-1 flex-row items-center gap-x-6 py-6"
+              activeOpacity={0.7}
+              onPress={() => handleTouchNotification(item, index)}
+            >
+              <View className="pointer-events-none flex-1 gap-y-2">
+                <Text
+                  className={cn('font-sans-semibold text-xl text-sky-900', {
+                    'text-sky-900/50': item.isVisualised,
+                  })}
+                  numberOfLines={2}
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  className={cn('font-sans-regular text-xl text-sky-900', {
+                    'text-sky-900/50': item.isVisualised,
+                  })}
+                  numberOfLines={2}
+                >
+                  {item.description}
+                </Text>
+                <Text
+                  className={cn('font-sans-regular text-lg text-sky-900/50', {
+                    'text-sky-900/20': item.isVisualised,
+                  })}
+                >
+                  {formatDate(item.createdAt)}
+                </Text>
+              </View>
+              <Ionicons
+                name="chevron-forward-outline"
+                className="pointer-events-none text-xl leading-none text-sky-900"
+              />
+            </TouchableOpacity>
+          )}
+          ItemSeparatorComponent={() => <Separator orientation="horizontal" />}
+          ListFooterComponentClassName={cn('mt-auto', {
+            hidden: notifications.length === 0,
+          })}
+          ListFooterComponent={<Footer />}
+          ListEmptyComponent={
+            <View className="flex-1 items-center justify-center">
+              <NoNotificationsSvg
+                style={{ width: noNotificationsSvgDimension, height: noNotificationsSvgDimension }}
+              />
+            </View>
+          }
+        />
+      </View>
       <BottomSheet
         isVisible={isBottomSheetActive}
         onVisibilityChange={onBottomSheetVisibilityChange}
@@ -157,7 +177,7 @@ export function Notifications() {
         {activeNotification ? (
           <ScrollView
             className="gap-y-6"
-            contentContainerStyle={{ flexGrow: 1, padding: 24 }}
+            contentContainerClassName="flex-grow p-6"
             showsVerticalScrollIndicator={false}
           >
             <View className="flex-1 gap-y-6">
@@ -186,6 +206,6 @@ export function Notifications() {
           <Loading />
         )}
       </BottomSheet>
-    </View>
+    </>
   )
 }
