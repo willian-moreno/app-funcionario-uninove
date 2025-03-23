@@ -2,12 +2,20 @@ import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
 import { Label } from '@components/label'
 import { OTPInput } from '@components/otp-input'
-import { Ionicons } from '@expo/vector-icons'
 import { zodResolver } from '@hookform/resolvers/zod'
+import MailOutlined from '@material-symbols/svg-500/outlined/mail.svg'
 import { useNavigation } from '@react-navigation/native'
+import { cssInterop } from 'nativewind'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
 import { z } from 'zod'
+
+cssInterop(MailOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 const resetPasswordForm = z.object({
   pin: z.string().regex(/^\d{4}$/, 'PIN possui formato inválido.'),
@@ -49,10 +57,7 @@ export function ResetPasswordSecondStage() {
           Antes de cadastrar uma senha, digite o PIN enviado para o seu e-mail:
         </Text>
         <View className="flex w-full flex-1 flex-row items-center gap-2">
-          <Ionicons
-            name="mail-outline"
-            className="pointer-events-none text-3xl leading-none text-sky-400"
-          />
+          <MailOutlined className="pointer-events-none h-8 w-8 fill-sky-400 leading-none" />
           <AnchorButton
             className="font-sans-bold text-lg text-sky-900"
             value="wil***nam@uninove.br"

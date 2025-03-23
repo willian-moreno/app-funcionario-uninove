@@ -1,18 +1,41 @@
 import NoNotificationsSvg from '@assets/no-notifications.svg'
 import { BottomSheet } from '@components/bottom-sheet'
 import { Footer } from '@components/footer'
-import { IconButton } from '@components/icon-button'
 import { Loading } from '@components/loading'
 import { Separator } from '@components/separator'
-import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/use-auth'
+import ArrowBackOutlined from '@material-symbols/svg-500/outlined/arrow_back.svg'
+import ChevronRightOutlined from '@material-symbols/svg-500/outlined/chevron_right.svg'
+import CloseOutlined from '@material-symbols/svg-500/outlined/close.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
 import { formatInTimeZone } from 'date-fns-tz'
 import { ptBR } from 'date-fns/locale/pt-BR'
+import { cssInterop } from 'nativewind'
 import { useCallback, useEffect, useState } from 'react'
 import { Dimensions, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
+
+cssInterop(ArrowBackOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
+
+cssInterop(CloseOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
+
+cssInterop(ChevronRightOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 type Notification = {
   id: number
@@ -30,7 +53,7 @@ export function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>(() => {
     return Array.from({ length: 25 }).map((_, index) => ({
       id: index,
-      title: 'Título da notificação ' + index,
+      title: 'Lorem Ipsum is simply ' + index,
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       createdAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * index).toISOString(),
       isVisualised: false,
@@ -109,7 +132,13 @@ export function Notifications() {
     <>
       <View className="flex-1 gap-y-6 px-6 pt-6">
         <View className="flex-row items-center justify-between">
-          <IconButton icon="arrow-back-outline" onPress={handleGoBack} />
+          <TouchableOpacity
+            className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+            activeOpacity={0.7}
+            onPress={handleGoBack}
+          >
+            <ArrowBackOutlined className="h-8 w-8 fill-sky-900" />
+          </TouchableOpacity>
         </View>
 
         <Text className="font-sans-bold text-2xl text-sky-900">Notificações</Text>
@@ -121,7 +150,10 @@ export function Notifications() {
           contentContainerClassName="flex-grow pb-6"
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              className="flex-1 flex-row items-center gap-x-6 py-6"
+              className={cn('flex-1 flex-row items-center gap-x-6 py-6', {
+                'pt-0': index === 0,
+                'pb-0': index + 1 === notifications.length,
+              })}
               activeOpacity={0.7}
               onPress={() => handleTouchNotification(item, index)}
             >
@@ -150,10 +182,7 @@ export function Notifications() {
                   {formatDate(item.createdAt)}
                 </Text>
               </View>
-              <Ionicons
-                name="chevron-forward-outline"
-                className="pointer-events-none text-xl leading-none text-sky-900"
-              />
+              <ChevronRightOutlined className="pointer-events-none h-6 w-6 fill-sky-900 leading-none" />
             </TouchableOpacity>
           )}
           ItemSeparatorComponent={() => <Separator orientation="horizontal" />}
@@ -181,20 +210,22 @@ export function Notifications() {
             showsVerticalScrollIndicator={false}
           >
             <View className="flex-1 gap-y-6">
-              <View className="flex-row items-center gap-x-6">
-                <View className="gap-y-2">
-                  <Text className="flex-1 font-sans-bold text-2xl text-sky-900">
+              <View className="flex-row justify-between gap-x-6">
+                <View className="flex-1 gap-y-2">
+                  <Text className="flex-1 font-sans-bold text-2xl text-sky-900" numberOfLines={3}>
                     {activeNotification.title}
                   </Text>
                   <Text className="font-sans-regular text-xl text-sky-900/50">
                     {formatDate(activeNotification.createdAt)}
                   </Text>
                 </View>
-                <IconButton
-                  icon="close-outline"
-                  className="ml-auto"
+                <TouchableOpacity
+                  className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+                  activeOpacity={0.7}
                   onPress={onBottomSheetVisibilityChange}
-                />
+                >
+                  <CloseOutlined className="h-8 w-8 fill-sky-900" />
+                </TouchableOpacity>
               </View>
 
               <Text className="font-sans-regular text-xl text-sky-900">

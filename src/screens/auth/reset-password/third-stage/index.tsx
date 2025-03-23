@@ -1,14 +1,30 @@
 import { Button } from '@components/button'
 import { Label } from '@components/label'
 import { PasswordInput } from '@components/password-input'
-import { Ionicons } from '@expo/vector-icons'
 import { zodResolver } from '@hookform/resolvers/zod'
+import CheckCircleOutlined from '@material-symbols/svg-500/outlined/check_circle.svg'
+import CircleOutlined from '@material-symbols/svg-500/outlined/circle.svg'
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
+import { cssInterop } from 'nativewind'
 import { RefObject, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, TextInput, View } from 'react-native'
 import { z } from 'zod'
+
+cssInterop(CheckCircleOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
+
+cssInterop(CircleOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 const resetPasswordForm = z
   .object({
@@ -115,12 +131,11 @@ export function ResetPasswordThirdStage() {
         <View className="flex-1 gap-y-2">
           {rules.map((rule) => (
             <View key={rule.text} className="flex w-full flex-1 flex-row items-center gap-2">
-              <Ionicons
-                name={rule.isValid ? 'checkmark-circle-outline' : 'ellipse-outline'}
-                className={cn('pointer-events-none text-3xl leading-none text-sky-900', {
-                  'text-sky-400': rule.isValid,
-                })}
-              />
+              {rule.isValid ? (
+                <CheckCircleOutlined className="pointer-events-none h-8 w-8 fill-sky-400 leading-none" />
+              ) : (
+                <CircleOutlined className="pointer-events-none h-8 w-8 fill-sky-900 leading-none" />
+              )}
               <Text
                 className={cn('font-sans-semibold text-lg tracking-tight text-sky-900', {
                   'text-sky-400': rule.isValid,

@@ -1,13 +1,29 @@
 import VacancieSvg from '@assets/vacancie.svg'
-import { IconButton } from '@components/icon-button'
 import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { AuthContext } from '@contexts/auth-context-provider'
+import VolumeMuteOutlined from '@material-symbols/svg-500/outlined/volume_mute.svg'
+import VolumeUpOutlined from '@material-symbols/svg-500/outlined/volume_up.svg'
 import { useNavigation } from '@react-navigation/native'
 import { Audio } from 'expo-av'
+import { cssInterop } from 'nativewind'
 import { useContext, useEffect, useState } from 'react'
-import { Dimensions, Text, View } from 'react-native'
+import { Dimensions, Text, TouchableOpacity, View } from 'react-native'
+
+cssInterop(VolumeMuteOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
+
+cssInterop(VolumeUpOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 export function EmployeeOnVacation() {
   const navigation = useNavigation()
@@ -92,17 +108,29 @@ export function EmployeeOnVacation() {
               width: svgWidth,
               height: svgHeight,
               marginLeft: -svgDecreaseLeft,
+              marginBottom: 20,
             }}
           />
         </View>
-        {sound && (
-          <IconButton
-            icon={isSoundMuted ? 'volume-off-outline' : 'volume-high-outline'}
-            variant={isSoundMuted ? 'default' : 'active'}
-            className="ml-auto"
-            onPress={handleToggleSoundMutedStatus}
-          />
-        )}
+
+        {sound &&
+          (isSoundMuted ? (
+            <TouchableOpacity
+              className="absolute bottom-0 right-0 ml-auto aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+              activeOpacity={0.7}
+              onPress={handleToggleSoundMutedStatus}
+            >
+              <VolumeMuteOutlined className="h-8 w-8 fill-sky-900" />
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              className="absolute bottom-0 right-0 ml-auto aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-800"
+              activeOpacity={0.7}
+              onPress={handleToggleSoundMutedStatus}
+            >
+              <VolumeUpOutlined className="h-8 w-8 fill-white" />
+            </TouchableOpacity>
+          ))}
       </View>
     </ScreenScrollView>
   )

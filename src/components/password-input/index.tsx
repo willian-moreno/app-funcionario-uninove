@@ -1,7 +1,23 @@
-import { Ionicons } from '@expo/vector-icons'
+import VisibilityOutlined from '@material-symbols/svg-500/outlined/visibility.svg'
+import VisibilityOffOutlined from '@material-symbols/svg-500/outlined/visibility_off.svg'
 import { cn } from '@utils/cn'
+import { cssInterop } from 'nativewind'
 import { RefObject, useEffect, useState } from 'react'
 import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native'
+
+cssInterop(VisibilityOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
+
+cssInterop(VisibilityOffOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 type Props = {
   inputRef?: RefObject<TextInput> | null
@@ -41,10 +57,11 @@ export function PasswordInput({ className, inputRef, readOnly, ...props }: Props
         disabled={readOnly}
         onPress={handleInvertVisibility}
       >
-        <Ionicons
-          name={isInvisible ? 'eye-outline' : 'eye-off-outline'}
-          className="pointer-events-none text-3xl leading-none text-slate-300"
-        />
+        {isInvisible ? (
+          <VisibilityOutlined className="pointer-events-none h-8 w-8 fill-slate-300 leading-none" />
+        ) : (
+          <VisibilityOffOutlined className="pointer-events-none h-8 w-8 fill-slate-300 leading-none" />
+        )}
       </TouchableOpacity>
     </View>
   )

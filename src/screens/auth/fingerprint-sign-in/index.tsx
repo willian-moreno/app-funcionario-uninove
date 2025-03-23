@@ -1,10 +1,18 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
-import { Ionicons } from '@expo/vector-icons'
 import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
+import FingerprintOutlined from '@material-symbols/svg-600/outlined/fingerprint.svg'
 import { useNavigation } from '@react-navigation/native'
+import { cssInterop } from 'nativewind'
 import { Alert, Text, View } from 'react-native'
+
+cssInterop(FingerprintOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 export function FingerprintSignIn() {
   const navigation = useNavigation()
@@ -53,10 +61,7 @@ export function FingerprintSignIn() {
   return (
     <View className="flex-1 gap-y-6">
       <View className="flex-1 items-center justify-center gap-y-6">
-        <Ionicons
-          name="finger-print-outline"
-          className="pointer-events-none text-8xl leading-none text-sky-400"
-        />
+        <FingerprintOutlined className="pointer-events-none h-28 w-28 fill-sky-400 leading-none" />
         <Text className="text-center font-sans-bold text-3xl text-sky-900">
           Use a biometria para desbloquear o app
         </Text>

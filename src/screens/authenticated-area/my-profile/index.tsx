@@ -1,6 +1,5 @@
 import { Bedge } from '@components/bedge'
 import { Footer } from '@components/footer'
-import { IconButton } from '@components/icon-button'
 import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
@@ -9,11 +8,28 @@ import { SwitchButton } from '@components/switch-button'
 import { AuthContext } from '@contexts/auth-context-provider'
 import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
+import ArrowBackOutlined from '@material-symbols/svg-500/outlined/arrow_back.svg'
+import NotificationsOutlined from '@material-symbols/svg-500/outlined/notifications.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { updateProfileStorage } from '@storage/auth/update-profile-storage'
+import { cssInterop } from 'nativewind'
 import { useCallback, useContext, useState } from 'react'
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
+
+cssInterop(ArrowBackOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
+
+cssInterop(NotificationsOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 type Profile = {
   isBiometricActive: boolean
@@ -118,12 +134,21 @@ export function MyProfile() {
     <ScreenScrollView>
       <View className="flex-1 gap-y-6">
         <View className="flex-row items-center justify-between">
-          <IconButton icon="arrow-back-outline" onPress={handleGoBack} />
+          <TouchableOpacity
+            className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+            activeOpacity={0.7}
+            onPress={handleGoBack}
+          >
+            <ArrowBackOutlined className="h-8 w-8 fill-sky-900" />
+          </TouchableOpacity>
           <Bedge.Root>
-            <IconButton
-              icon="notifications-outline"
+            <TouchableOpacity
+              className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+              activeOpacity={0.7}
               onPress={handleNavigateToNotificationsScreen}
-            />
+            >
+              <NotificationsOutlined className="h-8 w-8 fill-sky-900" />
+            </TouchableOpacity>
             <Bedge.Dot />
           </Bedge.Root>
         </View>

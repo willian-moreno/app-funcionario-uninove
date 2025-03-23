@@ -1,13 +1,21 @@
 import { Bedge } from '@components/bedge'
 import { Footer } from '@components/footer'
-import { IconButton } from '@components/icon-button'
 import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { AuthContext } from '@contexts/auth-context-provider'
+import NotificationsOutlined from '@material-symbols/svg-500/outlined/notifications.svg'
 import { useNavigation } from '@react-navigation/native'
+import { cssInterop } from 'nativewind'
 import { useContext } from 'react'
-import { Text, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
+
+cssInterop(NotificationsOutlined, {
+  className: {
+    target: 'style',
+    nativeStyleToProp: { width: true, height: true, fill: true },
+  },
+})
 
 export function Home() {
   const navigation = useNavigation()
@@ -38,10 +46,13 @@ export function Home() {
             <Text className="font-sans-bold text-2xl text-sky-900">Olá, {auth.user.firstName}</Text>
           </View>
           <Bedge.Root>
-            <IconButton
-              icon="notifications-outline"
+            <TouchableOpacity
+              className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+              activeOpacity={0.7}
               onPress={handleNavigateToNotificationsScreen}
-            />
+            >
+              <NotificationsOutlined className="h-8 w-8 fill-sky-900" />
+            </TouchableOpacity>
             <Bedge.Dot />
           </Bedge.Root>
         </View>
