@@ -2,15 +2,16 @@ import { cn } from '@utils/cn'
 import { ActivityIndicator, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
 
 type Props = {
-  value: string
+  value?: string
   variant?: 'primary' | 'secondary'
   isLoading?: boolean
 } & TouchableOpacityProps
 
 export function Button({
-  value,
+  children,
   disabled,
   className,
+  value = '',
   variant = 'primary',
   isLoading = false,
   ...props
@@ -18,7 +19,7 @@ export function Button({
   return (
     <TouchableOpacity
       className={cn(
-        'h-14 items-center justify-center rounded-sm',
+        'h-14 items-center justify-center rounded-sm px-4',
         {
           'bg-sky-800': variant === 'primary' && !disabled,
           'bg-sky-800/20': variant === 'primary' && disabled,
@@ -30,9 +31,20 @@ export function Button({
       activeOpacity={disabled ? 1 : 0.7}
       {...props}
     >
-      {!isLoading ? (
+      {isLoading && (
+        <ActivityIndicator
+          className={cn('mx-auto', {
+            'text-white': variant === 'primary',
+            'text-sky-900': variant === 'secondary',
+            'text-sky-900/25': variant === 'secondary' && disabled,
+          })}
+          size={20}
+        />
+      )}
+      {!isLoading && children}
+      {!isLoading && !children && (
         <Text
-          className={cn('font-sans-semibold text-xl', {
+          className={cn('mx-auto font-sans-semibold text-xl', {
             'text-white': variant === 'primary',
             'text-sky-900': variant === 'secondary',
             'text-sky-900/25': variant === 'secondary' && disabled,
@@ -40,15 +52,6 @@ export function Button({
         >
           {value}
         </Text>
-      ) : (
-        <ActivityIndicator
-          className={cn({
-            'text-white': variant === 'primary',
-            'text-sky-900': variant === 'secondary',
-            'text-sky-900/25': variant === 'secondary' && disabled,
-          })}
-          size={20}
-        />
       )}
     </TouchableOpacity>
   )
