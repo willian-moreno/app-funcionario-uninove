@@ -6,25 +6,13 @@ import CheckCircleOutlined from '@material-symbols/svg-500/outlined/check_circle
 import CircleOutlined from '@material-symbols/svg-500/outlined/circle.svg'
 import { CommonActions, useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
-import { cssInterop } from 'nativewind'
+import { svgCssInterop } from '@utils/svg-css-interop'
 import { RefObject, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, TextInput, View } from 'react-native'
 import { z } from 'zod'
 
-cssInterop(CheckCircleOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
-
-cssInterop(CircleOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
+svgCssInterop([CheckCircleOutlined, CircleOutlined])
 
 const resetPasswordForm = z
   .object({

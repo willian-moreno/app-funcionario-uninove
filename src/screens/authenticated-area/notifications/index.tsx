@@ -9,33 +9,14 @@ import ChevronRightOutlined from '@material-symbols/svg-500/outlined/chevron_rig
 import CloseOutlined from '@material-symbols/svg-500/outlined/close.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
+import { svgCssInterop } from '@utils/svg-css-interop'
 import { formatInTimeZone } from 'date-fns-tz'
 import { ptBR } from 'date-fns/locale/pt-BR'
-import { cssInterop } from 'nativewind'
 import { useCallback, useEffect, useState } from 'react'
 import { Dimensions, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
-cssInterop(ArrowBackOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
-
-cssInterop(CloseOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
-
-cssInterop(ChevronRightOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
+svgCssInterop([ArrowBackOutlined, CloseOutlined, ChevronRightOutlined])
 
 type Notification = {
   id: number

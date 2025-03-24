@@ -1,23 +1,11 @@
 import VisibilityOutlined from '@material-symbols/svg-500/outlined/visibility.svg'
 import VisibilityOffOutlined from '@material-symbols/svg-500/outlined/visibility_off.svg'
 import { cn } from '@utils/cn'
-import { cssInterop } from 'nativewind'
+import { svgCssInterop } from '@utils/svg-css-interop'
 import { RefObject, useEffect, useState } from 'react'
 import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native'
 
-cssInterop(VisibilityOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
-
-cssInterop(VisibilityOffOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
+svgCssInterop([VisibilityOutlined, VisibilityOffOutlined])
 
 type Props = {
   inputRef?: RefObject<TextInput> | null

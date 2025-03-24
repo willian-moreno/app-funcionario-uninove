@@ -5,17 +5,12 @@ import { OTPInput } from '@components/otp-input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import MailOutlined from '@material-symbols/svg-500/outlined/mail.svg'
 import { useNavigation } from '@react-navigation/native'
-import { cssInterop } from 'nativewind'
+import { svgCssInterop } from '@utils/svg-css-interop'
 import { Controller, useForm } from 'react-hook-form'
 import { Text, View } from 'react-native'
 import { z } from 'zod'
 
-cssInterop(MailOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
+svgCssInterop([MailOutlined])
 
 const resetPasswordForm = z.object({
   pin: z.string().regex(/^\d{4}$/, 'PIN possui formato inválido.'),

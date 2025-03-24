@@ -4,15 +4,10 @@ import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
 import FingerprintOutlined from '@material-symbols/svg-600/outlined/fingerprint.svg'
 import { useNavigation } from '@react-navigation/native'
-import { cssInterop } from 'nativewind'
+import { svgCssInterop } from '@utils/svg-css-interop'
 import { Alert, Text, View } from 'react-native'
 
-cssInterop(FingerprintOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
+svgCssInterop([FingerprintOutlined])
 
 export function FingerprintSignIn() {
   const navigation = useNavigation()

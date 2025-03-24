@@ -13,23 +13,11 @@ import NotificationsOutlined from '@material-symbols/svg-500/outlined/notificati
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { updateProfileStorage } from '@storage/auth/update-profile-storage'
-import { cssInterop } from 'nativewind'
+import { svgCssInterop } from '@utils/svg-css-interop'
 import { useCallback, useContext, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
-cssInterop(ArrowBackOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
-
-cssInterop(NotificationsOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
+svgCssInterop([ArrowBackOutlined, NotificationsOutlined])
 
 type Profile = {
   isBiometricActive: boolean

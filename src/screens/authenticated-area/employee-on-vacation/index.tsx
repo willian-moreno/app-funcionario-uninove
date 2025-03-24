@@ -6,24 +6,12 @@ import { AuthContext } from '@contexts/auth-context-provider'
 import VolumeMuteOutlined from '@material-symbols/svg-500/outlined/volume_mute.svg'
 import VolumeUpOutlined from '@material-symbols/svg-500/outlined/volume_up.svg'
 import { useNavigation } from '@react-navigation/native'
+import { svgCssInterop } from '@utils/svg-css-interop'
 import { Audio } from 'expo-av'
-import { cssInterop } from 'nativewind'
 import { useContext, useEffect, useState } from 'react'
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native'
 
-cssInterop(VolumeMuteOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
-
-cssInterop(VolumeUpOutlined, {
-  className: {
-    target: 'style',
-    nativeStyleToProp: { width: true, height: true, fill: true },
-  },
-})
+svgCssInterop([VolumeMuteOutlined, VolumeUpOutlined])
 
 export function EmployeeOnVacation() {
   const navigation = useNavigation()
