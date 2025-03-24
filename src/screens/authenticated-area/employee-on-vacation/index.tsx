@@ -87,14 +87,14 @@ export function EmployeeOnVacation() {
   return (
     <ScreenScrollView>
       <View className="flex-1 gap-y-6">
-        <View className="flex-row items-center gap-2">
+        <View className="flex-row items-center gap-x-2">
           <ProfileButton
             userNameInitials={auth?.user.nameInitials}
             onPress={handleNavigateToMyProfileScreen}
           />
           <Text className="font-sans-bold text-2xl text-sky-900">Olá, {auth?.user.firstName}</Text>
         </View>
-        <View className="mt-auto gap-4">
+        <View className="mt-auto gap-x-4">
           <Text className="font-sans-bold text-xl text-sky-900">
             Aproveite suas férias para descansar e recarregar as energias.
           </Text>
