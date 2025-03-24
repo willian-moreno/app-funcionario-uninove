@@ -4,13 +4,13 @@ import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { AuthContext } from '@contexts/auth-context-provider'
-import BookOutlined from '@material-symbols/svg-500/outlined/book.svg'
-import DentistryOutlined from '@material-symbols/svg-500/outlined/dentistry.svg'
-import EmojiLanguageOutlined from '@material-symbols/svg-500/outlined/emoji_language.svg'
-import MedicalServicesOutlined from '@material-symbols/svg-500/outlined/medical_services.svg'
-import NotificationsOutlined from '@material-symbols/svg-500/outlined/notifications.svg'
-import RestaurantOutlined from '@material-symbols/svg-500/outlined/restaurant.svg'
-import TheaterComedyOutlined from '@material-symbols/svg-500/outlined/theater_comedy.svg'
+import BookOutlined from '@material-symbols/svg-600/outlined/book.svg'
+import DentistryOutlined from '@material-symbols/svg-600/outlined/dentistry.svg'
+import EmojiLanguageOutlined from '@material-symbols/svg-600/outlined/emoji_language.svg'
+import MedicalServicesOutlined from '@material-symbols/svg-600/outlined/medical_services.svg'
+import NotificationsOutlined from '@material-symbols/svg-600/outlined/notifications.svg'
+import RestaurantOutlined from '@material-symbols/svg-600/outlined/restaurant.svg'
+import TheaterComedyOutlined from '@material-symbols/svg-600/outlined/theater_comedy.svg'
 import { useNavigation } from '@react-navigation/native'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import { useContext } from 'react'
@@ -77,14 +77,14 @@ export function Home() {
         <View className="gap-y-6">
           <Text className="px-6 font-sans-bold text-2xl text-sky-900">Benefícios e serviços</Text>
           <ScrollView
-            contentContainerClassName="gap-x-3 px-6"
+            contentContainerClassName="gap-x-2 px-6"
             horizontal
             showsHorizontalScrollIndicator={false}
           >
             {benefitsAndServices.map(({ title, Icon, onPress }, index) => (
               <TouchableOpacity
                 key={title}
-                className="aspect-square w-[35vw] justify-between gap-y-6 rounded-sm bg-sky-100 p-4"
+                className="aspect-square w-40 justify-between gap-y-6 rounded-sm bg-sky-100 p-4"
                 activeOpacity={0.7}
                 onPress={onPress}
               >
