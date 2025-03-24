@@ -58,6 +58,7 @@ export function SignIn() {
         user: {
           registration: '020084',
           fullName: 'Willian Alves Moreno',
+          email: 'willianam@uninove.br',
           department: 'Desenvolvimento',
           position: 'Analista de Sistemas Junior',
           campus: 'Vergueiro',
