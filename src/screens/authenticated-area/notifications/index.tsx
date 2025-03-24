@@ -32,7 +32,7 @@ export function Notifications() {
   const navigation = useNavigation()
 
   const [notifications, setNotifications] = useState<Notification[]>(() => {
-    return Array.from({ length: 25 }).map((_, index) => ({
+    return Array.from({ length: 10 }).map((_, index) => ({
       id: index,
       title: 'Lorem Ipsum is simply ' + index,
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -45,7 +45,7 @@ export function Notifications() {
 
   const isBottomSheetActive = useSharedValue(false)
 
-  const noNotificationsSvgDimension = Dimensions.get('window').width - 48
+  const containerWidth = Dimensions.get('window').width - 48
 
   async function handleGoBack() {
     const canGoBack = navigation.canGoBack()
@@ -167,15 +167,14 @@ export function Notifications() {
             </TouchableOpacity>
           )}
           ItemSeparatorComponent={() => <Separator orientation="horizontal" />}
-          ListFooterComponentClassName={cn('mt-auto', {
-            hidden: notifications.length === 0,
-          })}
+          ListFooterComponentClassName="mt-auto"
           ListFooterComponent={<Footer />}
           ListEmptyComponent={
-            <View className="flex-1 items-center justify-center">
+            <View className="flex-1 items-center justify-center gap-y-2">
               <NoNotificationsSvg
-                style={{ width: noNotificationsSvgDimension, height: noNotificationsSvgDimension }}
+                style={{ width: containerWidth * 0.7, height: containerWidth * 0.7 }}
               />
+              <Text className="font-sans-semibold text-2xl text-slate-300">Sem notificações</Text>
             </View>
           }
         />
@@ -185,21 +184,15 @@ export function Notifications() {
         onVisibilityChange={onBottomSheetVisibilityChange}
       >
         {activeNotification ? (
-          <ScrollView
-            className="gap-y-6"
-            contentContainerClassName="flex-grow p-6"
-            showsVerticalScrollIndicator={false}
-          >
-            <View className="flex-1 gap-y-6">
+          <View className="flex-1 gap-y-6 px-6 pt-6">
+            <View className="gap-y-2">
               <View className="flex-row justify-between gap-x-6">
-                <View className="flex-1 gap-y-2">
-                  <Text className="flex-1 font-sans-bold text-2xl text-sky-900" numberOfLines={3}>
-                    {activeNotification.title}
-                  </Text>
-                  <Text className="font-sans-regular text-xl text-sky-900/50">
-                    {formatDate(activeNotification.createdAt)}
-                  </Text>
-                </View>
+                <Text
+                  className="my-auto flex-1 font-sans-bold text-2xl text-sky-900"
+                  numberOfLines={2}
+                >
+                  {activeNotification.title}
+                </Text>
                 <TouchableOpacity
                   className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
                   activeOpacity={0.7}
@@ -208,12 +201,20 @@ export function Notifications() {
                   <CloseOutlined className="h-8 w-8 fill-sky-900" />
                 </TouchableOpacity>
               </View>
-
+              <Text className="font-sans-regular text-lg text-sky-900/50">
+                {formatDate(activeNotification.createdAt)}
+              </Text>
+            </View>
+            <ScrollView
+              className="gap-y-6"
+              contentContainerClassName="flex-grow pb-6 gap-y-6"
+              showsVerticalScrollIndicator={false}
+            >
               <Text className="font-sans-regular text-xl text-sky-900">
                 {activeNotification.description}
               </Text>
-            </View>
-          </ScrollView>
+            </ScrollView>
+          </View>
         ) : (
           <Loading />
         )}
