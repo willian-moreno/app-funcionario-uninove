@@ -1,4 +1,4 @@
-import { TouchableOpacity, ViewProps } from 'react-native'
+import { Pressable, ViewProps } from 'react-native'
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -32,7 +32,7 @@ export function BottomSheet({ isVisible, children, duration = 500, onVisibilityC
   return (
     <>
       <Animated.View className="absolute inset-0 h-svh w-svw bg-black/20" style={[backdropStyle]}>
-        <TouchableOpacity className="flex-1" onPress={onVisibilityChange} />
+        <Pressable className="flex-1" onPress={onVisibilityChange} />
       </Animated.View>
       <Animated.View
         className="absolute bottom-0 h-[90vh] w-full flex-1 rounded-t-3xl bg-slate-100"
