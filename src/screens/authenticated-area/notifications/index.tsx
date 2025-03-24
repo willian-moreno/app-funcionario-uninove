@@ -114,7 +114,7 @@ export function Notifications() {
       <View className="flex-1 gap-y-6 px-6 pt-6">
         <View className="flex-row items-center justify-between">
           <TouchableOpacity
-            className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+            className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-800/70"
             activeOpacity={0.7}
             onPress={handleGoBack}
           >
@@ -194,7 +194,7 @@ export function Notifications() {
                   {activeNotification.title}
                 </Text>
                 <TouchableOpacity
-                  className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+                  className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-800/70"
                   activeOpacity={0.7}
                   onPress={onBottomSheetVisibilityChange}
                 >

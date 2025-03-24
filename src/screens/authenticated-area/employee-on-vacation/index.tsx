@@ -104,7 +104,7 @@ export function EmployeeOnVacation() {
         {sound &&
           (isSoundMuted ? (
             <TouchableOpacity
-              className="absolute bottom-0 right-0 ml-auto aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100"
+              className="absolute bottom-0 right-0 ml-auto aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-800/70"
               activeOpacity={0.7}
               onPress={handleToggleSoundMutedStatus}
             >
@@ -112,7 +112,7 @@ export function EmployeeOnVacation() {
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
-              className="absolute bottom-0 right-0 ml-auto aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-800"
+              className="absolute bottom-0 right-0 ml-auto aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-800 shadow shadow-sky-800/70"
               activeOpacity={0.7}
               onPress={handleToggleSoundMutedStatus}
             >

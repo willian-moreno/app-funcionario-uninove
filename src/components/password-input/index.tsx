@@ -25,14 +25,10 @@ export function PasswordInput({ className, inputRef, readOnly, ...props }: Props
   }, [readOnly])
 
   return (
-    <View className="flex h-14 w-full flex-row gap-x-4 rounded-sm bg-white pl-4 shadow shadow-slate-800/10">
+    <View className="flex h-14 w-full flex-row gap-x-4 bg-white pl-4 shadow shadow-sky-800/70">
       <TextInput
         ref={inputRef}
-        className={cn(
-          'h-14 flex-1 bg-white text-lg text-sky-900',
-          'placeholder:text-slate-300',
-          className,
-        )}
+        className={cn('h-14 flex-1 text-lg text-sky-900', 'placeholder:text-slate-300', className)}
         autoCapitalize="none"
         underlineColorAndroid="transparent"
         secureTextEntry={isInvisible}

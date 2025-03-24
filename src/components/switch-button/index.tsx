@@ -31,7 +31,7 @@ export function SwitchButton({
 
   return (
     <TouchableOpacity
-      className={cn('h-8 w-14 rounded-full bg-slate-300 p-1', className, {
+      className={cn('h-8 w-14 rounded-full bg-slate-300 p-1 shadow shadow-sky-800/70', className, {
         'bg-sky-800': isActive && !disabled,
         'bg-sky-800/20': isActive && disabled,
         'bg-slate-200': !isActive && disabled,

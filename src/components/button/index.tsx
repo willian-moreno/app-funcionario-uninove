@@ -19,12 +19,13 @@ export function Button({
   return (
     <TouchableOpacity
       className={cn(
-        'h-14 items-center justify-center rounded-sm px-4',
+        'h-14 items-center justify-center px-4 shadow shadow-sky-800/70',
         {
           'bg-sky-800': variant === 'primary' && !disabled,
           'bg-sky-800/20': variant === 'primary' && disabled,
           'bg-sky-100': variant === 'secondary' && !disabled,
           'bg-sky-100/70': variant === 'secondary' && disabled,
+          'shadow-none': disabled,
         },
         className,
       )}
@@ -44,7 +45,7 @@ export function Button({
       {!isLoading && children}
       {!isLoading && !children && (
         <Text
-          className={cn('mx-auto font-sans-semibold text-xl', {
+          className={cn('mx-auto font-sans-bold text-xl', {
             'text-white': variant === 'primary',
             'text-sky-900': variant === 'secondary',
             'text-sky-900/25': variant === 'secondary' && disabled,
