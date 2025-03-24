@@ -18,6 +18,7 @@ import RestaurantOutlined from '@material-symbols/svg-600/outlined/restaurant.sv
 import TheaterComedyOutlined from '@material-symbols/svg-600/outlined/theater_comedy.svg'
 import { useNavigation } from '@react-navigation/native'
 import { svgCssInterop } from '@utils/svg-css-interop'
+import * as Linking from 'expo-linking'
 import { useContext, useState } from 'react'
 import { Dimensions, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 
@@ -51,18 +52,71 @@ export function Home() {
   const containerWidth = Dimensions.get('window').width - 48
 
   const benefitsAndServices = [
-    { title: 'NotreDame Intermédica', Icon: MedicalServicesOutlined, onPress: () => {} },
-    { title: 'Metlife', Icon: DentistryOutlined, onPress: () => {} },
-    { title: 'Ticke Edenred', Icon: RestaurantOutlined, onPress: () => {} },
-    { title: 'Sesc', Icon: TheaterComedyOutlined, onPress: () => {} },
-    { title: 'Voxy', Icon: EmojiLanguageOutlined, onPress: () => {} },
-    { title: 'ExLibris', Icon: BookOutlined, onPress: () => {} },
+    {
+      title: 'NotreDame Intermédica',
+      Icon: MedicalServicesOutlined,
+      onPress: () => {
+        Linking.openURL('https://portal-beneficiario.gndi.com.br/')
+      },
+    },
+    {
+      title: 'Metlife',
+      Icon: DentistryOutlined,
+      onPress: () => {
+        Linking.openURL('https://redecredenciada.metlife.com.br/')
+      },
+    },
+    {
+      title: 'Ticke Edenred',
+      Icon: RestaurantOutlined,
+      onPress: () => {
+        Linking.openURL('https://www.ticket.com.br/portal-usuario/consulta-saldo')
+      },
+    },
+    {
+      title: 'Sesc',
+      Icon: TheaterComedyOutlined,
+      onPress: () => {
+        Linking.openURL('https://centralrelacionamento.sescsp.org.br/')
+      },
+    },
+    {
+      title: 'Voxy',
+      Icon: EmojiLanguageOutlined,
+      onPress: () => {
+        Linking.openURL('https://inglesuninove.voxy.com/v2/#/login')
+      },
+    },
+    {
+      title: 'ExLibris',
+      Icon: BookOutlined,
+      onPress: () => {
+        Linking.openURL(
+          'https://uninove.primo.exlibrisgroup.com/discovery/search?vid=55UNINOVE_INST:UNINOVE',
+        )
+      },
+    },
   ]
 
   const toolsAndSupport = [
-    { title: 'Service Desk - GLPI', onPress: () => {} },
-    { title: 'RH - TOTVS', onPress: () => {} },
-    { title: 'Email - Microsoft Outlook', onPress: () => {} },
+    {
+      title: 'Service Desk - GLPI',
+      onPress: () => {
+        Linking.openURL('https://glpi.uninove.br')
+      },
+    },
+    {
+      title: 'RH - TOTVS',
+      onPress: () => {
+        Linking.openURL('https://portalrh.uninove.br')
+      },
+    },
+    {
+      title: 'Email - Microsoft Outlook',
+      onPress: () => {
+        Linking.openURL(`https://outlook.live.com/mail/0/inbox?login_hint=${auth.user.email}`)
+      },
+    },
   ]
 
   async function handleNavigateToMyProfileScreen() {
