@@ -43,7 +43,7 @@ export function Home() {
   const { auth, isLoading: isScreenLoading } = useContext(AuthContext)
 
   const [announcements, setAnnouncements] = useState<Announcement[]>(() => {
-    return Array.from({ length: 0 }).map((_, index) => ({
+    return Array.from({ length: 6 }).map((_, index) => ({
       id: index,
       title: 'Renovação de crachá de estacionamento 2025',
       content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -155,7 +155,7 @@ export function Home() {
             </View>
             <Bedge.Root>
               <TouchableOpacity
-                className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-900/70"
+                className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
                 activeOpacity={0.7}
                 onPress={handleNavigateToNotificationsScreen}
               >
@@ -177,12 +177,12 @@ export function Home() {
                   <AnnouncementCard announcement={item} style={{ width: containerWidth }} />
                 )}
                 showsHorizontalScrollIndicator={false}
-                contentContainerClassName="gap-x-4 px-6 py-3 flex-1"
+                contentContainerClassName="gap-x-4 px-6 py-3"
                 horizontal
                 ListFooterComponent={
                   announcements.length ? (
                     <TouchableOpacity
-                      className="flex-1 items-center justify-center bg-slate-200 p-6 shadow shadow-sky-900/70"
+                      className="flex-1 items-center justify-center bg-sky-50 p-6 shadow shadow-sky-900/70"
                       activeOpacity={0.7}
                       style={{ width: containerWidth }}
                     >
@@ -209,7 +209,7 @@ export function Home() {
                 keyExtractor={(item) => item.title}
                 renderItem={({ item: { title, Icon, onPress } }) => (
                   <TouchableOpacity
-                    className="aspect-square w-36 justify-between gap-y-6 bg-sky-100 p-4 shadow shadow-sky-900/70"
+                    className="aspect-square w-36 justify-between gap-y-6 bg-sky-50 p-4 shadow shadow-sky-900/70"
                     activeOpacity={0.7}
                     onPress={onPress}
                   >
@@ -244,7 +244,7 @@ export function Home() {
         </View>
         <Footer />
       </ScreenScrollView>
-      <View className="absolute bottom-6 right-6 h-20 w-20 overflow-hidden rounded-full bg-sky-800 shadow shadow-sky-900/70">
+      <View className="absolute bottom-6 right-6 h-20 w-20 overflow-hidden rounded-full bg-sky-800 shadow shadow-sky-900">
         <TouchableOpacity
           className="h-full w-full items-center justify-center"
           activeOpacity={0.7}
