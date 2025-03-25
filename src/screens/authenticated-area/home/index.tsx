@@ -131,6 +131,10 @@ export function Home() {
     navigation.navigate('notifications')
   }
 
+  function handleNavigateToQRCodeScreen() {
+    navigation.navigate('qr_code')
+  }
+
   if (isScreenLoading) {
     return <Loading />
   }
@@ -241,7 +245,11 @@ export function Home() {
         <Footer />
       </ScreenScrollView>
       <View className="absolute bottom-6 right-6 h-20 w-20 overflow-hidden rounded-full bg-sky-800 shadow shadow-sky-900/70">
-        <TouchableOpacity className="h-full w-full items-center justify-center" activeOpacity={0.7}>
+        <TouchableOpacity
+          className="h-full w-full items-center justify-center"
+          activeOpacity={0.7}
+          onPress={handleNavigateToQRCodeScreen}
+        >
           <QrCodeOutlined className="h-12 w-12 fill-white" />
         </TouchableOpacity>
       </View>
