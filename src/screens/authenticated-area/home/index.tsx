@@ -14,6 +14,7 @@ import EmojiLanguageOutlined from '@material-symbols/svg-600/outlined/emoji_lang
 import MedicalServicesOutlined from '@material-symbols/svg-600/outlined/medical_services.svg'
 import NotificationsOutlined from '@material-symbols/svg-600/outlined/notifications.svg'
 import OpenInNewOutlined from '@material-symbols/svg-600/outlined/open_in_new.svg'
+import QrCodeOutlined from '@material-symbols/svg-600/outlined/qr_code.svg'
 import RestaurantOutlined from '@material-symbols/svg-600/outlined/restaurant.svg'
 import TheaterComedyOutlined from '@material-symbols/svg-600/outlined/theater_comedy.svg'
 import { useNavigation } from '@react-navigation/native'
@@ -29,6 +30,7 @@ svgCssInterop([
   MedicalServicesOutlined,
   NotificationsOutlined,
   OpenInNewOutlined,
+  QrCodeOutlined,
   RestaurantOutlined,
   TheaterComedyOutlined,
 ])
@@ -132,93 +134,102 @@ export function Home() {
   }
 
   return (
-    <ScreenScrollView contentContainerClassName="p-0 py-6">
-      <View className="flex-1">
-        <View className="flex-row items-center justify-between gap-x-6 px-6">
-          <View className="flex-row items-center gap-x-2">
-            <ProfileButton
-              userNameInitials={auth.user.nameInitials}
-              onPress={handleNavigateToMyProfileScreen}
-            />
-            <Text className="font-sans-bold text-2xl text-sky-900">Olá, {auth.user.firstName}</Text>
-          </View>
-          <Bedge.Root>
-            <TouchableOpacity
-              className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-800/70"
-              activeOpacity={0.7}
-              onPress={handleNavigateToNotificationsScreen}
-            >
-              <NotificationsOutlined className="h-8 w-8 fill-sky-900" />
-            </TouchableOpacity>
-            <Bedge.Dot />
-          </Bedge.Root>
-        </View>
-        <View className="mt-6">
-          <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
-            <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
-            <TagButton value="Exibir todos" />
-          </View>
-          <ScrollView
-            contentContainerClassName="gap-x-4 px-6 py-3"
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            {announcements.map((announcement) => (
-              <AnnouncementCard
-                key={announcement.id}
-                announcement={announcement}
-                style={{ width: containerWidth }}
+    <>
+      <ScreenScrollView contentContainerClassName="p-0 py-6">
+        <View className="flex-1">
+          <View className="flex-row items-center justify-between gap-x-6 px-6">
+            <View className="flex-row items-center gap-x-2">
+              <ProfileButton
+                userNameInitials={auth.user.nameInitials}
+                onPress={handleNavigateToMyProfileScreen}
               />
-            ))}
-            <TouchableOpacity
-              className="items-center justify-center bg-slate-200 p-6 shadow shadow-sky-800/70"
-              activeOpacity={0.7}
-              style={{ width: containerWidth }}
-            >
-              <Text className="font-sans-bold text-2xl text-sky-900">Exibir todos</Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
-        <View className="mt-6">
-          <Text className="mb-3 px-6 font-sans-bold text-2xl text-sky-900">
-            Benefícios e serviços
-          </Text>
-          <ScrollView
-            contentContainerClassName="gap-x-4 px-6 py-3"
-            horizontal
-            showsHorizontalScrollIndicator={false}
-          >
-            {benefitsAndServices.map(({ title, Icon, onPress }) => (
+              <Text className="font-sans-bold text-2xl text-sky-900">
+                Olá, {auth.user.firstName}
+              </Text>
+            </View>
+            <Bedge.Root>
               <TouchableOpacity
-                key={title}
-                className="aspect-square w-40 justify-between gap-y-6 bg-sky-100 p-4 shadow shadow-sky-800/70"
+                className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-800/70"
                 activeOpacity={0.7}
-                onPress={onPress}
+                onPress={handleNavigateToNotificationsScreen}
               >
-                <Icon className="h-8 w-8 fill-sky-400" />
-                <Text className="font-sans-bold text-lg leading-tight text-sky-900">{title}</Text>
+                <NotificationsOutlined className="h-8 w-8 fill-sky-900" />
               </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-        <View className="mt-6 gap-y-6 px-6">
-          <Text className="font-sans-bold text-2xl text-sky-900">Ferramentas e suporte</Text>
-          <View className="gap-y-6">
-            {toolsAndSupport.map(({ title, onPress }) => (
-              <Button
-                key={title}
-                className="flex-row justify-between px-4"
-                variant="secondary"
-                onPress={onPress}
+              <Bedge.Dot />
+            </Bedge.Root>
+          </View>
+          <View className="mt-6">
+            <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
+              <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
+              <TagButton value="Exibir todos" />
+            </View>
+            <ScrollView
+              contentContainerClassName="gap-x-4 px-6 py-3"
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            >
+              {announcements.map((announcement) => (
+                <AnnouncementCard
+                  key={announcement.id}
+                  announcement={announcement}
+                  style={{ width: containerWidth }}
+                />
+              ))}
+              <TouchableOpacity
+                className="items-center justify-center bg-slate-200 p-6 shadow shadow-sky-800/70"
+                activeOpacity={0.7}
+                style={{ width: containerWidth }}
               >
-                <Text className="font-sans-bold text-lg text-sky-900">{title}</Text>
-                <OpenInNewOutlined className="h-6 w-6 fill-sky-900" />
-              </Button>
-            ))}
+                <Text className="font-sans-bold text-2xl text-sky-900">Exibir todos</Text>
+              </TouchableOpacity>
+            </ScrollView>
+          </View>
+          <View className="mt-6">
+            <Text className="mb-3 px-6 font-sans-bold text-2xl text-sky-900">
+              Benefícios e serviços
+            </Text>
+            <ScrollView
+              contentContainerClassName="gap-x-4 px-6 py-3"
+              horizontal
+              showsHorizontalScrollIndicator={false}
+            >
+              {benefitsAndServices.map(({ title, Icon, onPress }) => (
+                <TouchableOpacity
+                  key={title}
+                  className="aspect-square w-36 justify-between gap-y-6 bg-sky-100 p-4 shadow shadow-sky-800/70"
+                  activeOpacity={0.7}
+                  onPress={onPress}
+                >
+                  <Icon className="h-8 w-8 fill-sky-400" />
+                  <Text className="font-sans-bold text-lg leading-tight text-sky-900">{title}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+          <View className="mt-6 gap-y-6 px-6">
+            <Text className="font-sans-bold text-2xl text-sky-900">Ferramentas e suporte</Text>
+            <View className="gap-y-6">
+              {toolsAndSupport.map(({ title, onPress }) => (
+                <Button
+                  key={title}
+                  className="flex-row justify-between px-4"
+                  variant="secondary"
+                  onPress={onPress}
+                >
+                  <Text className="font-sans-bold text-lg text-sky-900">{title}</Text>
+                  <OpenInNewOutlined className="h-6 w-6 fill-sky-900" />
+                </Button>
+              ))}
+            </View>
           </View>
         </View>
+        <Footer />
+      </ScreenScrollView>
+      <View className="absolute bottom-6 right-6 h-20 w-20 overflow-hidden rounded-full bg-sky-800 shadow shadow-sky-800/70">
+        <TouchableOpacity className="h-full w-full items-center justify-center" activeOpacity={0.7}>
+          <QrCodeOutlined className="h-12 w-12 fill-white" />
+        </TouchableOpacity>
       </View>
-      <Footer />
-    </ScreenScrollView>
+    </>
   )
 }
