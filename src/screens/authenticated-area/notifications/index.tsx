@@ -32,7 +32,7 @@ export function Notifications() {
   const navigation = useNavigation()
 
   const [notifications, setNotifications] = useState<Notification[]>(() => {
-    return Array.from({ length: 10 }).map((_, index) => ({
+    return Array.from({ length: 0 }).map((_, index) => ({
       id: index,
       title: 'Lorem Ipsum is simply ' + index,
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -168,8 +168,8 @@ export function Notifications() {
           ListFooterComponentClassName="mt-auto"
           ListFooterComponent={<Footer />}
           ListEmptyComponent={
-            <View className="flex-1 items-center justify-center gap-y-2">
-              <NoNotificationsSvg className="mx-auto h-52 w-52" />
+            <View className="flex-1 items-center justify-center gap-y-6">
+              <NoNotificationsSvg className="mx-auto h-52 w-44" />
               <Text className="font-sans-semibold text-2xl text-slate-300">Sem notificações</Text>
             </View>
           }
