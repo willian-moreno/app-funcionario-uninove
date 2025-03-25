@@ -13,10 +13,10 @@ import { svgCssInterop } from '@utils/svg-css-interop'
 import { formatInTimeZone } from 'date-fns-tz'
 import { ptBR } from 'date-fns/locale/pt-BR'
 import { useCallback, useEffect, useState } from 'react'
-import { Dimensions, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
-svgCssInterop([ArrowBackOutlined, CloseOutlined, ChevronRightOutlined])
+svgCssInterop([ArrowBackOutlined, CloseOutlined, ChevronRightOutlined, NoNotificationsSvg])
 
 type Notification = {
   id: number
@@ -44,8 +44,6 @@ export function Notifications() {
   const [activeNotification, setActiveNotification] = useState<Notification | null>(null)
 
   const isBottomSheetActive = useSharedValue(false)
-
-  const containerWidth = Dimensions.get('window').width - 48
 
   async function handleGoBack() {
     const canGoBack = navigation.canGoBack()
@@ -171,9 +169,7 @@ export function Notifications() {
           ListFooterComponent={<Footer />}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center gap-y-2">
-              <NoNotificationsSvg
-                style={{ width: containerWidth * 0.7, height: containerWidth * 0.7 }}
-              />
+              <NoNotificationsSvg className="mx-auto h-52 w-52" />
               <Text className="font-sans-semibold text-2xl text-slate-300">Sem notificações</Text>
             </View>
           }
