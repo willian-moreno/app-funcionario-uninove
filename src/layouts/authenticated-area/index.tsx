@@ -8,7 +8,7 @@ type Props = {
 export function AuthenticatedArea({ children }: Props) {
   return (
     <SafeAreaProvider>
-      <SafeAreaView className="flex-1 bg-slate-100">
+      <SafeAreaView className="flex-1 bg-white">
         <AuthContextProvider>{children}</AuthContextProvider>
       </SafeAreaView>
     </SafeAreaProvider>

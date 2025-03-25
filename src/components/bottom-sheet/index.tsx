@@ -35,7 +35,7 @@ export function BottomSheet({ isVisible, children, duration = 500, onVisibilityC
         <Pressable className="flex-1" onPress={onVisibilityChange} />
       </Animated.View>
       <Animated.View
-        className="absolute bottom-0 h-[90vh] w-full flex-1 rounded-t-3xl bg-slate-100"
+        className="absolute bottom-0 h-[90vh] w-full flex-1 rounded-t-3xl bg-white"
         style={[sheetStyle]}
         onLayout={(e) => {
           offset.set(e.nativeEvent.layout.height)

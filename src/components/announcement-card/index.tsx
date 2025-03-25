@@ -30,8 +30,8 @@ export function AnnouncementCard({
 
   return (
     <TouchableOpacity
-      className={cn('justify-end gap-y-6 bg-slate-200 p-6 shadow shadow-sky-900/70', {
-        'bg-sky-100': isNew,
+      className={cn('justify-end gap-y-6 bg-slate-100 p-6 shadow shadow-sky-900/70', {
+        'bg-sky-50': isNew,
       })}
       activeOpacity={0.7}
       {...props}

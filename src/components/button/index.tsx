@@ -23,8 +23,8 @@ export function Button({
         {
           'bg-sky-800': variant === 'primary' && !disabled,
           'bg-sky-800/20': variant === 'primary' && disabled,
-          'bg-sky-100': variant === 'secondary' && !disabled,
-          'bg-sky-100/70': variant === 'secondary' && disabled,
+          'bg-sky-50': variant === 'secondary' && !disabled,
+          'bg-sky-50/70': variant === 'secondary' && disabled,
           'shadow-none': disabled,
         },
         className,
