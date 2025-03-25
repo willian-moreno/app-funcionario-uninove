@@ -8,7 +8,7 @@ type Props = {
 
 export function TextInput({ className, inputRef, ...props }: Props) {
   return (
-    <View className="flex h-14 w-full flex-row gap-x-4 bg-white px-4 shadow shadow-sky-800/70">
+    <View className="flex h-14 w-full flex-row gap-x-4 bg-white px-4 shadow shadow-sky-900/70">
       <NativeTextInput
         ref={inputRef}
         className={cn('h-14 flex-1 text-lg text-sky-900', 'placeholder:text-slate-300', className)}

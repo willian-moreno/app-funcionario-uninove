@@ -19,7 +19,7 @@ export function Button({
   return (
     <TouchableOpacity
       className={cn(
-        'h-14 items-center justify-center px-4 shadow shadow-sky-800/70',
+        'h-14 items-center justify-center px-4 shadow shadow-sky-900/70',
         {
           'bg-sky-800': variant === 'primary' && !disabled,
           'bg-sky-800/20': variant === 'primary' && disabled,

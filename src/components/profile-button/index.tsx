@@ -7,7 +7,7 @@ type Props = {
 export function ProfileButton({ userNameInitials = '', disabled, ...props }: Props) {
   return (
     <TouchableOpacity
-      className="aspect-square h-16 w-16 items-center justify-center rounded-full border-4 border-slate-300 bg-sky-800 shadow shadow-sky-800/70"
+      className="aspect-square h-16 w-16 items-center justify-center rounded-full border-4 border-slate-300 bg-sky-800 shadow shadow-sky-900/70"
       activeOpacity={disabled ? 1 : 0.7}
       {...props}
     >

@@ -150,7 +150,7 @@ export function OTPInput({
           ref={(el) => inputsRef.current.set(position, el)}
           value={value}
           className={cn(
-            'flex h-14 w-full min-w-9 flex-1 bg-white px-4 text-center text-lg text-sky-900 shadow shadow-sky-800/70',
+            'flex h-14 w-full min-w-9 flex-1 bg-white px-4 text-center text-lg text-sky-900 shadow shadow-sky-900/70',
             'placeholder:text-slate-300',
           )}
           autoCapitalize="none"
