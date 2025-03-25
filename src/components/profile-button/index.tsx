@@ -17,7 +17,7 @@ export function ProfileButton({
       className={cn(
         'aspect-square w-16 items-center justify-center rounded-full border-4 border-slate-300 bg-sky-800 shadow shadow-sky-900/70',
         {
-          'w-32': size === 'large',
+          'w-28': size === 'large',
         },
       )}
       activeOpacity={disabled ? 1 : 0.7}
@@ -25,7 +25,7 @@ export function ProfileButton({
     >
       <Text
         className={cn('font-sans-semibold text-xl text-white', {
-          'text-5xl leading-tight': size === 'large',
+          'text-4xl leading-tight': size === 'large',
         })}
       >
         {userNameInitials}
