@@ -38,7 +38,7 @@ export function AnnouncementCard({
     >
       <View className="gap-y-2">
         {isNew && (
-          <Text className="mr-auto bg-sky-400 px-4 py-1 font-sans-semibold text-sm uppercase text-white">
+          <Text className="mr-auto bg-sky-400 px-3 py-0.5 font-sans-semibold text-sm uppercase text-white">
             Novo
           </Text>
         )}
