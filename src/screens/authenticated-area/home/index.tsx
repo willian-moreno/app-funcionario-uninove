@@ -123,7 +123,7 @@ export function Home() {
     },
   ]
 
-  async function handleNavigateToMyProfileScreen() {
+  function handleNavigateToMyProfileScreen() {
     navigation.navigate('my_profile')
   }
 
