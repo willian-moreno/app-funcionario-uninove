@@ -138,7 +138,7 @@ export function Home() {
   return (
     <>
       <ScreenScrollView contentContainerClassName="p-0 py-6">
-        <View className="flex-1">
+        <View className="flex-1 gap-y-6">
           <View className="flex-row items-center justify-between gap-x-6 px-6">
             <View className="flex-row items-center gap-x-2">
               <ProfileButton
@@ -160,77 +160,81 @@ export function Home() {
               <Bedge.Dot />
             </Bedge.Root>
           </View>
-          <View className="mt-6">
-            <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
-              <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
-              <TagButton value="Exibir todos" />
+          <View className="gap-y-9">
+            <View>
+              <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
+                <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
+                <TagButton value="Exibir todos" />
+              </View>
+              <FlatList
+                data={announcements}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item }) => (
+                  <AnnouncementCard announcement={item} style={{ width: containerWidth }} />
+                )}
+                showsHorizontalScrollIndicator={false}
+                contentContainerClassName="gap-x-4 px-6 py-3 flex-1"
+                horizontal
+                ListFooterComponent={
+                  announcements.length ? (
+                    <TouchableOpacity
+                      className="flex-1 items-center justify-center bg-slate-200 p-6 shadow shadow-sky-900/70"
+                      activeOpacity={0.7}
+                      style={{ width: containerWidth }}
+                    >
+                      <Text className="font-sans-bold text-2xl text-sky-900">Exibir todos</Text>
+                    </TouchableOpacity>
+                  ) : null
+                }
+                ListEmptyComponent={
+                  <View className="flex-1 items-center justify-center gap-y-6">
+                    <UndrawNoDataSvg className="mx-auto h-52 w-52" />
+                    <Text className="font-sans-semibold text-2xl text-slate-300">
+                      Sem comunicados
+                    </Text>
+                  </View>
+                }
+              />
             </View>
-            <FlatList
-              data={announcements}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={({ item }) => (
-                <AnnouncementCard announcement={item} style={{ width: containerWidth }} />
-              )}
-              showsHorizontalScrollIndicator={false}
-              contentContainerClassName="gap-x-4 px-6 py-3 flex-1"
-              horizontal
-              ListFooterComponent={
-                announcements.length ? (
+            <View>
+              <Text className="mb-3 px-6 font-sans-bold text-2xl text-sky-900">
+                Benefícios e serviços
+              </Text>
+              <FlatList
+                data={benefitsAndServices}
+                keyExtractor={(item) => item.title}
+                renderItem={({ item: { title, Icon, onPress } }) => (
                   <TouchableOpacity
-                    className="flex-1 items-center justify-center bg-slate-200 p-6 shadow shadow-sky-900/70"
+                    className="aspect-square w-36 justify-between gap-y-6 bg-sky-100 p-4 shadow shadow-sky-900/70"
                     activeOpacity={0.7}
-                    style={{ width: containerWidth }}
+                    onPress={onPress}
                   >
-                    <Text className="font-sans-bold text-2xl text-sky-900">Exibir todos</Text>
+                    <Icon className="h-8 w-8 fill-sky-400" />
+                    <Text className="font-sans-bold text-lg leading-tight text-sky-900">
+                      {title}
+                    </Text>
                   </TouchableOpacity>
-                ) : null
-              }
-              ListEmptyComponent={
-                <View className="flex-1 items-center justify-center gap-y-6">
-                  <UndrawNoDataSvg className="mx-auto h-52 w-52" />
-                  <Text className="font-sans-semibold text-2xl text-slate-300">
-                    Sem comunicados
-                  </Text>
-                </View>
-              }
-            />
-          </View>
-          <View className="mt-6">
-            <Text className="mb-3 px-6 font-sans-bold text-2xl text-sky-900">
-              Benefícios e serviços
-            </Text>
-            <FlatList
-              data={benefitsAndServices}
-              keyExtractor={(item) => item.title}
-              renderItem={({ item: { title, Icon, onPress } }) => (
-                <TouchableOpacity
-                  className="aspect-square w-36 justify-between gap-y-6 bg-sky-100 p-4 shadow shadow-sky-900/70"
-                  activeOpacity={0.7}
-                  onPress={onPress}
-                >
-                  <Icon className="h-8 w-8 fill-sky-400" />
-                  <Text className="font-sans-bold text-lg leading-tight text-sky-900">{title}</Text>
-                </TouchableOpacity>
-              )}
-              showsHorizontalScrollIndicator={false}
-              contentContainerClassName="gap-x-4 px-6 py-3"
-              horizontal
-            />
-          </View>
-          <View className="mt-6 gap-y-6 px-6">
-            <Text className="font-sans-bold text-2xl text-sky-900">Ferramentas e suporte</Text>
-            <View className="gap-y-6">
-              {toolsAndSupport.map(({ title, onPress }) => (
-                <Button
-                  key={title}
-                  className="flex-row justify-between px-4"
-                  variant="secondary"
-                  onPress={onPress}
-                >
-                  <Text className="font-sans-bold text-lg text-sky-900">{title}</Text>
-                  <OpenInNewOutlined className="h-6 w-6 fill-sky-900" />
-                </Button>
-              ))}
+                )}
+                showsHorizontalScrollIndicator={false}
+                contentContainerClassName="gap-x-4 px-6 py-3"
+                horizontal
+              />
+            </View>
+            <View className="gap-y-6 px-6">
+              <Text className="font-sans-bold text-2xl text-sky-900">Ferramentas e suporte</Text>
+              <View className="gap-y-4">
+                {toolsAndSupport.map(({ title, onPress }) => (
+                  <Button
+                    key={title}
+                    className="flex-row justify-between px-4"
+                    variant="secondary"
+                    onPress={onPress}
+                  >
+                    <Text className="font-sans-bold text-lg text-sky-900">{title}</Text>
+                    <OpenInNewOutlined className="h-6 w-6 fill-sky-900" />
+                  </Button>
+                ))}
+              </View>
             </View>
           </View>
         </View>
