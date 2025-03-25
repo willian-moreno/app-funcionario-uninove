@@ -159,7 +159,7 @@ export function MyProfile() {
 
         <View className="gap-y-6">
           <View className="gap-y-2">
-            <Text className="text-sm font-semibold uppercase text-sky-900/50">Segurança</Text>
+            <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">Segurança</Text>
             <Text className="font-sans-semibold text-xl text-sky-900">
               Configure a segurança da sua conta
             </Text>
@@ -181,7 +181,9 @@ export function MyProfile() {
 
         <View className="gap-y-6">
           <View className="gap-y-2">
-            <Text className="text-sm font-semibold uppercase text-sky-900/50">Comunicação</Text>
+            <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">
+              Comunicação
+            </Text>
             <Text className="font-sans-semibold text-xl text-sky-900">
               Escolha o tipo de comunicação que você quer receber no seu dispositivo móvel
             </Text>

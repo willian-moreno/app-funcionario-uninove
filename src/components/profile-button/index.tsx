@@ -24,7 +24,7 @@ export function ProfileButton({
       {...props}
     >
       <Text
-        className={cn('text-xl font-semibold text-white', {
+        className={cn('font-sans-semibold text-xl text-white', {
           'text-5xl leading-tight': size === 'large',
         })}
       >
