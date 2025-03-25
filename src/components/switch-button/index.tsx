@@ -1,5 +1,4 @@
 import { cn } from '@utils/cn'
-import { useEffect, useState } from 'react'
 import { TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 
 type Props = {
@@ -14,27 +13,22 @@ export function SwitchButton({
   onChangeValue = () => {},
   ...props
 }: Props) {
-  const [isActive, setIsActive] = useState(value)
-
   function handleToggleActivation() {
     if (disabled) {
       return
     }
 
-    const newState = !isActive
+    const newState = !value
 
-    setIsActive(newState)
     onChangeValue(newState)
   }
-
-  useEffect(() => setIsActive(value), [value])
 
   return (
     <TouchableOpacity
       className={cn('h-8 w-14 rounded-full bg-slate-300 p-1 shadow shadow-sky-900/70', className, {
-        'bg-sky-800': isActive && !disabled,
-        'bg-sky-800/20': isActive && disabled,
-        'bg-slate-200': !isActive && disabled,
+        'bg-sky-800': value && !disabled,
+        'bg-sky-800/20': value && disabled,
+        'bg-slate-200': !value && disabled,
       })}
       onPress={handleToggleActivation}
       activeOpacity={disabled ? 1 : 0.7}
@@ -42,7 +36,7 @@ export function SwitchButton({
     >
       <View
         className={cn('aspect-square h-full rounded-full bg-white shadow-sm', {
-          'ml-auto': isActive,
+          'ml-auto': value,
         })}
       />
     </TouchableOpacity>
