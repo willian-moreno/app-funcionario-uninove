@@ -26,7 +26,7 @@ type Profile = {
 }
 
 export function MyProfile() {
-  const { isLoading: isAuthLoading, auth } = useContext(AuthContext)
+  const { auth, isLoading: isAuthLoading } = useContext(AuthContext)
 
   const { signOut } = useAuth()
 
