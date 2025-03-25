@@ -9,6 +9,7 @@ import { useBiometrics } from '@hooks/use-biometrics'
 import { CommonActions, useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createAuthStorage } from '@storage/auth/create-auth-storage'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
+import { fakeQrCode } from '@utils/fake-qr-code'
 import { useCallback, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TextInput as NativeTextInput, Text, View } from 'react-native'
@@ -64,6 +65,7 @@ export function SignIn() {
           campus: 'Vergueiro',
           dateOfAdmission: '28/03/2022',
         },
+        qrCode: fakeQrCode,
         accessToken: '',
       })
 

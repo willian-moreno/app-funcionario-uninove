@@ -9,6 +9,7 @@ type Auth = {
     firstName: string
     nameInitials: string
   } & User
+  qrCode: string
   accessToken: string
 }
 
