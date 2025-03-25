@@ -10,6 +10,7 @@ import { EmployeeOnVacation } from '@screens/authenticated-area/employee-on-vaca
 import { Home } from '@screens/authenticated-area/home'
 import { MyProfile } from '@screens/authenticated-area/my-profile'
 import { Notifications } from '@screens/authenticated-area/notifications'
+import { QRCode } from '@screens/authenticated-area/qr-code'
 
 const { Navigator, Screen } = createNativeStackNavigator()
 
@@ -44,6 +45,7 @@ export function AppRoutes() {
       <Screen name="home" layout={AuthenticatedArea} component={Home} />
       <Screen name="my_profile" layout={AuthenticatedArea} component={MyProfile} />
       <Screen name="notifications" layout={AuthenticatedArea} component={Notifications} />
+      <Screen name="qr_code" layout={AuthenticatedArea} component={QRCode} />
     </Navigator>
   )
 }

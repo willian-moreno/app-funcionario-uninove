@@ -10,6 +10,7 @@ export declare global {
       home: undefined
       my_profile: undefined
       notifications: undefined
+      qr_code: undefined
     }
   }
 }
