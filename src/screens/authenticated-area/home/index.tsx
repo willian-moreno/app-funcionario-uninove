@@ -19,6 +19,7 @@ import QrCodeOutlined from '@material-symbols/svg-600/outlined/qr_code.svg'
 import RestaurantOutlined from '@material-symbols/svg-600/outlined/restaurant.svg'
 import TheaterComedyOutlined from '@material-symbols/svg-600/outlined/theater_comedy.svg'
 import { useNavigation } from '@react-navigation/native'
+import { cn } from '@utils/cn'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import * as Linking from 'expo-linking'
 import { useContext, useState } from 'react'
@@ -168,7 +169,7 @@ export function Home() {
             <View>
               <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
                 <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
-                <TagButton value="Exibir todos" />
+                {announcements.length > 0 && <TagButton value="Exibir todos" />}
               </View>
               <FlatList
                 data={announcements}
@@ -177,7 +178,9 @@ export function Home() {
                   <AnnouncementCard announcement={item} style={{ width: containerWidth }} />
                 )}
                 showsHorizontalScrollIndicator={false}
-                contentContainerClassName="gap-x-4 px-6 py-3"
+                contentContainerClassName={cn('gap-x-4 px-6 py-3', {
+                  'flex-1': announcements.length === 0,
+                })}
                 horizontal
                 ListFooterComponent={
                   announcements.length ? (
