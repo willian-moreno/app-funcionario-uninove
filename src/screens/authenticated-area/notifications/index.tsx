@@ -9,9 +9,8 @@ import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_rig
 import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
+import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { formatInTimeZone } from 'date-fns-tz'
-import { ptBR } from 'date-fns/locale/pt-BR'
 import { useCallback, useEffect, useState } from 'react'
 import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
@@ -83,12 +82,6 @@ export function Notifications() {
     setActiveNotification(null)
   }
 
-  function formatDate(date: string) {
-    return formatInTimeZone(date, 'America/Sao_Paulo', "dd 'de' MMMM 'de' yyyy 'às' HH:mm", {
-      locale: ptBR,
-    })
-  }
-
   useEffect(() => {
     if (activeNotification !== null) {
       isBottomSheetActive.set(true)
@@ -158,7 +151,7 @@ export function Notifications() {
                     'text-sky-900/20': item.isVisualised,
                   })}
                 >
-                  {formatDate(item.createdAt)}
+                  {formatDateToLocale(item.createdAt, DEFAULT_DATETIME)}
                 </Text>
               </View>
               <ChevronRightOutlined className="pointer-events-none h-6 w-6 fill-sky-900 leading-none" />
@@ -198,7 +191,7 @@ export function Notifications() {
                 </TouchableOpacity>
               </View>
               <Text className="font-sans-regular text-lg text-sky-900/50">
-                {formatDate(activeNotification.createdAt)}
+                {formatDateToLocale(activeNotification.createdAt, DEFAULT_DATETIME)}
               </Text>
             </View>
             <ScrollView
