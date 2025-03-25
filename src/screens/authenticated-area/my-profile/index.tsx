@@ -1,3 +1,4 @@
+import { AnchorButton } from '@components/anchor-button'
 import { Bedge } from '@components/bedge'
 import { Footer } from '@components/footer'
 import { Loading } from '@components/loading'
@@ -15,7 +16,7 @@ import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { updateProfileStorage } from '@storage/auth/update-profile-storage'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import { useCallback, useContext, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Text, TouchableOpacity, View } from 'react-native'
 
 svgCssInterop([ArrowBackOutlined, NotificationsOutlined])
 
@@ -32,7 +33,7 @@ export function MyProfile() {
 
   const navigation = useNavigation()
 
-  const { isFingerprintAvailable, isBiometricEnrolled } = useBiometrics()
+  const { isFingerprintAvailable, isBiometricEnrolled, authenticate } = useBiometrics()
 
   const [profile, setProfile] = useState<Profile>({
     isBiometricActive: false,
@@ -80,6 +81,16 @@ export function MyProfile() {
 
   async function handleToggleBiometric(isActive: boolean) {
     try {
+      if (!isBiometricEnrolled) {
+        Alert.alert('Autenticação', 'Nenhuma biometria cadastrada no dispositivo.')
+
+        return
+      }
+
+      if (isActive && !(await authenticate())) {
+        return
+      }
+
       setProfile((state) => ({ ...state, isBiometricActive: isActive && isBiometricEnrolled }))
       await updateProfileStorage({ ...profile, isBiometricActive: isActive && isBiometricEnrolled })
     } catch (error) {
@@ -108,6 +119,27 @@ export function MyProfile() {
     }
   }
 
+  async function handleSignOut() {
+    console.log(signOut)
+
+    Alert.alert(
+      'Sair da conta',
+      'Tem certeza que deseja sair da conta? Ao sair você retornará para a tela de login.',
+      [
+        {
+          text: 'Confirmar',
+          onPress: async () => {
+            signOut()
+          },
+        },
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+      ],
+    )
+  }
+
   useFocusEffect(
     useCallback(() => {
       findStoredProfile()
@@ -123,7 +155,7 @@ export function MyProfile() {
       <View className="flex-1 gap-y-6">
         <View className="flex-row items-center justify-between">
           <TouchableOpacity
-            className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-900/70"
+            className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
             activeOpacity={0.7}
             onPress={handleGoBack}
           >
@@ -131,7 +163,7 @@ export function MyProfile() {
           </TouchableOpacity>
           <Bedge.Root>
             <TouchableOpacity
-              className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-100 shadow shadow-sky-900/70"
+              className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
               activeOpacity={0.7}
               onPress={handleNavigateToNotificationsScreen}
             >
@@ -209,6 +241,8 @@ export function MyProfile() {
         </View>
 
         <Separator orientation="horizontal" />
+
+        <AnchorButton value="Sair da conta" className="mx-auto my-4" onPress={handleSignOut} />
       </View>
       <Footer />
     </ScreenScrollView>
