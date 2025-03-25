@@ -32,7 +32,7 @@ export function Notifications() {
   const navigation = useNavigation()
 
   const [notifications, setNotifications] = useState<Notification[]>(() => {
-    return Array.from({ length: 0 }).map((_, index) => ({
+    return Array.from({ length: 10 }).map((_, index) => ({
       id: index,
       title: 'Lorem Ipsum is simply ' + index,
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
