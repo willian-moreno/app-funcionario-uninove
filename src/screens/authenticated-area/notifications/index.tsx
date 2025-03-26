@@ -197,6 +197,7 @@ export function Notifications() {
             <ScrollView
               className="gap-y-6"
               contentContainerClassName="flex-grow pb-6 gap-y-6"
+              keyboardShouldPersistTaps="handled"
               showsVerticalScrollIndicator={false}
             >
               <Text className="font-sans-regular text-xl text-sky-900">

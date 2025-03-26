@@ -8,6 +8,7 @@ export function Scroll({ children, className, contentContainerClassName, ...prop
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerClassName={cn('flex-grow p-6', contentContainerClassName)}
+      keyboardShouldPersistTaps="handled"
       {...props}
     >
       {children}

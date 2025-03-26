@@ -8,6 +8,7 @@ export function ScreenScrollView({ children, contentContainerClassName, ...props
     <ScrollView
       showsVerticalScrollIndicator={false}
       contentContainerClassName={cn('flex-grow p-6', contentContainerClassName)}
+      keyboardShouldPersistTaps="handled"
       {...props}
     >
       {children}
