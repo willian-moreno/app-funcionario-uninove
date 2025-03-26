@@ -11,6 +11,7 @@ import { Routes } from '@routes/index'
 import * as ScreenOrientation from 'expo-screen-orientation'
 import { useEffect } from 'react'
 import { View } from 'react-native'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 export function App() {
   const [fontsLoaded] = useFonts({
@@ -23,5 +24,9 @@ export function App() {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
   }, [])
 
-  return <View className="flex-1 bg-sky-50">{fontsLoaded ? <Routes /> : <Loading />}</View>
+  return (
+    <GestureHandlerRootView>
+      <View className="flex-1 bg-sky-50">{fontsLoaded ? <Routes /> : <Loading />}</View>
+    </GestureHandlerRootView>
+  )
 }
