@@ -11,10 +11,10 @@ import Animated, {
 type Props = {
   isVisible: SharedValue<boolean>
   duration?: number
-  onVisibilityChange: () => void
+  onClose: () => void
 } & ViewProps
 
-export function BottomSheet({ isVisible, children, duration = 500, onVisibilityChange }: Props) {
+export function BottomSheet({ isVisible, children, duration = 500, onClose }: Props) {
   const offset = useSharedValue(0)
 
   const progress = useDerivedValue(() => withTiming(isVisible.value ? 0 : 1, { duration }))
@@ -25,17 +25,21 @@ export function BottomSheet({ isVisible, children, duration = 500, onVisibilityC
   }))
 
   const sheetStyle = useAnimatedStyle(() => ({
+    opacity: 1,
     transform: [{ translateY: progress.value * 2 * offset.value }],
     zIndex: isVisible.value ? 2 : withDelay(duration, withTiming(-1, { duration: 0 })),
   }))
 
   return (
     <>
-      <Animated.View className="absolute inset-0 h-svh w-svw bg-black/20" style={[backdropStyle]}>
-        <Pressable className="flex-1" onPress={onVisibilityChange} />
+      <Animated.View
+        className="absolute inset-0 -z-10 h-svh w-svw bg-black/20 opacity-0"
+        style={[backdropStyle]}
+      >
+        <Pressable className="flex-1" onPress={onClose} />
       </Animated.View>
       <Animated.View
-        className="absolute bottom-0 h-[90vh] w-full flex-1 rounded-t-3xl bg-white"
+        className="absolute bottom-0 -z-10 h-[90vh] w-full flex-1 rounded-t-3xl bg-white opacity-0"
         style={[sheetStyle]}
         onLayout={(e) => {
           offset.set(e.nativeEvent.layout.height)
