@@ -16,7 +16,7 @@ export function ProfileButton({
   return (
     <TouchableOpacity
       className={cn(
-        'aspect-square w-16 items-center justify-center rounded-full border-4 border-slate-300 bg-sky-800 shadow shadow-sky-900/70',
+        'aspect-square w-16 items-center justify-center rounded-full border-4 border-slate-300 bg-sky-800',
         className,
         {
           'w-28': size === 'large',
