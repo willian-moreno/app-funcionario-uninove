@@ -1,4 +1,3 @@
-import NoNotificationsSvg from '@assets/no-notifications.svg'
 import { BottomSheet } from '@components/bottom-sheet'
 import { Footer } from '@components/footer'
 import { Loading } from '@components/loading'
@@ -7,6 +6,7 @@ import { useAuth } from '@hooks/use-auth'
 import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
 import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_right.svg'
 import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
+import NotificationsOffOutlined from '@material-symbols/svg-600/outlined/notifications_off.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
 import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
@@ -15,7 +15,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 
-svgCssInterop([ArrowBackOutlined, CloseOutlined, ChevronRightOutlined, NoNotificationsSvg])
+svgCssInterop([ArrowBackOutlined, CloseOutlined, ChevronRightOutlined, NotificationsOffOutlined])
 
 type Notification = {
   id: number
@@ -31,7 +31,7 @@ export function Notifications() {
   const navigation = useNavigation()
 
   const [notifications, setNotifications] = useState<Notification[]>(() => {
-    return Array.from({ length: 10 }).map((_, index) => ({
+    return Array.from({ length: 0 }).map((_, index) => ({
       id: index,
       title: 'Lorem Ipsum is simply ' + index,
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -162,8 +162,10 @@ export function Notifications() {
           ListFooterComponent={<Footer />}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center gap-y-6">
-              <NoNotificationsSvg className="mx-auto h-52 w-44" />
-              <Text className="font-sans-semibold text-2xl text-slate-300">Sem notificações</Text>
+              <NotificationsOffOutlined className="pointer-events-none h-28 w-28 fill-sky-400 leading-none" />
+              <Text className="text-center font-sans-bold text-3xl text-sky-900">
+                Sem notificações
+              </Text>
             </View>
           }
         />
