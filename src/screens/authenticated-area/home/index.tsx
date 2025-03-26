@@ -23,7 +23,7 @@ import { cn } from '@utils/cn'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import * as Linking from 'expo-linking'
 import { useContext, useState } from 'react'
-import { Dimensions, FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, FlatList, Pressable, Text, TouchableOpacity, View } from 'react-native'
 
 svgCssInterop([
   BookOutlined,
@@ -44,7 +44,7 @@ export function Home() {
   const { auth, isLoading: isScreenLoading } = useContext(AuthContext)
 
   const [announcements, setAnnouncements] = useState<Announcement[]>(() => {
-    return Array.from({ length: 0 }).map((_, index) => ({
+    return Array.from({ length: 6 }).map((_, index) => ({
       id: index,
       title: 'Renovação de crachá de estacionamento 2025',
       content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -145,7 +145,7 @@ export function Home() {
       <ScreenScrollView contentContainerClassName="p-0 py-6">
         <View className="flex-1 gap-y-6">
           <View className="flex-row items-center justify-between gap-x-6 px-6">
-            <View className="flex-row items-center gap-x-2">
+            <View className="flex-row items-center gap-x-4">
               <ProfileButton
                 userNameInitials={auth.user.nameInitials}
                 onPress={handleNavigateToMyProfileScreen}
@@ -168,7 +168,7 @@ export function Home() {
           <View className="gap-y-9">
             {announcements.length > 0 && (
               <View>
-                <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
+                <View className="mb-3 flex-row items-center justify-between gap-x-4 px-6">
                   <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
                   <TagButton value="Exibir todos" />
                 </View>
@@ -239,15 +239,12 @@ export function Home() {
         </View>
         <Footer />
       </ScreenScrollView>
-      <View className="absolute bottom-6 right-6 h-20 w-20 overflow-hidden rounded-full bg-sky-800 shadow shadow-sky-900">
-        <TouchableOpacity
-          className="h-full w-full items-center justify-center"
-          activeOpacity={0.7}
-          onPress={handleNavigateToQRCodeScreen}
-        >
-          <QrCodeOutlined className="h-12 w-12 fill-white" />
-        </TouchableOpacity>
-      </View>
+      <Pressable
+        className="absolute bottom-6 right-6 h-20 w-20 items-center justify-center rounded-full bg-sky-800 shadow shadow-sky-900/70"
+        onPress={handleNavigateToQRCodeScreen}
+      >
+        <QrCodeOutlined className="h-12 w-12 fill-white" />
+      </Pressable>
     </>
   )
 }

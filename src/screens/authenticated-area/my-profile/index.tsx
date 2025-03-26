@@ -175,7 +175,7 @@ export function MyProfile() {
 
         <Text className="font-sans-bold text-2xl text-sky-900">Meu perfil</Text>
 
-        <View className="flex-row items-center gap-x-2">
+        <View className="flex-row items-center gap-x-4">
           <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
           <View className="flex-1">
             <Text className="font-sans-bold text-lg leading-tight text-sky-900" numberOfLines={1}>
@@ -197,7 +197,7 @@ export function MyProfile() {
             </Text>
           </View>
 
-          <View className="flex-row flex-nowrap items-center justify-between gap-x-2">
+          <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
             <Text className="flex-1 font-sans-regular text-xl text-sky-900">
               Usar biometria para desbloquear o app e acessar a conta
             </Text>
@@ -221,7 +221,7 @@ export function MyProfile() {
             </Text>
           </View>
 
-          <View className="flex-row flex-nowrap items-center justify-between gap-x-2">
+          <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
             <Text className="flex-1 font-sans-regular text-xl text-sky-900">Comunicados novos</Text>
             <SwitchButton
               value={isNewAnnouncementsActive}
@@ -229,7 +229,7 @@ export function MyProfile() {
             />
           </View>
 
-          <View className="flex-row flex-nowrap items-center justify-between gap-x-2">
+          <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
             <Text className="flex-1 font-sans-regular text-xl text-sky-900">
               Notificações novas
             </Text>

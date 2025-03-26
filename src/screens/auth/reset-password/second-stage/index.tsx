@@ -51,7 +51,7 @@ export function ResetPasswordSecondStage() {
         <Text className="font-sans-regular text-xl text-sky-900">
           Antes de cadastrar uma senha, digite o PIN enviado para o seu e-mail:
         </Text>
-        <View className="flex w-full flex-1 flex-row items-center gap-x-2">
+        <View className="flex w-full flex-1 flex-row items-center gap-x-4">
           <MailOutlined className="pointer-events-none h-8 w-8 fill-sky-400 leading-none" />
           <AnchorButton
             className="font-sans-bold text-lg text-sky-900"

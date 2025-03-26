@@ -118,7 +118,7 @@ export function ResetPasswordThirdStage() {
         </Text>
         <View className="flex-1 gap-y-2">
           {rules.map((rule) => (
-            <View key={rule.text} className="flex w-full flex-1 flex-row items-center gap-x-2">
+            <View key={rule.text} className="flex w-full flex-1 flex-row items-center gap-x-4">
               {rule.isValid ? (
                 <CheckCircleOutlined className="pointer-events-none h-8 w-8 fill-sky-400 leading-none" />
               ) : (

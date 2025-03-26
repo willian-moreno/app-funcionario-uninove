@@ -75,7 +75,7 @@ export function EmployeeOnVacation() {
   return (
     <ScreenScrollView>
       <View className="flex-1 gap-y-6">
-        <View className="flex-row items-center gap-x-2">
+        <View className="flex-row items-center gap-x-4">
           <ProfileButton
             userNameInitials={auth?.user.nameInitials}
             onPress={handleNavigateToMyProfileScreen}
