@@ -1,5 +1,4 @@
 import { Announcement } from '@@types/announcement'
-import UndrawNoDataSvg from '@assets/undraw-no-data.svg'
 import { AnnouncementCard } from '@components/announcement-card'
 import { Bedge } from '@components/bedge'
 import { Button } from '@components/button'
@@ -35,7 +34,6 @@ svgCssInterop([
   QrCodeOutlined,
   RestaurantOutlined,
   TheaterComedyOutlined,
-  UndrawNoDataSvg,
 ])
 
 export function Home() {
