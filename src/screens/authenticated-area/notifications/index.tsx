@@ -76,7 +76,7 @@ export function Notifications() {
     setActiveNotification({ ...notifications[index] })
   }
 
-  function onBottomSheetVisibilityChange() {
+  function handleCloseBottomSheet() {
     isBottomSheetActive.set(false)
 
     setActiveNotification(null)
@@ -168,10 +168,7 @@ export function Notifications() {
           }
         />
       </View>
-      <BottomSheet
-        isVisible={isBottomSheetActive}
-        onVisibilityChange={onBottomSheetVisibilityChange}
-      >
+      <BottomSheet isVisible={isBottomSheetActive} onClose={handleCloseBottomSheet}>
         {activeNotification ? (
           <View className="flex-1 gap-y-6 px-6 pt-6">
             <View className="gap-y-2">
@@ -185,7 +182,7 @@ export function Notifications() {
                 <TouchableOpacity
                   className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
                   activeOpacity={0.7}
-                  onPress={onBottomSheetVisibilityChange}
+                  onPress={handleCloseBottomSheet}
                 >
                   <CloseOutlined className="h-8 w-8 fill-sky-900" />
                 </TouchableOpacity>
