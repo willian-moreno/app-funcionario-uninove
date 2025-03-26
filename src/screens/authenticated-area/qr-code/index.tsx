@@ -15,6 +15,7 @@ import { useCallback, useContext } from 'react'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { BasicInformations } from './basic-informations'
+import { QRCodeReader } from './qr-code-reader'
 
 svgCssInterop([ArrowBackOutlined, NotificationsOutlined])
 
@@ -25,7 +26,8 @@ export function QRCode() {
 
   const navigation = useNavigation()
 
-  const isBottomSheetActive = useSharedValue(false)
+  const isBasicInformationsBottomSheetActive = useSharedValue(false)
+  const isQRCodeReaderBottomSheetActive = useSharedValue(false)
 
   async function handleGoBack() {
     const canGoBack = navigation.canGoBack()
@@ -48,12 +50,17 @@ export function QRCode() {
   }
 
   function handleShowBasicInformations() {
-    isBottomSheetActive.set(true)
+    isBasicInformationsBottomSheetActive.set(true)
+  }
+
+  function handleShowQRCodeReader() {
+    isQRCodeReaderBottomSheetActive.set(true)
   }
 
   useFocusEffect(
     useCallback(() => {
-      isBottomSheetActive.set(false)
+      isBasicInformationsBottomSheetActive.set(false)
+      isQRCodeReaderBottomSheetActive.set(false)
     }, []),
   )
 
@@ -125,12 +132,13 @@ export function QRCode() {
               variant="secondary"
               onPress={handleShowBasicInformations}
             />
-            <Button value="Leitor de QR Code" />
+            <Button value="Leitor de QR Code" onPress={handleShowQRCodeReader} />
           </View>
         </View>
         <Footer />
       </ScreenScrollView>
-      <BasicInformations isVisible={isBottomSheetActive} />
+      <BasicInformations isVisible={isBasicInformationsBottomSheetActive} />
+      <QRCodeReader isVisible={isQRCodeReaderBottomSheetActive} />
     </>
   )
 }
