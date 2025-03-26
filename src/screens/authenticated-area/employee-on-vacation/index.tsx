@@ -82,12 +82,13 @@ export function EmployeeOnVacation() {
           />
           <Text className="font-sans-bold text-2xl text-sky-900">Olá, {auth?.user.firstName}</Text>
         </View>
-        <View className="mt-auto gap-x-4">
+        <View className="mt-auto gap-y-4">
+          <Text className="font-sans-bold text-4xl text-sky-900">Você está de férias!!</Text>
           <Text className="font-sans-bold text-xl text-sky-900">
-            Aproveite suas férias para descansar e recarregar as energias.
+            Aproveite para descansar e recarregar as energias! <Text className="text-2xl">😎</Text>
           </Text>
-          <Text className="font-sans-bold text-xl text-sky-900">
-            Você merece! Boas férias! <Text className="text-2xl">😎</Text>
+          <Text className="font-sans-regular text-lg text-sky-900/50">
+            Não se preocupe, suas notificações foram silenciadas.
           </Text>
         </View>
         <View className="mt-auto flex-1 justify-end">
