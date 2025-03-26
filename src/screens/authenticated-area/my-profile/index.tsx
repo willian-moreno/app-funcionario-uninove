@@ -159,7 +159,7 @@ export function MyProfile() {
             activeOpacity={0.7}
             onPress={handleGoBack}
           >
-            <ArrowBackOutlined className="h-8 w-8 fill-sky-900" />
+            <ArrowBackOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
           </TouchableOpacity>
           <Bedge.Root>
             <TouchableOpacity
@@ -167,7 +167,7 @@ export function MyProfile() {
               activeOpacity={0.7}
               onPress={handleNavigateToNotificationsScreen}
             >
-              <NotificationsOutlined className="h-8 w-8 fill-sky-900" />
+              <NotificationsOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
             </TouchableOpacity>
             <Bedge.Dot />
           </Bedge.Root>

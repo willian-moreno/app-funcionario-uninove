@@ -109,7 +109,7 @@ export function EmployeeOnVacation() {
               activeOpacity={0.7}
               onPress={handleToggleSoundMutedStatus}
             >
-              <VolumeMuteOutlined className="h-8 w-8 fill-sky-900" />
+              <VolumeMuteOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
@@ -117,7 +117,7 @@ export function EmployeeOnVacation() {
               activeOpacity={0.7}
               onPress={handleToggleSoundMutedStatus}
             >
-              <VolumeUpOutlined className="h-8 w-8 fill-white" />
+              <VolumeUpOutlined className="pointer-events-none h-8 w-8 fill-white" />
             </TouchableOpacity>
           ))}
       </View>

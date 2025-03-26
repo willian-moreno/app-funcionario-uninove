@@ -50,7 +50,10 @@ export function AnnouncementCard({
         className="mr-auto h-10 w-10 items-center justify-center"
         activeOpacity={0.7}
       >
-        <IOSShareOutlined className="h-8 w-8 fill-sky-900" onPress={handleShareAnnouncement} />
+        <IOSShareOutlined
+          className="pointer-events-none h-8 w-8 fill-sky-900"
+          onPress={handleShareAnnouncement}
+        />
       </TouchableOpacity>
     </TouchableOpacity>
   )

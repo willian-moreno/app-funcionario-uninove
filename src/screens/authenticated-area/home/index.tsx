@@ -158,7 +158,7 @@ export function Home() {
                 activeOpacity={0.7}
                 onPress={handleNavigateToNotificationsScreen}
               >
-                <NotificationsOutlined className="h-8 w-8 fill-sky-900" />
+                <NotificationsOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
               </TouchableOpacity>
               <Bedge.Dot />
             </Bedge.Root>
@@ -228,7 +228,7 @@ export function Home() {
                     onPress={onPress}
                   >
                     <Text className="font-sans-bold text-lg text-sky-900">{title}</Text>
-                    <OpenInNewOutlined className="h-6 w-6 fill-sky-900" />
+                    <OpenInNewOutlined className="pointer-events-none h-6 w-6 fill-sky-900" />
                   </Button>
                 ))}
               </View>
@@ -241,7 +241,7 @@ export function Home() {
         className="absolute bottom-6 right-6 h-20 w-20 items-center justify-center rounded-full bg-sky-800 shadow shadow-sky-900/70"
         onPress={handleNavigateToQRCodeScreen}
       >
-        <QrCodeOutlined className="h-12 w-12 fill-white" />
+        <QrCodeOutlined className="pointer-events-none h-12 w-12 fill-white" />
       </Pressable>
     </>
   )

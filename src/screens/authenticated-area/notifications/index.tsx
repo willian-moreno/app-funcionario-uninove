@@ -109,7 +109,7 @@ export function Notifications() {
             activeOpacity={0.7}
             onPress={handleGoBack}
           >
-            <ArrowBackOutlined className="h-8 w-8 fill-sky-900" />
+            <ArrowBackOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
           </TouchableOpacity>
         </View>
 
@@ -186,7 +186,7 @@ export function Notifications() {
                   activeOpacity={0.7}
                   onPress={handleCloseBottomSheet}
                 >
-                  <CloseOutlined className="h-8 w-8 fill-sky-900" />
+                  <CloseOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
                 </TouchableOpacity>
               </View>
               <Text className="font-sans-regular text-lg text-sky-900/50">

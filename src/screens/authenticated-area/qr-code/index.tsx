@@ -107,7 +107,7 @@ export function QRCode() {
               activeOpacity={0.7}
               onPress={handleGoBack}
             >
-              <ArrowBackOutlined className="h-8 w-8 fill-sky-900" />
+              <ArrowBackOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
             </TouchableOpacity>
             <Bedge.Root>
               <TouchableOpacity
@@ -115,7 +115,7 @@ export function QRCode() {
                 activeOpacity={0.7}
                 onPress={handleNavigateToNotificationsScreen}
               >
-                <NotificationsOutlined className="h-8 w-8 fill-sky-900" />
+                <NotificationsOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
               </TouchableOpacity>
               <Bedge.Dot />
             </Bedge.Root>
@@ -181,7 +181,7 @@ export function QRCode() {
                 activeOpacity={0.7}
                 onPress={onBottomSheetVisibilityChange}
               >
-                <CloseOutlined className="h-8 w-8 fill-sky-900" />
+                <CloseOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
               </TouchableOpacity>
             </View>
           </View>
@@ -192,7 +192,7 @@ export function QRCode() {
             showsVerticalScrollIndicator={false}
           >
             <View className="flex-row items-center gap-x-6">
-              <PersonOutlined className="h-8 w-8 fill-sky-400" />
+              <PersonOutlined className="pointer-events-none h-8 w-8 fill-sky-400" />
               <View>
                 <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">
                   Nome completo
@@ -202,7 +202,7 @@ export function QRCode() {
             </View>
             <Separator orientation="horizontal" />
             <View className="flex-row items-center gap-x-6">
-              <SchoolOutlined className="h-8 w-8 fill-sky-400" />
+              <SchoolOutlined className="pointer-events-none h-8 w-8 fill-sky-400" />
               <View>
                 <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">Campus</Text>
                 <Text className="font-sans-bold text-lg text-sky-900">{auth.user.campus}</Text>
@@ -210,7 +210,7 @@ export function QRCode() {
             </View>
             <Separator orientation="horizontal" />
             <View className="flex-row items-center gap-x-6">
-              <FlagOutlined className="h-8 w-8 fill-sky-400" />
+              <FlagOutlined className="pointer-events-none h-8 w-8 fill-sky-400" />
               <View>
                 <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">Setor</Text>
                 <Text className="font-sans-bold text-lg text-sky-900">{auth.user.department}</Text>
@@ -218,7 +218,7 @@ export function QRCode() {
             </View>
             <Separator orientation="horizontal" />
             <View className="flex-row items-center gap-x-6">
-              <BadgeOutlined className="h-8 w-8 fill-sky-400" />
+              <BadgeOutlined className="pointer-events-none h-8 w-8 fill-sky-400" />
               <View>
                 <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">Cargo</Text>
                 <Text className="font-sans-bold text-lg text-sky-900">{auth.user.position}</Text>
@@ -226,7 +226,7 @@ export function QRCode() {
             </View>
             <Separator orientation="horizontal" />
             <View className="flex-row items-center gap-x-6">
-              <CakeOutlined className="h-8 w-8 fill-sky-400" />
+              <CakeOutlined className="pointer-events-none h-8 w-8 fill-sky-400" />
               <View>
                 <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">
                   Data de admissão
