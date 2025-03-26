@@ -1,4 +1,5 @@
-import { Pressable, ViewProps } from 'react-native'
+import { ReactNode } from 'react'
+import { Pressable } from 'react-native'
 import Animated, {
   SharedValue,
   useAnimatedStyle,
@@ -9,10 +10,11 @@ import Animated, {
 } from 'react-native-reanimated'
 
 type Props = {
+  children: ReactNode
   isVisible: SharedValue<boolean>
   duration?: number
   onClose: () => void
-} & ViewProps
+}
 
 export function BottomSheet({ isVisible, children, duration = 500, onClose }: Props) {
   const offset = useSharedValue(0)

@@ -7,6 +7,7 @@ type Props = {
 } & TouchableOpacityProps
 
 export function ProfileButton({
+  className,
   userNameInitials = '',
   size = 'default',
   disabled,
@@ -16,6 +17,7 @@ export function ProfileButton({
     <TouchableOpacity
       className={cn(
         'aspect-square w-16 items-center justify-center rounded-full border-4 border-slate-300 bg-sky-800 shadow shadow-sky-900/70',
+        className,
         {
           'w-28': size === 'large',
         },
@@ -24,7 +26,7 @@ export function ProfileButton({
       {...props}
     >
       <Text
-        className={cn('font-sans-semibold text-xl text-white', {
+        className={cn('pointer-events-none font-sans-semibold text-xl text-white', {
           'text-4xl leading-tight': size === 'large',
         })}
       >

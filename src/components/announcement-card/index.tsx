@@ -13,6 +13,7 @@ type Props = {
 
 export function AnnouncementCard({
   announcement: { title, department, publishedAt, isNew },
+  className,
   ...props
 }: Props) {
   async function handleShareAnnouncement() {
@@ -23,7 +24,7 @@ export function AnnouncementCard({
 
   return (
     <TouchableOpacity
-      className={cn('justify-end gap-y-6 bg-slate-100 p-6 shadow shadow-sky-900/70', {
+      className={cn('justify-end gap-y-6 bg-slate-100 p-6 shadow shadow-sky-900/70', className, {
         'bg-sky-50': isNew,
       })}
       activeOpacity={0.7}
