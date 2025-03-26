@@ -63,7 +63,7 @@ export function SignIn() {
           department: 'Desenvolvimento',
           position: 'Analista de Sistemas Junior',
           campus: 'Vergueiro',
-          dateOfAdmission: '28/03/2022',
+          dateOfAdmission: new Date('2022-03-28').toISOString(),
         },
         qrCode: fakeQrCode,
         accessToken: '',
