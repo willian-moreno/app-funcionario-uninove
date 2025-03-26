@@ -44,7 +44,7 @@ export function Home() {
   const { auth, isLoading: isScreenLoading } = useContext(AuthContext)
 
   const [announcements, setAnnouncements] = useState<Announcement[]>(() => {
-    return Array.from({ length: 6 }).map((_, index) => ({
+    return Array.from({ length: 0 }).map((_, index) => ({
       id: index,
       title: 'Renovação de crachá de estacionamento 2025',
       content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
@@ -166,24 +166,24 @@ export function Home() {
             </Bedge.Root>
           </View>
           <View className="gap-y-9">
-            <View>
-              <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
-                <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
-                {announcements.length > 0 && <TagButton value="Exibir todos" />}
-              </View>
-              <FlatList
-                data={announcements}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                  <AnnouncementCard announcement={item} style={{ width: containerWidth }} />
-                )}
-                showsHorizontalScrollIndicator={false}
-                contentContainerClassName={cn('gap-x-4 px-6 py-3', {
-                  'flex-1': announcements.length === 0,
-                })}
-                horizontal
-                ListFooterComponent={
-                  announcements.length ? (
+            {announcements.length > 0 && (
+              <View>
+                <View className="mb-3 flex-row items-center justify-between gap-x-2 px-6">
+                  <Text className="flex-1 font-sans-bold text-2xl text-sky-900">Comunicados</Text>
+                  <TagButton value="Exibir todos" />
+                </View>
+                <FlatList
+                  data={announcements}
+                  keyExtractor={(item) => item.id.toString()}
+                  renderItem={({ item }) => (
+                    <AnnouncementCard announcement={item} style={{ width: containerWidth }} />
+                  )}
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerClassName={cn('gap-x-4 px-6 py-3', {
+                    'flex-1': announcements.length === 0,
+                  })}
+                  horizontal
+                  ListFooterComponent={
                     <TouchableOpacity
                       className="flex-1 items-center justify-center bg-sky-50 p-6 shadow shadow-sky-900/70"
                       activeOpacity={0.7}
@@ -191,18 +191,10 @@ export function Home() {
                     >
                       <Text className="font-sans-bold text-2xl text-sky-900">Exibir todos</Text>
                     </TouchableOpacity>
-                  ) : null
-                }
-                ListEmptyComponent={
-                  <View className="flex-1 items-center justify-center gap-y-6">
-                    <UndrawNoDataSvg className="mx-auto h-52 w-52" />
-                    <Text className="font-sans-semibold text-2xl text-slate-300">
-                      Sem comunicados
-                    </Text>
-                  </View>
-                }
-              />
-            </View>
+                  }
+                />
+              </View>
+            )}
             <View>
               <Text className="mb-3 px-6 font-sans-bold text-2xl text-sky-900">
                 Benefícios e serviços
