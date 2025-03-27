@@ -6,10 +6,11 @@ import { AuthContext } from '@contexts/auth-context-provider'
 import VolumeMuteOutlined from '@material-symbols/svg-600/outlined/volume_mute.svg'
 import VolumeUpOutlined from '@material-symbols/svg-600/outlined/volume_up.svg'
 import { useNavigation } from '@react-navigation/native'
+import { SCREEN_WIDTH } from '@utils/dimensions'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import { Audio } from 'expo-av'
 import { useContext, useEffect, useState } from 'react'
-import { Dimensions, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 
 svgCssInterop([VolumeMuteOutlined, VolumeUpOutlined])
 
@@ -22,7 +23,7 @@ export function EmployeeOnVacation() {
 
   const [isSoundMuted, setIsSoundMuted] = useState(true)
 
-  const windowWidth = Math.round(Dimensions.get('window').width)
+  const windowWidth = Math.round(SCREEN_WIDTH)
 
   const svgDecreaseLeft = windowWidth * 0.3
   const svgWidth = windowWidth + windowWidth * 0.25

@@ -19,10 +19,11 @@ import RestaurantOutlined from '@material-symbols/svg-600/outlined/restaurant.sv
 import TheaterComedyOutlined from '@material-symbols/svg-600/outlined/theater_comedy.svg'
 import { useNavigation } from '@react-navigation/native'
 import { cn } from '@utils/cn'
+import { SCREEN_WIDTH } from '@utils/dimensions'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import * as Linking from 'expo-linking'
 import { useContext, useState } from 'react'
-import { Dimensions, FlatList, Pressable, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, Pressable, Text, TouchableOpacity, View } from 'react-native'
 
 svgCssInterop([
   BookOutlined,
@@ -52,7 +53,7 @@ export function Home() {
     }))
   })
 
-  const containerWidth = Dimensions.get('window').width - 48
+  const containerWidth = SCREEN_WIDTH - 48
 
   const benefitsAndServices = [
     {
