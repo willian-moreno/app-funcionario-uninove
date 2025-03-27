@@ -11,8 +11,9 @@ import NotificationsOutlined from '@material-symbols/svg-600/outlined/notificati
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { fakeQrCode } from '@utils/fake-qr-code'
 import { svgCssInterop } from '@utils/svg-css-interop'
+import { PermissionResponse, useCameraPermissions } from 'expo-camera'
 import { useCallback, useContext } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { BasicInformations } from './basic-informations'
 import { QRCodeReader } from './qr-code-reader'
@@ -21,6 +22,8 @@ svgCssInterop([ArrowBackOutlined, NotificationsOutlined])
 
 export function QRCode() {
   const { auth, isLoading: isAuthLoading } = useContext(AuthContext)
+
+  const [permission, requestPermission] = useCameraPermissions()
 
   const { signOut } = useAuth()
 
@@ -53,7 +56,37 @@ export function QRCode() {
     isBasicInformationsBottomSheetActive.set(true)
   }
 
-  function handleShowQRCodeReader() {
+  async function handleShowQRCodeReader() {
+    let permissionResponse: PermissionResponse = permission!
+
+    if (permissionResponse.status === 'undetermined') {
+      permissionResponse = await requestPermission()
+    }
+
+    if (permissionResponse.status === 'denied') {
+      Alert.alert(
+        'Permissão negada',
+        'Acesse as configurações do aplicativo no seu dispositivo e habilite a permissão de câmera.',
+        [
+          {
+            text: 'Habilitar câmera',
+            onPress: async () => {
+              try {
+                await Linking.openSettings()
+              } catch (error) {
+                Alert.alert('Erro', 'Não foi possível abrir as configurações do aplicativo.')
+              }
+            },
+          },
+          {
+            text: 'Fechar',
+            style: 'cancel',
+          },
+        ],
+      )
+      return
+    }
+
     isQRCodeReaderBottomSheetActive.set(true)
   }
 
@@ -64,7 +97,7 @@ export function QRCode() {
     }, []),
   )
 
-  if (isAuthLoading) {
+  if (isAuthLoading || !permission) {
     return <Loading />
   }
 
