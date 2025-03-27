@@ -29,7 +29,7 @@ export function Content({
   const progress = useDerivedValue(() => withTiming(isVisible.value ? 0 : 1, { duration }))
 
   const sheetStyle = useAnimatedStyle(() => ({
-    opacity: 1,
+    opacity: isVisible.value ? 1 : withTiming(-1, { duration }),
     transform: [{ translateY: progress.value * 2 * offset.value }],
     zIndex: isVisible.value ? 2 : withDelay(duration, withTiming(-1, { duration: 0 })),
   }))

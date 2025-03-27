@@ -24,7 +24,7 @@ export function Overlay({ isVisible, duration = 500, onClose, className, style, 
 
   return (
     <Animated.View
-      className={cn('absolute inset-0 -z-10 h-svh w-svw bg-black/20 opacity-0', className)}
+      className={cn('absolute inset-0 -z-10 h-svh w-svw bg-black/70 opacity-0', className)}
       style={[backdropStyle, style]}
       {...props}
     >
