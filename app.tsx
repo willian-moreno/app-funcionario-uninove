@@ -9,9 +9,16 @@ import {
 } from '@expo-google-fonts/open-sans'
 import { Routes } from '@routes/index'
 import * as ScreenOrientation from 'expo-screen-orientation'
+import * as SplashScreen from 'expo-splash-screen'
+import { setBackgroundColorAsync } from 'expo-system-ui'
 import { useEffect } from 'react'
 import { View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
+SplashScreen.preventAutoHideAsync()
+SplashScreen.setOptions({
+  duration: 1000,
+})
 
 export function App() {
   const [fontsLoaded] = useFonts({
@@ -21,7 +28,14 @@ export function App() {
   })
 
   useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hide()
+    }
+  }, [fontsLoaded])
+
+  useEffect(() => {
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT)
+    setBackgroundColorAsync('#f0f9ff')
   }, [])
 
   return (
