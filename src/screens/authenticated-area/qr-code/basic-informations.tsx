@@ -127,9 +127,11 @@ export function BasicInformations({ isVisible }: Props) {
               </View>
             </View>
             <Separator orientation="horizontal" />
-            <Text className="font-sans-regular text-xl text-sky-900">
-              Caso haja divergência em algum dado, entre em contato com o RH.{' '}
-            </Text>
+            <View className="bg-slate-100 p-4">
+              <Text className="font-sans-regular text-xl text-sky-900">
+                Caso haja divergência em algum dado, entre em contato com o RH.{' '}
+              </Text>
+            </View>
           </ScrollView>
         </View>
       </BottomSheet.Content>
