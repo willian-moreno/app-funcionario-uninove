@@ -6,8 +6,18 @@ import FlashlightOffOutlined from '@material-symbols/svg-600/outlined/flashlight
 import FlashlightOnOutlined from '@material-symbols/svg-600/outlined/flashlight_on.svg'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import { BarcodeScanningResult, CameraType, CameraView, useCameraPermissions } from 'expo-camera'
+import * as Clipboard from 'expo-clipboard'
+import * as Linking from 'expo-linking'
 import { useState } from 'react'
-import { Pressable, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import { runOnJS, SharedValue, useAnimatedReaction } from 'react-native-reanimated'
 
 svgCssInterop([CameraswitchOutlined, CloseOutlined, FlashlightOffOutlined, FlashlightOnOutlined])
@@ -20,14 +30,50 @@ export function QRCodeReader({ isVisible }: Props) {
   const [isActive, setIsActive] = useState(false)
   const [isFlashActive, setIsFlashActive] = useState(false)
   const [facing, setFacing] = useState<CameraType>('back')
-  const [permission, requestPermission] = useCameraPermissions()
+  const [permission] = useCameraPermissions()
 
   function handleCloseBottomSheet() {
     isVisible.set(false)
   }
 
-  function onBarcodeScanned(scanningResult: BarcodeScanningResult) {
-    console.log('scanningResult', JSON.stringify(scanningResult))
+  async function onBarcodeScanned(scanningResult: BarcodeScanningResult) {
+    if (scanningResult.type !== 'qr') {
+      return
+    }
+
+    if (await Linking.canOpenURL(scanningResult.data)) {
+      setIsActive(false)
+
+      Alert.alert('QR Code', `Abrir o link "${scanningResult.data}" no navegador?`, [
+        {
+          text: 'Abrir',
+          onPress: async () => {
+            await Linking.openURL(scanningResult.data)
+
+            isVisible.set(false)
+
+            return
+          },
+        },
+        {
+          text: 'Não',
+          style: 'cancel',
+          onPress: () => {
+            setIsActive(true)
+          },
+        },
+      ])
+
+      return
+    }
+
+    if (['string', 'number', 'bigint'].includes(typeof scanningResult.data)) {
+      await Clipboard.setStringAsync(scanningResult.data)
+
+      isVisible.set(false)
+
+      return
+    }
   }
 
   function handleToggleCameraFacing() {
