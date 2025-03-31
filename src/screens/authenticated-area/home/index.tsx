@@ -203,7 +203,7 @@ export function Home() {
                 keyExtractor={(item) => item.title}
                 renderItem={({ item: { title, Icon, onPress } }) => (
                   <TouchableOpacity
-                    className="aspect-square w-36 justify-between gap-y-6 bg-sky-50 p-4 shadow shadow-sky-900/70"
+                    className="aspect-square w-[35vw] justify-between gap-y-6 bg-sky-50 p-4 shadow shadow-sky-900/70"
                     activeOpacity={0.7}
                     onPress={onPress}
                   >
