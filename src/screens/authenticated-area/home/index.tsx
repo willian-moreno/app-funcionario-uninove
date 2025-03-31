@@ -22,8 +22,8 @@ import { cn } from '@utils/cn'
 import { SCREEN_WIDTH } from '@utils/dimensions'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import * as Linking from 'expo-linking'
-import { useContext, useState } from 'react'
-import { FlatList, Pressable, Text, TouchableOpacity, View } from 'react-native'
+import { useCallback, useContext, useState } from 'react'
+import { FlatList, Pressable, RefreshControl, Text, TouchableOpacity, View } from 'react-native'
 
 svgCssInterop([
   BookOutlined,
@@ -52,6 +52,8 @@ export function Home() {
       isNew: index < 2,
     }))
   })
+
+  const [refreshing, setRefreshing] = useState(false)
 
   const containerWidth = SCREEN_WIDTH - 48
 
@@ -123,6 +125,13 @@ export function Home() {
     },
   ]
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    setTimeout(() => {
+      setRefreshing(false)
+    }, 2000)
+  }, [])
+
   function handleNavigateToMyProfileScreen() {
     navigation.navigate('my_profile')
   }
@@ -141,7 +150,10 @@ export function Home() {
 
   return (
     <>
-      <ScreenScrollView contentContainerClassName="p-0 py-6">
+      <ScreenScrollView
+        contentContainerClassName="p-0 py-6"
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+      >
         <View className="flex-1 gap-y-6">
           <View className="flex-row items-center justify-between gap-x-6 px-6">
             <View className="flex-row items-center gap-x-4">

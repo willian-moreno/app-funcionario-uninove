@@ -10,7 +10,7 @@ import { cn } from '@utils/cn'
 import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import { useCallback, useState } from 'react'
-import { FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
 import { NotificationDetails } from './notification-details'
 
@@ -33,7 +33,16 @@ export function Notifications() {
 
   const [activeNotification, setActiveNotification] = useState<Notification | null>(null)
 
+  const [refreshing, setRefreshing] = useState(false)
+
   const isBottomSheetActive = useSharedValue(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    setTimeout(() => {
+      setRefreshing(false)
+    }, 2000)
+  }, [])
 
   async function handleGoBack() {
     const canGoBack = navigation.canGoBack()
@@ -99,6 +108,7 @@ export function Notifications() {
           keyExtractor={(item) => item.id.toString()}
           showsVerticalScrollIndicator={false}
           contentContainerClassName="flex-grow pb-6"
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               className={cn('flex-1 flex-row items-center gap-x-6 py-6', {
@@ -137,7 +147,7 @@ export function Notifications() {
             </TouchableOpacity>
           )}
           ItemSeparatorComponent={() => <Separator orientation="horizontal" />}
-          ListFooterComponentClassName="mt-auto"
+          ListFooterComponentStyle={{ marginTop: 'auto' }}
           ListFooterComponent={<Footer />}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center gap-y-6">
