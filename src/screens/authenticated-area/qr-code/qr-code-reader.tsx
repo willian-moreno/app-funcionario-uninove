@@ -100,10 +100,6 @@ export function QRCodeReader({ isVisible }: Props) {
     [],
   )
 
-  if (!permission) {
-    return <Loading />
-  }
-
   return (
     <>
       <BottomSheet.Overlay isVisible={isVisible} onClose={handleCloseBottomSheet} />
