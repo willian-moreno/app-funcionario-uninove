@@ -10,6 +10,7 @@ import {
 import { Routes } from '@routes/index'
 import * as ScreenOrientation from 'expo-screen-orientation'
 import * as SplashScreen from 'expo-splash-screen'
+import { StatusBar } from 'expo-status-bar'
 import * as SystemUI from 'expo-system-ui'
 import { useEffect } from 'react'
 import { View } from 'react-native'
@@ -40,6 +41,7 @@ export function App() {
 
   return (
     <GestureHandlerRootView>
+      <StatusBar style="dark" backgroundColor="transparent" translucent />
       <View className="flex-1 bg-sky-50">{fontsLoaded ? <Routes /> : <Loading />}</View>
     </GestureHandlerRootView>
   )
