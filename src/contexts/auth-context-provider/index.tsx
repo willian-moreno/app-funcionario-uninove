@@ -1,8 +1,7 @@
 import { User } from '@@types/user'
-import { Loading } from '@components/loading'
 import { useAuth } from '@hooks/use-auth'
 import { findAuthStorage } from '@storage/auth/find-auth-storage'
-import { createContext, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useState } from 'react'
 
 type Auth = {
   user: {
@@ -15,7 +14,7 @@ type Auth = {
 
 type AuthContextType = {
   auth: Auth
-  isLoading: boolean
+  findStoredAuth: () => Promise<void>
 }
 
 export const AuthContext = createContext({} as AuthContextType)
@@ -26,8 +25,6 @@ type Props = {
 
 export function AuthContextProvider({ children }: Props) {
   const { signOut } = useAuth()
-
-  const [isLoading, setIsLoading] = useState(true)
 
   const [auth, setAuth] = useState<Auth>()
 
@@ -57,24 +54,17 @@ export function AuthContextProvider({ children }: Props) {
           nameInitials: userNameInitials,
         },
       })
-    } catch (error) {
-    } finally {
-      setIsLoading(false)
-    }
+    } catch (error) {}
   }
-
-  useEffect(() => {
-    findStoredAuth()
-  }, [])
 
   return (
     <AuthContext.Provider
       value={{
         auth: auth!,
-        isLoading,
+        findStoredAuth,
       }}
     >
-      {isLoading ? <Loading /> : children}
+      {children}
     </AuthContext.Provider>
   )
 }

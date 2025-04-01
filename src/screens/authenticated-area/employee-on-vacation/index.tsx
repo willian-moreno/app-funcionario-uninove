@@ -1,5 +1,4 @@
 import VacancieSvg from '@assets/vacancie.svg'
-import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { AuthContext } from '@contexts/auth-context-provider'
@@ -17,7 +16,7 @@ svgCssInterop([VolumeMuteOutlined, VolumeUpOutlined])
 export function EmployeeOnVacation() {
   const navigation = useNavigation()
 
-  const { auth, isLoading: isScreenLoading } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   const [sound, setSound] = useState<Audio.Sound>()
 
@@ -68,10 +67,6 @@ export function EmployeeOnVacation() {
         }
       : undefined
   }, [])
-
-  if (isScreenLoading) {
-    return <Loading />
-  }
 
   return (
     <ScreenScrollView>

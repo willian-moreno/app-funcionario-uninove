@@ -1,7 +1,6 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Bedge } from '@components/bedge'
 import { Footer } from '@components/footer'
-import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { Separator } from '@components/separator'
@@ -27,7 +26,7 @@ type Profile = {
 }
 
 export function MyProfile() {
-  const { auth, isLoading: isAuthLoading } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   const { signOut } = useAuth()
 
@@ -120,8 +119,6 @@ export function MyProfile() {
   }
 
   async function handleSignOut() {
-    console.log(signOut)
-
     Alert.alert(
       'Sair da conta',
       'Tem certeza que deseja sair da conta? Ao sair você retornará para a tela de login.',
@@ -145,10 +142,6 @@ export function MyProfile() {
       findStoredProfile()
     }, []),
   )
-
-  if (isAuthLoading) {
-    return <Loading />
-  }
 
   return (
     <ScreenScrollView>

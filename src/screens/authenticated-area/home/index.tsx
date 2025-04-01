@@ -3,7 +3,6 @@ import { AnnouncementCard } from '@components/announcement-card'
 import { Bedge } from '@components/bedge'
 import { Button } from '@components/button'
 import { Footer } from '@components/footer'
-import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { TagButton } from '@components/tag-button'
@@ -40,7 +39,7 @@ svgCssInterop([
 export function Home() {
   const navigation = useNavigation()
 
-  const { auth, isLoading: isScreenLoading } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   const [announcements, setAnnouncements] = useState<Announcement[]>(() => {
     return Array.from({ length: 6 }).map((_, index) => ({
@@ -142,10 +141,6 @@ export function Home() {
 
   function handleNavigateToQRCodeScreen() {
     navigation.navigate('qr_code')
-  }
-
-  if (isScreenLoading) {
-    return <Loading />
   }
 
   return (

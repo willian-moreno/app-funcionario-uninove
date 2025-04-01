@@ -1,4 +1,3 @@
-import { AuthContextProvider } from '@contexts/auth-context-provider'
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
 type Props = {
@@ -8,9 +7,7 @@ type Props = {
 export function AuthenticatedArea({ children }: Props) {
   return (
     <SafeAreaProvider>
-      <SafeAreaView className="flex-1 bg-white">
-        <AuthContextProvider>{children}</AuthContextProvider>
-      </SafeAreaView>
+      <SafeAreaView className="flex-1 bg-white">{children}</SafeAreaView>
     </SafeAreaProvider>
   )
 }

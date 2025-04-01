@@ -4,13 +4,14 @@ import { Label } from '@components/label'
 import { Loading } from '@components/loading'
 import { PasswordInput } from '@components/password-input'
 import { TextInput } from '@components/text-input'
+import { AuthContext } from '@contexts/auth-context-provider'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useBiometrics } from '@hooks/use-biometrics'
 import { CommonActions, useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createAuthStorage } from '@storage/auth/create-auth-storage'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { fakeQrCode } from '@utils/fake-qr-code'
-import { useCallback, useRef } from 'react'
+import { useCallback, useContext, useRef } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TextInput as NativeTextInput, Text, View } from 'react-native'
 import { z } from 'zod'
@@ -27,6 +28,8 @@ type SignInForm = z.infer<typeof signInForm>
 
 export function SignIn() {
   const navigation = useNavigation()
+
+  const { findStoredAuth } = useContext(AuthContext)
 
   const { isBiometricEnrolled, isBiometricVerificationLoading } = useBiometrics()
 
@@ -68,6 +71,8 @@ export function SignIn() {
         qrCode: fakeQrCode,
         accessToken: '',
       })
+
+      await findStoredAuth()
 
       navigation.navigate('home')
     } catch (error) {

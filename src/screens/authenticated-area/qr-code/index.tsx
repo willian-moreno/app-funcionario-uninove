@@ -1,7 +1,6 @@
 import { Bedge } from '@components/bedge'
 import { Button } from '@components/button'
 import { Footer } from '@components/footer'
-import { Loading } from '@components/loading'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { AuthContext } from '@contexts/auth-context-provider'
@@ -21,7 +20,7 @@ import { QRCodeReader } from './qr-code-reader'
 svgCssInterop([ArrowBackOutlined, NotificationsOutlined])
 
 export function QRCode() {
-  const { auth, isLoading: isAuthLoading } = useContext(AuthContext)
+  const { auth } = useContext(AuthContext)
 
   const { signOut } = useAuth()
 
@@ -97,7 +96,6 @@ export function QRCode() {
 
   return (
     <>
-      {isAuthLoading && <Loading className="insert-0 absolute z-10 h-svh w-full bg-white" />}
       <ScreenScrollView>
         <View className="flex-1 gap-y-6">
           <View className="flex-row items-center justify-between">
