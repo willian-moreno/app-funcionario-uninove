@@ -1,11 +1,10 @@
 import { BottomSheet } from '@components/bottom-sheet'
-import { Loading } from '@components/loading'
 import CameraswitchOutlined from '@material-symbols/svg-600/outlined/cameraswitch.svg'
 import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
 import FlashlightOffOutlined from '@material-symbols/svg-600/outlined/flashlight_off.svg'
 import FlashlightOnOutlined from '@material-symbols/svg-600/outlined/flashlight_on.svg'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { BarcodeScanningResult, CameraType, CameraView, useCameraPermissions } from 'expo-camera'
+import { BarcodeScanningResult, CameraType, CameraView } from 'expo-camera'
 import * as Clipboard from 'expo-clipboard'
 import * as Linking from 'expo-linking'
 import { useState } from 'react'
@@ -27,10 +26,9 @@ type Props = {
 }
 
 export function QRCodeReader({ isVisible }: Props) {
-  const [isActive, setIsActive] = useState(false)
+  const [isCameraActive, setIsCameraActive] = useState(false)
   const [isFlashActive, setIsFlashActive] = useState(false)
   const [facing, setFacing] = useState<CameraType>('back')
-  const [permission] = useCameraPermissions()
 
   function handleCloseBottomSheet() {
     isVisible.set(false)
@@ -42,7 +40,7 @@ export function QRCodeReader({ isVisible }: Props) {
     }
 
     if (await Linking.canOpenURL(scanningResult.data)) {
-      setIsActive(false)
+      setIsCameraActive(false)
 
       Alert.alert('QR Code', `Abrir o link "${scanningResult.data}" no navegador?`, [
         {
@@ -59,7 +57,7 @@ export function QRCodeReader({ isVisible }: Props) {
           text: 'Não',
           style: 'cancel',
           onPress: () => {
-            setIsActive(true)
+            setIsCameraActive(true)
           },
         },
       ])
@@ -94,7 +92,7 @@ export function QRCodeReader({ isVisible }: Props) {
     () => isVisible.value,
     (currentState, beforeState) => {
       if (currentState !== beforeState) {
-        runOnJS(setIsActive)(currentState)
+        runOnJS(setIsCameraActive)(currentState)
       }
     },
     [],
@@ -125,58 +123,54 @@ export function QRCodeReader({ isVisible }: Props) {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            {permission ? (
-              <View className="flex-1 gap-y-6">
-                <>
-                  {isActive ? (
-                    <>
-                      <View className="flex-1 items-center justify-center">
-                        <View className="aspect-square w-[90%] overflow-hidden rounded-lg border-2 border-white">
-                          <CameraView
-                            active={isActive}
-                            facing={facing}
-                            enableTorch={isFlashActive}
-                            autofocus="on"
-                            mode="picture"
-                            mute
-                            style={[StyleSheet.absoluteFill]}
-                            barcodeScannerSettings={{
-                              barcodeTypes: ['qr'],
-                            }}
-                            onBarcodeScanned={onBarcodeScanned}
-                          />
-                        </View>
+            <View className="flex-1 gap-y-6">
+              <>
+                {isCameraActive ? (
+                  <>
+                    <View className="flex-1 items-center justify-center">
+                      <View className="aspect-square w-[90%] overflow-hidden rounded-lg border-2 border-white">
+                        <CameraView
+                          active={isCameraActive}
+                          facing={facing}
+                          enableTorch={isFlashActive}
+                          autofocus="on"
+                          mode="picture"
+                          mute
+                          style={[StyleSheet.absoluteFill]}
+                          barcodeScannerSettings={{
+                            barcodeTypes: ['qr'],
+                          }}
+                          onBarcodeScanned={onBarcodeScanned}
+                        />
                       </View>
-                      <View className="flex-row items-center justify-center gap-x-12 py-6">
+                    </View>
+                    <View className="flex-row items-center justify-center gap-x-12 py-6">
+                      <Pressable
+                        className="h-20 w-20 items-center justify-center rounded-full border border-white bg-transparent"
+                        onPress={handleToggleCameraFacing}
+                      >
+                        <CameraswitchOutlined className="pointer-events-none h-12 w-12 fill-white" />
+                      </Pressable>
+                      {isFlashActive ? (
+                        <Pressable
+                          className="h-20 w-20 items-center justify-center rounded-full border border-sky-400 bg-sky-400"
+                          onPress={handleToggleFlash}
+                        >
+                          <FlashlightOnOutlined className="pointer-events-none h-12 w-12 fill-white" />
+                        </Pressable>
+                      ) : (
                         <Pressable
                           className="h-20 w-20 items-center justify-center rounded-full border border-white bg-transparent"
-                          onPress={handleToggleCameraFacing}
+                          onPress={handleToggleFlash}
                         >
-                          <CameraswitchOutlined className="pointer-events-none h-12 w-12 fill-white" />
+                          <FlashlightOffOutlined className="pointer-events-none h-12 w-12 fill-white" />
                         </Pressable>
-                        {isFlashActive ? (
-                          <Pressable
-                            className="h-20 w-20 items-center justify-center rounded-full border border-sky-400 bg-sky-400"
-                            onPress={handleToggleFlash}
-                          >
-                            <FlashlightOnOutlined className="pointer-events-none h-12 w-12 fill-white" />
-                          </Pressable>
-                        ) : (
-                          <Pressable
-                            className="h-20 w-20 items-center justify-center rounded-full border border-white bg-transparent"
-                            onPress={handleToggleFlash}
-                          >
-                            <FlashlightOffOutlined className="pointer-events-none h-12 w-12 fill-white" />
-                          </Pressable>
-                        )}
-                      </View>
-                    </>
-                  ) : null}
-                </>
-              </View>
-            ) : (
-              <Loading variant="light" />
-            )}
+                      )}
+                    </View>
+                  </>
+                ) : null}
+              </>
+            </View>
           </ScrollView>
         </View>
       </BottomSheet.Content>

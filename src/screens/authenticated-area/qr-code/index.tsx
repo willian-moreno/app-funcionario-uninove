@@ -11,7 +11,7 @@ import NotificationsOutlined from '@material-symbols/svg-600/outlined/notificati
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { fakeQrCode } from '@utils/fake-qr-code'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { PermissionResponse, useCameraPermissions } from 'expo-camera'
+import { Camera } from 'expo-camera'
 import { useCallback, useContext } from 'react'
 import { Alert, Image, Linking, Text, TouchableOpacity, View } from 'react-native'
 import { useSharedValue } from 'react-native-reanimated'
@@ -22,8 +22,6 @@ svgCssInterop([ArrowBackOutlined, NotificationsOutlined])
 
 export function QRCode() {
   const { auth, isLoading: isAuthLoading } = useContext(AuthContext)
-
-  const [permission, requestPermission] = useCameraPermissions()
 
   const { signOut } = useAuth()
 
@@ -57,10 +55,10 @@ export function QRCode() {
   }
 
   async function handleShowQRCodeReader() {
-    let permissionResponse: PermissionResponse = permission!
+    let permissionResponse = await Camera.getCameraPermissionsAsync()
 
     if (permissionResponse.status === 'undetermined') {
-      permissionResponse = await requestPermission()
+      permissionResponse = await Camera.requestCameraPermissionsAsync()
     }
 
     if (permissionResponse.status === 'denied') {
@@ -97,12 +95,9 @@ export function QRCode() {
     }, []),
   )
 
-  if (isAuthLoading || !permission) {
-    return <Loading />
-  }
-
   return (
     <>
+      {isAuthLoading && <Loading className="insert-0 absolute z-10 h-svh w-full bg-white" />}
       <ScreenScrollView>
         <View className="flex-1 gap-y-6">
           <View className="flex-row items-center justify-between">
