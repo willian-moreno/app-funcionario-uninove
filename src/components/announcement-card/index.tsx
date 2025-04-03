@@ -17,6 +17,8 @@ export function AnnouncementCard({
   ...props
 }: Props) {
   async function handleShareAnnouncement() {
+    console.log('oi')
+
     await Share.share({
       message: 'https://intranet-dev.uninove.br/comunicados',
     })
@@ -49,11 +51,9 @@ export function AnnouncementCard({
       <TouchableOpacity
         className="mr-auto h-10 w-10 items-center justify-center"
         activeOpacity={0.7}
+        onPress={handleShareAnnouncement}
       >
-        <IOSShareOutlined
-          className="pointer-events-none h-8 w-8 fill-sky-900"
-          onPress={handleShareAnnouncement}
-        />
+        <IOSShareOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
       </TouchableOpacity>
     </TouchableOpacity>
   )
