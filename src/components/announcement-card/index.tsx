@@ -17,8 +17,6 @@ export function AnnouncementCard({
   ...props
 }: Props) {
   async function handleShareAnnouncement() {
-    console.log('oi')
-
     await Share.share({
       message: 'https://intranet-dev.uninove.br/comunicados',
     })
