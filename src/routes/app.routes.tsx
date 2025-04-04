@@ -1,7 +1,6 @@
 import { AuthLayout } from '@layouts/auth'
 import { AuthenticatedArea } from '@layouts/authenticated-area'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { FingerprintSignIn } from '@screens/auth/fingerprint-sign-in'
 import { ResetPasswordFirstStage } from '@screens/auth/reset-password/first-stage'
 import { ResetPasswordSecondStage } from '@screens/auth/reset-password/second-stage'
 import { ResetPasswordThirdStage } from '@screens/auth/reset-password/third-stage'
@@ -22,7 +21,6 @@ export function AppRoutes() {
     >
       <Group screenLayout={AuthLayout}>
         <Screen name="sign_in" component={SignIn} />
-        <Screen name="fingerprint_sign_in" component={FingerprintSignIn} />
         <Screen name="reset_password_first_stage" component={ResetPasswordFirstStage} />
         <Screen name="reset_password_second_stage" component={ResetPasswordSecondStage} />
         <Screen name="reset_password_third_stage" component={ResetPasswordThirdStage} />

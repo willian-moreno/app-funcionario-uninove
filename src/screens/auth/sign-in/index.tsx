@@ -1,5 +1,6 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
+import { FingerprintValidation } from '@components/fingerprint-validation'
 import { Label } from '@components/label'
 import { Loading } from '@components/loading'
 import { PasswordInput } from '@components/password-input'
@@ -7,11 +8,11 @@ import { TextInput } from '@components/text-input'
 import { AuthContext } from '@contexts/auth-context-provider'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useBiometrics } from '@hooks/use-biometrics'
-import { CommonActions, useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { createAuthStorage } from '@storage/auth/create-auth-storage'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { fakeQrCode } from '@utils/fake-qr-code'
-import { useCallback, useContext, useRef } from 'react'
+import { useCallback, useContext, useRef, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { TextInput as NativeTextInput, Text, View } from 'react-native'
 import { z } from 'zod'
@@ -45,6 +46,8 @@ export function SignIn() {
       password: '',
     },
   })
+
+  const [isFingerprintSignInVisible, setIsFingerprintSignInVisible] = useState(false)
 
   const isSubmitDisabled = !isValid || isSubmitting
 
@@ -80,7 +83,13 @@ export function SignIn() {
     }
   }
 
-  async function navigateToFingerprintSignInScreenIfAvailable() {
+  async function handleFingerprintValidation() {
+    await findStoredAuth()
+
+    navigation.navigate('home')
+  }
+
+  async function showFingerprintSignInScreenIfAvailable() {
     if (!isBiometricEnrolled) {
       return
     }
@@ -92,13 +101,7 @@ export function SignIn() {
         return
       }
 
-      navigation.navigate('fingerprint_sign_in')
-      navigation.dispatch(
-        CommonActions.reset({
-          index: 1,
-          routes: [{ name: 'fingerprint_sign_in' }],
-        }),
-      )
+      setIsFingerprintSignInVisible(true)
     } catch (error) {}
   }
 
@@ -125,12 +128,16 @@ export function SignIn() {
 
   useFocusEffect(
     useCallback(() => {
-      navigateToFingerprintSignInScreenIfAvailable()
+      showFingerprintSignInScreenIfAvailable()
     }, [isBiometricVerificationLoading]),
   )
 
   if (isBiometricVerificationLoading) {
     return <Loading />
+  }
+
+  if (isFingerprintSignInVisible) {
+    return <FingerprintValidation onSuccess={handleFingerprintValidation} />
   }
 
   return (

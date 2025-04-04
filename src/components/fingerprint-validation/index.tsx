@@ -1,21 +1,18 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
-import { AuthContext } from '@contexts/auth-context-provider'
 import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
 import FingerprintOutlined from '@material-symbols/svg-600/outlined/fingerprint.svg'
-import { useNavigation } from '@react-navigation/native'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { useContext } from 'react'
 import { Alert, Text, View } from 'react-native'
 
 svgCssInterop([FingerprintOutlined])
 
-export function FingerprintSignIn() {
-  const navigation = useNavigation()
+type Props = {
+  onSuccess: () => Promise<void>
+}
 
-  const { findStoredAuth } = useContext(AuthContext)
-
+export function FingerprintValidation({ onSuccess }: Props) {
   const { signOut } = useAuth()
 
   const { isFingerprintAvailable, isBiometricEnrolled, authenticate } = useBiometrics()
@@ -33,9 +30,7 @@ export function FingerprintSignIn() {
       return
     }
 
-    await findStoredAuth()
-
-    navigation.navigate('home')
+    await onSuccess()
   }
 
   async function handleSignOut() {
