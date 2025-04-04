@@ -10,6 +10,7 @@ import { AuthContext } from '@contexts/auth-context-provider'
 import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
 import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
+import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_right.svg'
 import NotificationsOutlined from '@material-symbols/svg-600/outlined/notifications.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
@@ -17,8 +18,10 @@ import { updateProfileStorage } from '@storage/auth/update-profile-storage'
 import { svgCssInterop } from '@utils/svg-css-interop'
 import { useCallback, useContext, useState } from 'react'
 import { Alert, Text, TouchableOpacity, View } from 'react-native'
+import { useSharedValue } from 'react-native-reanimated'
+import { TermsAndConditions } from './terms-and-conditions'
 
-svgCssInterop([ArrowBackOutlined, NotificationsOutlined])
+svgCssInterop([ArrowBackOutlined, ChevronRightOutlined, NotificationsOutlined])
 
 type Profile = {
   isBiometricActive: boolean
@@ -34,6 +37,8 @@ export function MyProfile() {
   const navigation = useNavigation()
 
   const { isFingerprintAvailable, isBiometricEnrolled } = useBiometrics()
+
+  const isTermsAndConditionsBottomSheetActive = useSharedValue(false)
 
   const [isFingerprintSignInVisible, setIsFingerprintSignInVisible] = useState(false)
 
@@ -131,6 +136,10 @@ export function MyProfile() {
     }
   }
 
+  function handleShowTermsAndConditions() {
+    isTermsAndConditionsBottomSheetActive.set(true)
+  }
+
   async function handleSignOut() {
     Alert.alert(
       'Sair da conta',
@@ -152,6 +161,7 @@ export function MyProfile() {
 
   useFocusEffect(
     useCallback(() => {
+      isTermsAndConditionsBottomSheetActive.set(false)
       findStoredProfile()
     }, []),
   )
@@ -254,10 +264,35 @@ export function MyProfile() {
 
           <Separator orientation="horizontal" />
 
+          <View className="gap-y-6">
+            <View className="gap-y-2">
+              <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">
+                Privacidade
+              </Text>
+              <Text className="font-sans-semibold text-xl text-sky-900">
+                Entenda como seus dados são utilizados, compartilhados e protegidos
+              </Text>
+            </View>
+
+            <TouchableOpacity
+              className="flex-row flex-nowrap items-center justify-between gap-x-4"
+              activeOpacity={0.7}
+              onPress={handleShowTermsAndConditions}
+            >
+              <Text className="flex-1 font-sans-regular text-xl text-sky-900">
+                Termos e Condições
+              </Text>
+              <ChevronRightOutlined className="pointer-events-none h-6 w-6 fill-sky-900 leading-none" />
+            </TouchableOpacity>
+          </View>
+
+          <Separator orientation="horizontal" />
+
           <AnchorButton value="Sair da conta" className="mx-auto my-4" onPress={handleSignOut} />
         </View>
         <Footer />
       </ScreenScrollView>
+      <TermsAndConditions isVisible={isTermsAndConditionsBottomSheetActive} />
     </>
   )
 }
