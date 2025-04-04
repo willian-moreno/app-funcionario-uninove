@@ -1,5 +1,6 @@
 import { AnchorButton } from '@components/anchor-button'
 import { Bedge } from '@components/bedge'
+import { FingerprintValidation } from '@components/fingerprint-validation'
 import { Footer } from '@components/footer'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
@@ -32,7 +33,9 @@ export function MyProfile() {
 
   const navigation = useNavigation()
 
-  const { isFingerprintAvailable, isBiometricEnrolled, authenticate } = useBiometrics()
+  const { isFingerprintAvailable, isBiometricEnrolled } = useBiometrics()
+
+  const [isFingerprintSignInVisible, setIsFingerprintSignInVisible] = useState(false)
 
   const [profile, setProfile] = useState<Profile>({
     isBiometricActive: false,
@@ -78,20 +81,30 @@ export function MyProfile() {
     } catch (error) {}
   }
 
-  async function handleToggleBiometric(isActive: boolean) {
+  async function handleShowFingerprintValidation(isActive: boolean) {
+    if (!isActive) {
+      await handleUpdateBiometric(false)
+      return
+    }
+
+    if (!isBiometricEnrolled) {
+      Alert.alert('Autenticação', 'Nenhuma biometria cadastrada no dispositivo.')
+
+      return
+    }
+
+    setIsFingerprintSignInVisible(true)
+  }
+
+  async function handleEnableBiometric() {
+    await handleUpdateBiometric(true)
+    setIsFingerprintSignInVisible(false)
+  }
+
+  async function handleUpdateBiometric(isActive: boolean) {
     try {
-      if (!isBiometricEnrolled) {
-        Alert.alert('Autenticação', 'Nenhuma biometria cadastrada no dispositivo.')
-
-        return
-      }
-
-      if (isActive && !(await authenticate())) {
-        return
-      }
-
-      setProfile((state) => ({ ...state, isBiometricActive: isActive && isBiometricEnrolled }))
-      await updateProfileStorage({ ...profile, isBiometricActive: isActive && isBiometricEnrolled })
+      setProfile((state) => ({ ...state, isBiometricActive: isActive }))
+      await updateProfileStorage({ ...profile, isBiometricActive: isActive })
     } catch (error) {
     } finally {
       await findStoredProfile()
@@ -144,100 +157,107 @@ export function MyProfile() {
   )
 
   return (
-    <ScreenScrollView>
-      <View className="flex-1 gap-y-6">
-        <View className="flex-row items-center justify-between">
-          <TouchableOpacity
-            className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
-            activeOpacity={0.7}
-            onPress={handleGoBack}
-          >
-            <ArrowBackOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
-          </TouchableOpacity>
-          <Bedge.Root>
+    <>
+      {isFingerprintSignInVisible && <FingerprintValidation onSuccess={handleEnableBiometric} />}
+      <ScreenScrollView>
+        <View className="flex-1 gap-y-6">
+          <View className="flex-row items-center justify-between">
             <TouchableOpacity
               className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
               activeOpacity={0.7}
-              onPress={handleNavigateToNotificationsScreen}
+              onPress={handleGoBack}
             >
-              <NotificationsOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
+              <ArrowBackOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
             </TouchableOpacity>
-            <Bedge.Dot />
-          </Bedge.Root>
+            <Bedge.Root>
+              <TouchableOpacity
+                className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
+                activeOpacity={0.7}
+                onPress={handleNavigateToNotificationsScreen}
+              >
+                <NotificationsOutlined className="pointer-events-none h-8 w-8 fill-sky-900" />
+              </TouchableOpacity>
+              <Bedge.Dot />
+            </Bedge.Root>
+          </View>
+
+          <Text className="font-sans-bold text-2xl text-sky-900">Meu perfil</Text>
+
+          <View className="flex-row items-center gap-x-4">
+            <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
+            <View className="flex-1">
+              <Text className="font-sans-bold text-lg leading-tight text-sky-900" numberOfLines={1}>
+                {auth?.user.fullName}
+              </Text>
+              <Text className="font-sans-regular text-lg leading-tight text-sky-900">
+                {auth?.user.registration}
+              </Text>
+            </View>
+          </View>
+
+          <Separator orientation="horizontal" />
+
+          <View className="gap-y-6">
+            <View className="gap-y-2">
+              <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">
+                Segurança
+              </Text>
+              <Text className="font-sans-semibold text-xl text-sky-900">
+                Configure a segurança da sua conta
+              </Text>
+            </View>
+
+            <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
+              <Text className="flex-1 font-sans-regular text-xl text-sky-900">
+                Usar biometria para desbloquear o app e acessar a conta
+              </Text>
+              <SwitchButton
+                value={isBiometricActive}
+                disabled={!isFingerprintAvailable}
+                onChangeValue={handleShowFingerprintValidation}
+              />
+            </View>
+          </View>
+
+          <Separator orientation="horizontal" />
+
+          <View className="gap-y-6">
+            <View className="gap-y-2">
+              <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">
+                Comunicação
+              </Text>
+              <Text className="font-sans-semibold text-xl text-sky-900">
+                Escolha o tipo de comunicação que você quer receber no seu dispositivo móvel
+              </Text>
+            </View>
+
+            <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
+              <Text className="flex-1 font-sans-regular text-xl text-sky-900">
+                Comunicados novos
+              </Text>
+              <SwitchButton
+                value={isNewAnnouncementsActive}
+                onChangeValue={handleToggleNewAnnouncements}
+              />
+            </View>
+
+            <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
+              <Text className="flex-1 font-sans-regular text-xl text-sky-900">
+                Notificações novas
+              </Text>
+              <SwitchButton
+                value={isNewNotificationsActive}
+                onChangeValue={handleToggleNewNotifications}
+              />
+            </View>
+          </View>
+
+          <Separator orientation="horizontal" />
+
+          <AnchorButton value="Sair da conta" className="mx-auto my-4" onPress={handleSignOut} />
         </View>
-
-        <Text className="font-sans-bold text-2xl text-sky-900">Meu perfil</Text>
-
-        <View className="flex-row items-center gap-x-4">
-          <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
-          <View className="flex-1">
-            <Text className="font-sans-bold text-lg leading-tight text-sky-900" numberOfLines={1}>
-              {auth?.user.fullName}
-            </Text>
-            <Text className="font-sans-regular text-lg leading-tight text-sky-900">
-              {auth?.user.registration}
-            </Text>
-          </View>
-        </View>
-
-        <Separator orientation="horizontal" />
-
-        <View className="gap-y-6">
-          <View className="gap-y-2">
-            <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">Segurança</Text>
-            <Text className="font-sans-semibold text-xl text-sky-900">
-              Configure a segurança da sua conta
-            </Text>
-          </View>
-
-          <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
-            <Text className="flex-1 font-sans-regular text-xl text-sky-900">
-              Usar biometria para desbloquear o app e acessar a conta
-            </Text>
-            <SwitchButton
-              value={isBiometricActive}
-              disabled={!isFingerprintAvailable}
-              onChangeValue={handleToggleBiometric}
-            />
-          </View>
-        </View>
-
-        <Separator orientation="horizontal" />
-
-        <View className="gap-y-6">
-          <View className="gap-y-2">
-            <Text className="font-sans-semibold text-sm uppercase text-sky-900/50">
-              Comunicação
-            </Text>
-            <Text className="font-sans-semibold text-xl text-sky-900">
-              Escolha o tipo de comunicação que você quer receber no seu dispositivo móvel
-            </Text>
-          </View>
-
-          <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
-            <Text className="flex-1 font-sans-regular text-xl text-sky-900">Comunicados novos</Text>
-            <SwitchButton
-              value={isNewAnnouncementsActive}
-              onChangeValue={handleToggleNewAnnouncements}
-            />
-          </View>
-
-          <View className="flex-row flex-nowrap items-center justify-between gap-x-4">
-            <Text className="flex-1 font-sans-regular text-xl text-sky-900">
-              Notificações novas
-            </Text>
-            <SwitchButton
-              value={isNewNotificationsActive}
-              onChangeValue={handleToggleNewNotifications}
-            />
-          </View>
-        </View>
-
-        <Separator orientation="horizontal" />
-
-        <AnchorButton value="Sair da conta" className="mx-auto my-4" onPress={handleSignOut} />
-      </View>
-      <Footer />
-    </ScreenScrollView>
+        <Footer />
+      </ScreenScrollView>
+    </>
   )
 }
