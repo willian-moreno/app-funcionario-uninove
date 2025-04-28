@@ -124,21 +124,6 @@ export function Home() {
     },
   ]
 
-  const forms = [
-    {
-      title: 'Movimentação de pessoal',
-      onPress: () => {
-        Linking.openURL('https://mp.uninove.br')
-      },
-    },
-    {
-      title: 'Prestação de contas',
-      onPress: () => {
-        Linking.openURL('https://sys.uninove.br/sistemas/intranet/sol_and_desp.php')
-      },
-    },
-  ]
-
   const onRefresh = useCallback(() => {
     setRefreshing(true)
     setTimeout(() => {
@@ -244,22 +229,6 @@ export function Home() {
               <Text className="font-sans-bold text-2xl text-sky-900">Ferramentas e suporte</Text>
               <View className="gap-y-4">
                 {toolsAndSupport.map(({ title, onPress }) => (
-                  <Button
-                    key={title}
-                    className="flex-row justify-between px-4"
-                    variant="secondary"
-                    onPress={onPress}
-                  >
-                    <Text className="font-sans-bold text-lg text-sky-900">{title}</Text>
-                    <OpenInNewOutlined className="pointer-events-none h-6 w-6 fill-sky-900" />
-                  </Button>
-                ))}
-              </View>
-            </View>
-            <View className="gap-y-6 px-6">
-              <Text className="font-sans-bold text-2xl text-sky-900">Formulários</Text>
-              <View className="gap-y-4">
-                {forms.map(({ title, onPress }) => (
                   <Button
                     key={title}
                     className="flex-row justify-between px-4"
