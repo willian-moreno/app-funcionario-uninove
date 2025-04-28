@@ -42,13 +42,11 @@ export function QRCodeReader({ isVisible }: Props) {
     if (await Linking.canOpenURL(scanningResult.data)) {
       setIsCameraActive(false)
 
-      Alert.alert('QR Code', `Abrir o link "${scanningResult.data}" no navegador?`, [
+      Alert.alert('Leitor de QR Code', `Abrir o link "${scanningResult.data}" no navegador?`, [
         {
           text: 'Abrir',
           onPress: async () => {
             await Linking.openURL(scanningResult.data)
-
-            isVisible.set(false)
 
             return
           },
@@ -56,16 +54,18 @@ export function QRCodeReader({ isVisible }: Props) {
         {
           text: 'Não',
           style: 'cancel',
-          onPress: () => {
-            setIsCameraActive(true)
-          },
+          onPress: () => {},
         },
       ])
+
+      isVisible.set(false)
 
       return
     }
 
     if (['string', 'number', 'bigint'].includes(typeof scanningResult.data)) {
+      setIsCameraActive(false)
+
       await Clipboard.setStringAsync(scanningResult.data)
 
       isVisible.set(false)
