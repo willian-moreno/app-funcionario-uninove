@@ -1,19 +1,25 @@
+import { useCallback, useContext } from 'react'
+import { Alert, Image, Linking, Text, TouchableOpacity, View } from 'react-native'
+import { useSharedValue } from 'react-native-reanimated'
+
+import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
+import NotificationsOutlined from '@material-symbols/svg-600/outlined/notifications.svg'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { Camera } from 'expo-camera'
+
 import { Bedge } from '@components/bedge'
 import { Button } from '@components/button'
 import { Footer } from '@components/footer'
 import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
+
 import { AuthContext } from '@contexts/auth-context-provider'
+
 import { useAuth } from '@hooks/use-auth'
-import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
-import NotificationsOutlined from '@material-symbols/svg-600/outlined/notifications.svg'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
+
 import { fakeQrCode } from '@utils/fake-qr-code'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { Camera } from 'expo-camera'
-import { useCallback, useContext } from 'react'
-import { Alert, Image, Linking, Text, TouchableOpacity, View } from 'react-native'
-import { useSharedValue } from 'react-native-reanimated'
+
 import { BasicInformations } from './basic-informations'
 import { QRCodeReader } from './qr-code-reader'
 

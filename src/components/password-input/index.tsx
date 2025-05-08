@@ -1,9 +1,11 @@
-import VisibilityOutlined from '@material-symbols/svg-600/outlined/visibility.svg'
-import VisibilityOffOutlined from '@material-symbols/svg-600/outlined/visibility_off.svg'
-import { cn } from '@utils/cn'
-import { svgCssInterop } from '@utils/svg-css-interop'
 import { RefObject, useEffect, useState } from 'react'
 import { TextInput, TextInputProps, TouchableOpacity, View } from 'react-native'
+
+import VisibilityOffOutlined from '@material-symbols/svg-600/outlined/visibility_off.svg'
+import VisibilityOutlined from '@material-symbols/svg-600/outlined/visibility.svg'
+
+import { cn } from '@utils/cn'
+import { svgCssInterop } from '@utils/svg-css-interop'
 
 svgCssInterop([VisibilityOutlined, VisibilityOffOutlined])
 

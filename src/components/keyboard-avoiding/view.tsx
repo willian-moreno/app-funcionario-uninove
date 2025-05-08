@@ -1,5 +1,6 @@
-import { cn } from '@utils/cn'
 import { KeyboardAvoidingView, KeyboardAvoidingViewProps, Platform } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {} & KeyboardAvoidingViewProps
 

@@ -1,7 +1,9 @@
+import { useCallback } from 'react'
+
 import { CommonActions, useNavigation } from '@react-navigation/native'
+
 import { removeAuthStorage } from '@storage/auth/remove-auth-storage'
 import { removeProfileStorage } from '@storage/auth/remove-profile-storage'
-import { useCallback } from 'react'
 
 export function useAuth() {
   const navigation = useNavigation()

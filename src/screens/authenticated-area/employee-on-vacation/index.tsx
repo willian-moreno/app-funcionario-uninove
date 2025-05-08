@@ -1,15 +1,20 @@
-import VacancieSvg from '@assets/vacancie.svg'
-import { ProfileButton } from '@components/profile-button'
-import { ScreenScrollView } from '@components/screen-scroll-view'
-import { AuthContext } from '@contexts/auth-context-provider'
+import { useContext, useEffect, useState } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+
 import VolumeMuteOutlined from '@material-symbols/svg-600/outlined/volume_mute.svg'
 import VolumeUpOutlined from '@material-symbols/svg-600/outlined/volume_up.svg'
 import { useNavigation } from '@react-navigation/native'
+import { Audio } from 'expo-av'
+
+import VacancieSvg from '@assets/vacancie.svg'
+
+import { ProfileButton } from '@components/profile-button'
+import { ScreenScrollView } from '@components/screen-scroll-view'
+
+import { AuthContext } from '@contexts/auth-context-provider'
+
 import { SCREEN_WIDTH } from '@utils/dimensions'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { Audio } from 'expo-av'
-import { useContext, useEffect, useState } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
 
 svgCssInterop([VolumeMuteOutlined, VolumeUpOutlined])
 

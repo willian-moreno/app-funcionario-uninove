@@ -1,5 +1,6 @@
-import { cn } from '@utils/cn'
 import { Text, View, ViewProps } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   variant?: 'default' | 'diluted'

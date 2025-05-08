@@ -1,5 +1,6 @@
-import { cn } from '@utils/cn'
 import { Text, TextProps } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   value: string

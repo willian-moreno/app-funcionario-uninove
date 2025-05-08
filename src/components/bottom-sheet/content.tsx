@@ -1,4 +1,3 @@
-import { cn } from '@utils/cn'
 import { ReactNode } from 'react'
 import { ViewProps } from 'react-native'
 import Animated, {
@@ -9,6 +8,8 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   children: ReactNode

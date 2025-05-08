@@ -1,13 +1,18 @@
+import { Alert, Text, View } from 'react-native'
+
+import FingerprintOutlined from '@material-symbols/svg-600/outlined/fingerprint.svg'
+
 import LogoSvg from '@assets/logo.svg'
+
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
 import { Footer } from '@components/footer'
 import { KeyboardAvoiding } from '@components/keyboard-avoiding'
+
 import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
-import FingerprintOutlined from '@material-symbols/svg-600/outlined/fingerprint.svg'
+
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { Alert, Text, View } from 'react-native'
 
 svgCssInterop([FingerprintOutlined])
 

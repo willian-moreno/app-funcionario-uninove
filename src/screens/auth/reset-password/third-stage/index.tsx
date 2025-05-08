@@ -1,16 +1,19 @@
-import { Button } from '@components/button'
-import { Label } from '@components/label'
-import { PasswordInput } from '@components/password-input'
+import { RefObject, useRef } from 'react'
+import { Text, TextInput, View } from 'react-native'
+import { Controller, useForm } from 'react-hook-form'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import CheckCircleOutlined from '@material-symbols/svg-600/outlined/check_circle.svg'
 import CircleOutlined from '@material-symbols/svg-600/outlined/circle.svg'
 import { CommonActions, useNavigation } from '@react-navigation/native'
+import { z } from 'zod'
+
+import { Button } from '@components/button'
+import { Label } from '@components/label'
+import { PasswordInput } from '@components/password-input'
+
 import { cn } from '@utils/cn'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { RefObject, useRef } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { Text, TextInput, View } from 'react-native'
-import { z } from 'zod'
 
 svgCssInterop([CheckCircleOutlined, CircleOutlined])
 

@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { ProfileStorageDTO } from '@storage/profile-storage-dto'
 import { PROFILE_STORAGE_KEY } from '@storage/storageConfig'
 

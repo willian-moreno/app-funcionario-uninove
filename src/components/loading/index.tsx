@@ -1,5 +1,6 @@
-import { cn } from '@utils/cn'
 import { ActivityIndicator, View, ViewProps } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   variant?: 'default' | 'light'

@@ -1,7 +1,10 @@
-import { User } from '@@types/user'
-import { useAuth } from '@hooks/use-auth'
-import { findAuthStorage } from '@storage/auth/find-auth-storage'
 import { createContext, ReactNode, useState } from 'react'
+
+import { User } from '@@types/user'
+
+import { useAuth } from '@hooks/use-auth'
+
+import { findAuthStorage } from '@storage/auth/find-auth-storage'
 
 type Auth = {
   user: {

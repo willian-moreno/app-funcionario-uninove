@@ -1,12 +1,6 @@
-import { Announcement } from '@@types/announcement'
-import { AnnouncementCard } from '@components/announcement-card'
-import { Bedge } from '@components/bedge'
-import { Button } from '@components/button'
-import { Footer } from '@components/footer'
-import { ProfileButton } from '@components/profile-button'
-import { ScreenScrollView } from '@components/screen-scroll-view'
-import { TagButton } from '@components/tag-button'
-import { AuthContext } from '@contexts/auth-context-provider'
+import { useCallback, useContext, useState } from 'react'
+import { FlatList, Pressable, RefreshControl, Text, TouchableOpacity, View } from 'react-native'
+
 import BookOutlined from '@material-symbols/svg-600/outlined/book.svg'
 import DentistryOutlined from '@material-symbols/svg-600/outlined/dentistry.svg'
 import EmojiLanguageOutlined from '@material-symbols/svg-600/outlined/emoji_language.svg'
@@ -17,12 +11,23 @@ import QrCodeOutlined from '@material-symbols/svg-600/outlined/qr_code.svg'
 import RestaurantOutlined from '@material-symbols/svg-600/outlined/restaurant.svg'
 import TheaterComedyOutlined from '@material-symbols/svg-600/outlined/theater_comedy.svg'
 import { useNavigation } from '@react-navigation/native'
+import * as Linking from 'expo-linking'
+
+import { Announcement } from '@@types/announcement'
+
+import { AnnouncementCard } from '@components/announcement-card'
+import { Bedge } from '@components/bedge'
+import { Button } from '@components/button'
+import { Footer } from '@components/footer'
+import { ProfileButton } from '@components/profile-button'
+import { ScreenScrollView } from '@components/screen-scroll-view'
+import { TagButton } from '@components/tag-button'
+
+import { AuthContext } from '@contexts/auth-context-provider'
+
 import { cn } from '@utils/cn'
 import { SCREEN_WIDTH } from '@utils/dimensions'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import * as Linking from 'expo-linking'
-import { useCallback, useContext, useState } from 'react'
-import { FlatList, Pressable, RefreshControl, Text, TouchableOpacity, View } from 'react-native'
 
 svgCssInterop([
   BookOutlined,

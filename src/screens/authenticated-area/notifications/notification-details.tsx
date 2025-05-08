@@ -1,12 +1,16 @@
-import { Notification } from '@@types/notification'
-import { BottomSheet } from '@components/bottom-sheet'
-import { Loading } from '@components/loading'
-import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
-import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
-import { svgCssInterop } from '@utils/svg-css-interop'
 import { useEffect } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SharedValue } from 'react-native-reanimated'
+
+import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
+
+import { Notification } from '@@types/notification'
+
+import { BottomSheet } from '@components/bottom-sheet'
+import { Loading } from '@components/loading'
+
+import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
+import { svgCssInterop } from '@utils/svg-css-interop'
 
 svgCssInterop([CloseOutlined])
 

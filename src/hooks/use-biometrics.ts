@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import {
   authenticateAsync,
   AuthenticationType,
@@ -5,7 +7,6 @@ import {
   isEnrolledAsync,
   supportedAuthenticationTypesAsync,
 } from 'expo-local-authentication'
-import { useEffect, useState } from 'react'
 
 export function useBiometrics() {
   const [isBiometricVerificationLoading, setIsBiometricVerificationLoading] = useState(true)

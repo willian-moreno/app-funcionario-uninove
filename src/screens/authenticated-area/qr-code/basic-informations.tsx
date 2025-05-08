@@ -1,19 +1,23 @@
-import { BottomSheet } from '@components/bottom-sheet'
-import { Separator } from '@components/separator'
-import { AuthContext } from '@contexts/auth-context-provider'
+import { useContext } from 'react'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { SharedValue } from 'react-native-reanimated'
+
 import BadgeOutlined from '@material-symbols/svg-600/outlined/badge.svg'
 import CakeOutlined from '@material-symbols/svg-600/outlined/cake.svg'
 import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
 import FlagOutlined from '@material-symbols/svg-600/outlined/flag.svg'
 import PersonOutlined from '@material-symbols/svg-600/outlined/person.svg'
 import SchoolOutlined from '@material-symbols/svg-600/outlined/school.svg'
-import { DEFAULT_DATE, formatDateToLocale } from '@utils/format-date-to-locale'
-import { svgCssInterop } from '@utils/svg-css-interop'
 import { formatDuration, intervalToDuration } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
-import { useContext } from 'react'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import { SharedValue } from 'react-native-reanimated'
+
+import { BottomSheet } from '@components/bottom-sheet'
+import { Separator } from '@components/separator'
+
+import { AuthContext } from '@contexts/auth-context-provider'
+
+import { DEFAULT_DATE, formatDateToLocale } from '@utils/format-date-to-locale'
+import { svgCssInterop } from '@utils/svg-css-interop'
 
 svgCssInterop([
   BadgeOutlined,

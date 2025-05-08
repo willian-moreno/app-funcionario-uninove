@@ -1,3 +1,12 @@
+import { useCallback, useContext, useState } from 'react'
+import { Alert, Text, TouchableOpacity, View } from 'react-native'
+import { useSharedValue } from 'react-native-reanimated'
+
+import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
+import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_right.svg'
+import NotificationsOutlined from '@material-symbols/svg-600/outlined/notifications.svg'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+
 import { AnchorButton } from '@components/anchor-button'
 import { Bedge } from '@components/bedge'
 import { FingerprintValidation } from '@components/fingerprint-validation'
@@ -6,19 +15,17 @@ import { ProfileButton } from '@components/profile-button'
 import { ScreenScrollView } from '@components/screen-scroll-view'
 import { Separator } from '@components/separator'
 import { SwitchButton } from '@components/switch-button'
+
 import { AuthContext } from '@contexts/auth-context-provider'
+
 import { useAuth } from '@hooks/use-auth'
 import { useBiometrics } from '@hooks/use-biometrics'
-import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
-import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_right.svg'
-import NotificationsOutlined from '@material-symbols/svg-600/outlined/notifications.svg'
-import { useFocusEffect, useNavigation } from '@react-navigation/native'
+
 import { findProfileStorage } from '@storage/auth/find-profile-storage'
 import { updateProfileStorage } from '@storage/auth/update-profile-storage'
+
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { useCallback, useContext, useState } from 'react'
-import { Alert, Text, TouchableOpacity, View } from 'react-native'
-import { useSharedValue } from 'react-native-reanimated'
+
 import { TermsAndConditions } from './terms-and-conditions'
 
 svgCssInterop([ArrowBackOutlined, ChevronRightOutlined, NotificationsOutlined])

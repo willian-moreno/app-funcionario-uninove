@@ -1,4 +1,3 @@
-import { cn } from '@utils/cn'
 import { Pressable, ViewProps } from 'react-native'
 import Animated, {
   SharedValue,
@@ -7,6 +6,8 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   isVisible: SharedValue<boolean>

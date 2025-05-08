@@ -1,6 +1,7 @@
-import { cn } from '@utils/cn'
 import { RefObject } from 'react'
 import { TextInput as NativeTextInput, TextInputProps, View } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   inputRef?: RefObject<NativeTextInput> | null

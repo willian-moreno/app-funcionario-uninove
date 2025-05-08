@@ -1,17 +1,23 @@
-import { Notification } from '@@types/notification'
-import { Footer } from '@components/footer'
-import { Separator } from '@components/separator'
-import { useAuth } from '@hooks/use-auth'
+import { useCallback, useState } from 'react'
+import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native'
+import { useSharedValue } from 'react-native-reanimated'
+
 import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
 import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_right.svg'
 import NotificationsOffOutlined from '@material-symbols/svg-600/outlined/notifications_off.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
+
+import { Notification } from '@@types/notification'
+
+import { Footer } from '@components/footer'
+import { Separator } from '@components/separator'
+
+import { useAuth } from '@hooks/use-auth'
+
 import { cn } from '@utils/cn'
 import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { useCallback, useState } from 'react'
-import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-native'
-import { useSharedValue } from 'react-native-reanimated'
+
 import { NotificationDetails } from './notification-details'
 
 svgCssInterop([ArrowBackOutlined, ChevronRightOutlined, NotificationsOffOutlined])

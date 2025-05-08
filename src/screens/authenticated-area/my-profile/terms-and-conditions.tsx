@@ -1,9 +1,12 @@
-import { BottomSheet } from '@components/bottom-sheet'
-import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
-import { DEFAULT_DATE, formatDateToLocale } from '@utils/format-date-to-locale'
-import { svgCssInterop } from '@utils/svg-css-interop'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import { SharedValue } from 'react-native-reanimated'
+
+import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
+
+import { BottomSheet } from '@components/bottom-sheet'
+
+import { DEFAULT_DATE, formatDateToLocale } from '@utils/format-date-to-locale'
+import { svgCssInterop } from '@utils/svg-css-interop'
 
 svgCssInterop([CloseOutlined])
 

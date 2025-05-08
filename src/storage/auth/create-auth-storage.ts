@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { AuthStorageDTO } from '@storage/auth-storage-dto'
 import { AUTH_STORAGE_KEY } from '@storage/storageConfig'
 

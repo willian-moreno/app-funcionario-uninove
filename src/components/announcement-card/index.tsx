@@ -1,9 +1,12 @@
-import { Announcement } from '@@types/announcement'
+import { Share, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
+
 import IOSShareOutlined from '@material-symbols/svg-600/outlined/ios_share.svg'
+
+import { Announcement } from '@@types/announcement'
+
 import { cn } from '@utils/cn'
 import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { Share, Text, TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
 
 svgCssInterop([IOSShareOutlined])
 

@@ -1,5 +1,6 @@
-import { cn } from '@utils/cn'
 import { ScrollView, ScrollViewProps } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {} & ScrollViewProps
 

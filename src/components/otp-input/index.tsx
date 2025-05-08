@@ -1,4 +1,3 @@
-import { cn } from '@utils/cn'
 import { useEffect, useRef, useState } from 'react'
 import {
   NativeSyntheticEvent,
@@ -8,6 +7,8 @@ import {
   TextInputSubmitEditingEventData,
   View,
 } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type OTPInputType = 'text' | 'number' | 'password'
 

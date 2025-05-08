@@ -1,12 +1,3 @@
-import { BottomSheet } from '@components/bottom-sheet'
-import CameraswitchOutlined from '@material-symbols/svg-600/outlined/cameraswitch.svg'
-import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
-import FlashlightOffOutlined from '@material-symbols/svg-600/outlined/flashlight_off.svg'
-import FlashlightOnOutlined from '@material-symbols/svg-600/outlined/flashlight_on.svg'
-import { svgCssInterop } from '@utils/svg-css-interop'
-import { BarcodeScanningResult, CameraType, CameraView } from 'expo-camera'
-import * as Clipboard from 'expo-clipboard'
-import * as Linking from 'expo-linking'
 import { useState } from 'react'
 import {
   Alert,
@@ -18,6 +9,18 @@ import {
   View,
 } from 'react-native'
 import { runOnJS, SharedValue, useAnimatedReaction } from 'react-native-reanimated'
+
+import CameraswitchOutlined from '@material-symbols/svg-600/outlined/cameraswitch.svg'
+import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
+import FlashlightOffOutlined from '@material-symbols/svg-600/outlined/flashlight_off.svg'
+import FlashlightOnOutlined from '@material-symbols/svg-600/outlined/flashlight_on.svg'
+import { BarcodeScanningResult, CameraType, CameraView } from 'expo-camera'
+import * as Clipboard from 'expo-clipboard'
+import * as Linking from 'expo-linking'
+
+import { BottomSheet } from '@components/bottom-sheet'
+
+import { svgCssInterop } from '@utils/svg-css-interop'
 
 svgCssInterop([CameraswitchOutlined, CloseOutlined, FlashlightOffOutlined, FlashlightOnOutlined])
 

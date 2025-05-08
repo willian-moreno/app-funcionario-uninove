@@ -1,14 +1,17 @@
+import { Text, View } from 'react-native'
+import { Controller, useForm } from 'react-hook-form'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import MailOutlined from '@material-symbols/svg-600/outlined/mail.svg'
+import { useNavigation } from '@react-navigation/native'
+import { z } from 'zod'
+
 import { AnchorButton } from '@components/anchor-button'
 import { Button } from '@components/button'
 import { Label } from '@components/label'
 import { OTPInput } from '@components/otp-input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import MailOutlined from '@material-symbols/svg-600/outlined/mail.svg'
-import { useNavigation } from '@react-navigation/native'
+
 import { svgCssInterop } from '@utils/svg-css-interop'
-import { Controller, useForm } from 'react-hook-form'
-import { Text, View } from 'react-native'
-import { z } from 'zod'
 
 svgCssInterop([MailOutlined])
 

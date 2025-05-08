@@ -1,14 +1,17 @@
+import { RefObject, useRef } from 'react'
+import { TextInput as NativeTextInput, Text, View } from 'react-native'
+import { Controller, useForm } from 'react-hook-form'
+
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useNavigation } from '@react-navigation/native'
+import { z } from 'zod'
+
 import { Button } from '@components/button'
 import { Label } from '@components/label'
 import { TextInput } from '@components/text-input'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigation } from '@react-navigation/native'
+
 import { maskCpfNumber } from '@utils/mask-cpf-number'
 import { maskDate } from '@utils/mask-date'
-import { RefObject, useRef } from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import { TextInput as NativeTextInput, Text, View } from 'react-native'
-import { z } from 'zod'
 
 const resetPasswordForm = z.object({
   registration: z.string().regex(/^\d{6}$/, 'Matrícula possui formato inválido.'),

@@ -1,5 +1,6 @@
-import { cn } from '@utils/cn'
 import { TouchableOpacity, TouchableOpacityProps, View } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   value?: boolean

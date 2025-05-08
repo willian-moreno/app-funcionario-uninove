@@ -1,5 +1,6 @@
-import { cn } from '@utils/cn'
 import { Text, TouchableOpacity, TouchableOpacityProps } from 'react-native'
+
+import { cn } from '@utils/cn'
 
 type Props = {
   userNameInitials?: string

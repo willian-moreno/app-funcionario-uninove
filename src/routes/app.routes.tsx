@@ -1,6 +1,8 @@
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
 import { AuthLayout } from '@layouts/auth'
 import { AuthenticatedArea } from '@layouts/authenticated-area'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
 import { ResetPasswordFirstStage } from '@screens/auth/reset-password/first-stage'
 import { ResetPasswordSecondStage } from '@screens/auth/reset-password/second-stage'
 import { ResetPasswordThirdStage } from '@screens/auth/reset-password/third-stage'

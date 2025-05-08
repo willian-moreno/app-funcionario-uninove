@@ -1,5 +1,6 @@
-import { cssInterop } from 'nativewind'
 import { SvgProps } from 'react-native-svg'
+
+import { cssInterop } from 'nativewind'
 
 export function svgCssInterop(svgs: React.FC<SvgProps>[]) {
   svgs.forEach((Svg) =>
