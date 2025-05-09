@@ -2,7 +2,7 @@ import { Share, Text, TouchableOpacity, TouchableOpacityProps, View } from 'reac
 
 import IOSShareOutlined from '@material-symbols/svg-600/outlined/ios_share.svg'
 
-import { Announcement } from '@@types/announcement'
+import type { Announcement } from '@@types/announcement'
 
 import { cn } from '@utils/cn'
 import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'

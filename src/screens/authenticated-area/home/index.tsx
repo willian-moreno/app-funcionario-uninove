@@ -13,7 +13,7 @@ import TheaterComedyOutlined from '@material-symbols/svg-600/outlined/theater_co
 import { useNavigation } from '@react-navigation/native'
 import * as Linking from 'expo-linking'
 
-import { Announcement } from '@@types/announcement'
+import type { Announcement } from '@@types/announcement'
 
 import { AnnouncementCard } from '@components/announcement-card'
 import { Bedge } from '@components/bedge'

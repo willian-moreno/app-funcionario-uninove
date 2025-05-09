@@ -4,7 +4,7 @@ import { SharedValue } from 'react-native-reanimated'
 
 import CloseOutlined from '@material-symbols/svg-600/outlined/close.svg'
 
-import { Notification } from '@@types/notification'
+import type { Notification } from '@@types/notification'
 
 import { BottomSheet } from '@components/bottom-sheet'
 import { Loading } from '@components/loading'

@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useState } from 'react'
 
-import { User } from '@@types/user'
+import type { User } from '@@types/user'
 
 import { useAuth } from '@hooks/use-auth'
 

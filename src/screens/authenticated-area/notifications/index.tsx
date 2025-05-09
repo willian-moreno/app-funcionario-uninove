@@ -7,7 +7,7 @@ import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_rig
 import NotificationsOffOutlined from '@material-symbols/svg-600/outlined/notifications_off.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
-import { Notification } from '@@types/notification'
+import type { Notification } from '@@types/notification'
 
 import { Footer } from '@components/footer'
 import { Separator } from '@components/separator'
