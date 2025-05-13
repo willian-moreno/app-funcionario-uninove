@@ -6,7 +6,10 @@ type Props = {} & ViewProps
 
 export function Root({ children, className, ...props }: Props) {
   return (
-    <View className={cn('relative', className)} {...props}>
+    <View
+      className={cn('relative', className)}
+      {...props}
+    >
       {children}
     </View>
   )

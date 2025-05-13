@@ -103,12 +103,21 @@ export function QRCodeReader({ isVisible }: Props) {
 
   return (
     <>
-      <BottomSheet.Overlay isVisible={isVisible} onClose={handleCloseBottomSheet} />
-      <BottomSheet.Content isVisible={isVisible} className="bg-sky-950">
+      <BottomSheet.Overlay
+        isVisible={isVisible}
+        onClose={handleCloseBottomSheet}
+      />
+      <BottomSheet.Content
+        isVisible={isVisible}
+        className="bg-sky-950"
+      >
         <View className="flex-1 gap-y-6 px-6 pt-6">
           <View className="gap-y-2">
             <View className="flex-row justify-between gap-x-6">
-              <Text className="my-auto flex-1 font-sans-bold text-2xl text-white" numberOfLines={2}>
+              <Text
+                className="my-auto flex-1 font-sans-bold text-2xl text-white"
+                numberOfLines={2}
+              >
                 Leitor de QR Code
               </Text>
               <TouchableOpacity

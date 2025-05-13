@@ -22,17 +22,44 @@ export function AppRoutes() {
       screenOptions={{ headerShown: false, animation: 'fade_from_bottom', statusBarStyle: 'dark' }}
     >
       <Group screenLayout={AuthLayout}>
-        <Screen name="sign_in" component={SignIn} />
-        <Screen name="reset_password_first_stage" component={ResetPasswordFirstStage} />
-        <Screen name="reset_password_second_stage" component={ResetPasswordSecondStage} />
-        <Screen name="reset_password_third_stage" component={ResetPasswordThirdStage} />
+        <Screen
+          name="sign_in"
+          component={SignIn}
+        />
+        <Screen
+          name="reset_password_first_stage"
+          component={ResetPasswordFirstStage}
+        />
+        <Screen
+          name="reset_password_second_stage"
+          component={ResetPasswordSecondStage}
+        />
+        <Screen
+          name="reset_password_third_stage"
+          component={ResetPasswordThirdStage}
+        />
       </Group>
       <Group screenLayout={AuthenticatedArea}>
-        <Screen name="employee_on_vacation" component={EmployeeOnVacation} />
-        <Screen name="home" component={Home} />
-        <Screen name="my_profile" component={MyProfile} />
-        <Screen name="notifications" component={Notifications} />
-        <Screen name="qr_code" component={QRCode} />
+        <Screen
+          name="employee_on_vacation"
+          component={EmployeeOnVacation}
+        />
+        <Screen
+          name="home"
+          component={Home}
+        />
+        <Screen
+          name="my_profile"
+          component={MyProfile}
+        />
+        <Screen
+          name="notifications"
+          component={Notifications}
+        />
+        <Screen
+          name="qr_code"
+          component={QRCode}
+        />
       </Group>
     </Navigator>
   )

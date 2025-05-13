@@ -114,7 +114,12 @@ export function Notifications() {
           keyExtractor={(item) => item.id.toString()}
           showsVerticalScrollIndicator={false}
           contentContainerClassName="flex-grow pb-6"
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+            />
+          }
           renderItem={({ item, index }) => (
             <TouchableOpacity
               className={cn('flex-1 flex-row items-center gap-x-6 py-6', {

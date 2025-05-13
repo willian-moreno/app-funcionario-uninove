@@ -29,7 +29,10 @@ export function Overlay({ isVisible, duration = 500, onClose, className, style, 
       style={[backdropStyle, style]}
       {...props}
     >
-      <Pressable className="flex-1" onPress={onClose} />
+      <Pressable
+        className="flex-1"
+        onPress={onClose}
+      />
     </Animated.View>
   )
 }

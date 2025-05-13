@@ -11,7 +11,10 @@ export function Footer({ className, variant = 'default', ...props }: Props) {
   const version = require('./../../../package.json').version
 
   return (
-    <View className={cn('mt-6 w-full', className)} {...props}>
+    <View
+      className={cn('mt-6 w-full', className)}
+      {...props}
+    >
       <Text
         className={cn('mx-auto font-sans-regular text-base', {
           'text-sky-900': variant === 'default',

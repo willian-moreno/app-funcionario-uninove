@@ -201,9 +201,15 @@ export function MyProfile() {
           <Text className="font-sans-bold text-2xl text-sky-900">Meu perfil</Text>
 
           <View className="flex-row items-center gap-x-4">
-            <ProfileButton userNameInitials={auth?.user.nameInitials} disabled />
+            <ProfileButton
+              userNameInitials={auth?.user.nameInitials}
+              disabled
+            />
             <View className="flex-1">
-              <Text className="font-sans-bold text-lg leading-tight text-sky-900" numberOfLines={1}>
+              <Text
+                className="font-sans-bold text-lg leading-tight text-sky-900"
+                numberOfLines={1}
+              >
                 {auth?.user.fullName}
               </Text>
               <Text className="font-sans-regular text-lg leading-tight text-sky-900">
@@ -295,7 +301,11 @@ export function MyProfile() {
 
           <Separator orientation="horizontal" />
 
-          <AnchorButton value="Sair da conta" className="mx-auto my-4" onPress={handleSignOut} />
+          <AnchorButton
+            value="Sair da conta"
+            className="mx-auto my-4"
+            onPress={handleSignOut}
+          />
         </View>
         <Footer />
       </ScreenScrollView>

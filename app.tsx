@@ -44,7 +44,11 @@ export function App() {
 
   return (
     <GestureHandlerRootView>
-      <StatusBar style="dark" backgroundColor="transparent" translucent />
+      <StatusBar
+        style="dark"
+        backgroundColor="transparent"
+        translucent
+      />
       <View className="flex-1 bg-sky-50">{fontsLoaded ? <Routes /> : <Loading />}</View>
     </GestureHandlerRootView>
   )

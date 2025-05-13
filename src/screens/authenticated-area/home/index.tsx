@@ -152,7 +152,12 @@ export function Home() {
     <>
       <ScreenScrollView
         contentContainerClassName="p-0 py-6"
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
       >
         <View className="flex-1 gap-y-6">
           <View className="flex-row items-center justify-between gap-x-6 px-6">
@@ -187,7 +192,10 @@ export function Home() {
                   data={announcements}
                   keyExtractor={(item) => item.id.toString()}
                   renderItem={({ item }) => (
-                    <AnnouncementCard announcement={item} style={{ width: containerWidth }} />
+                    <AnnouncementCard
+                      announcement={item}
+                      style={{ width: containerWidth }}
+                    />
                   )}
                   showsHorizontalScrollIndicator={false}
                   contentContainerClassName={cn('gap-x-4 px-6 py-3', {

@@ -39,7 +39,10 @@ export function AnnouncementCard({
             Novo
           </Text>
         )}
-        <Text className="font-sans-bold text-2xl text-sky-900" numberOfLines={2}>
+        <Text
+          className="font-sans-bold text-2xl text-sky-900"
+          numberOfLines={2}
+        >
           {title}
         </Text>
         <View>

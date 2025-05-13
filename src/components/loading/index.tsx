@@ -8,7 +8,10 @@ type Props = {
 
 export function Loading({ className, variant = 'default', ...props }: Props) {
   return (
-    <View className={cn('flex-1 items-center justify-center', className)} {...props}>
+    <View
+      className={cn('flex-1 items-center justify-center', className)}
+      {...props}
+    >
       <ActivityIndicator
         className={cn('text-sky-900', {
           'text-white': variant === 'light',

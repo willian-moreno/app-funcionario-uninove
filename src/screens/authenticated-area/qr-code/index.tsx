@@ -164,7 +164,10 @@ export function QRCode() {
               variant="secondary"
               onPress={handleShowBasicInformations}
             />
-            <Button value="Leitor de QR Code" onPress={handleShowQRCodeReader} />
+            <Button
+              value="Leitor de QR Code"
+              onPress={handleShowQRCodeReader}
+            />
           </View>
         </View>
         <Footer />

@@ -54,7 +54,10 @@ export function BasicInformations({ isVisible }: Props) {
 
   return (
     <>
-      <BottomSheet.Overlay isVisible={isVisible} onClose={handleCloseBottomSheet} />
+      <BottomSheet.Overlay
+        isVisible={isVisible}
+        onClose={handleCloseBottomSheet}
+      />
       <BottomSheet.Content isVisible={isVisible}>
         <View className="flex-1 gap-y-6 px-6 pt-6">
           <View className="gap-y-2">

@@ -39,6 +39,7 @@
   ],
   "importOrderTypeScriptVersion": "5.3.3",
   "importOrderCaseSensitive": false,
+  "singleAttributePerLine": true,
   "printWidth": 100,
   "tabWidth": 2,
   "singleQuote": true,

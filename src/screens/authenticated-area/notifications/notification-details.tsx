@@ -39,7 +39,10 @@ export function NotificationDetails({ isVisible, notification, onClose }: Props)
 
   return (
     <>
-      <BottomSheet.Overlay isVisible={isVisible} onClose={handleCloseBottomSheet} />
+      <BottomSheet.Overlay
+        isVisible={isVisible}
+        onClose={handleCloseBottomSheet}
+      />
       <BottomSheet.Content isVisible={isVisible}>
         {notification ? (
           <View className="flex-1 gap-y-6 px-6 pt-6">

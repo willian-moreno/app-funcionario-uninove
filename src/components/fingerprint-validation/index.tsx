@@ -65,7 +65,10 @@ export function FingerprintValidation({ onSuccess }: Props) {
       <KeyboardAvoiding.View>
         <KeyboardAvoiding.Scroll>
           <View className="mx-auto flex w-52">
-            <LogoSvg height={150} style={{ marginTop: 'auto', marginBottom: 'auto' }} />
+            <LogoSvg
+              height={150}
+              style={{ marginTop: 'auto', marginBottom: 'auto' }}
+            />
           </View>
           <View className="flex-1 gap-y-6">
             <View className="flex-1 items-center justify-center gap-y-6">
@@ -80,7 +83,11 @@ export function FingerprintValidation({ onSuccess }: Props) {
                 disabled={!isFingerprintAvailable}
                 onPress={handleSignIn}
               />
-              <AnchorButton value="Sair da conta" className="mx-auto" onPress={handleSignOut} />
+              <AnchorButton
+                value="Sair da conta"
+                className="mx-auto"
+                onPress={handleSignOut}
+              />
             </View>
           </View>
           <Footer variant="diluted" />
