@@ -37,6 +37,10 @@ export function Notifications() {
     }))
   })
 
+  const numberOfNewNotifications = notifications.reduce((acc, notification) => {
+    return notification.isVisualised ? acc : acc + 1
+  }, 0)
+
   const [activeNotification, setActiveNotification] = useState<Notification | null>(null)
 
   const [refreshing, setRefreshing] = useState(false)
@@ -116,7 +120,11 @@ export function Notifications() {
             />
           </View>
 
-          <Text className="font-sans-regular text-xl text-sky-400">2 novas</Text>
+          {numberOfNewNotifications > 0 && (
+            <Text className="font-sans-regular text-xl text-sky-400">
+              {numberOfNewNotifications} novas
+            </Text>
+          )}
         </View>
 
         <FlatList
