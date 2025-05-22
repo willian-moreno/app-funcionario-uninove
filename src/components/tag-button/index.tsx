@@ -19,7 +19,12 @@ export function TagButton({ children, className, value = '', ...props }: Props) 
       {children ? (
         children
       ) : (
-        <Text className="mx-auto font-sans-bold text-sm text-sky-900">{value}</Text>
+        <Text
+          className="mx-auto font-sans-bold text-sm uppercase text-sky-900"
+          numberOfLines={1}
+        >
+          {value}
+        </Text>
       )}
     </TouchableOpacity>
   )

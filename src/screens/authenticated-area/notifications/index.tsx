@@ -3,24 +3,24 @@ import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-na
 import { useSharedValue } from 'react-native-reanimated'
 
 import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
-import ChevronRightOutlined from '@material-symbols/svg-600/outlined/chevron_right.svg'
 import NotificationsOffOutlined from '@material-symbols/svg-600/outlined/notifications_off.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import type { Notification } from '@@types/notification'
 
 import { Footer } from '@components/footer'
+import { NotificationCard } from '@components/notification-card'
 import { Separator } from '@components/separator'
+import { TagButton } from '@components/tag-button'
 
 import { useAuth } from '@hooks/use-auth'
 
 import { cn } from '@utils/cn'
-import { DEFAULT_DATETIME, formatDateToLocale } from '@utils/format-date-to-locale'
 import { svgCssInterop } from '@utils/svg-css-interop'
 
 import { NotificationDetails } from './notification-details'
 
-svgCssInterop([ArrowBackOutlined, ChevronRightOutlined, NotificationsOffOutlined])
+svgCssInterop([ArrowBackOutlined, NotificationsOffOutlined])
 
 export function Notifications() {
   const { signOut } = useAuth()
@@ -29,7 +29,7 @@ export function Notifications() {
 
   const [notifications, setNotifications] = useState<Notification[]>(() => {
     return Array.from({ length: 10 }).map((_, index) => ({
-      id: index,
+      id: index.toString(),
       title: 'Lorem Ipsum is simply ' + index,
       description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       createdAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * index).toISOString(),
@@ -96,8 +96,8 @@ export function Notifications() {
 
   return (
     <>
-      <View className="flex-1 gap-y-6 px-6 pt-6">
-        <View className="flex-row items-center justify-between">
+      <View className="flex-1 gap-y-6 pt-6">
+        <View className="flex-row items-center justify-between px-6">
           <TouchableOpacity
             className="aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"
             activeOpacity={0.7}
@@ -107,13 +107,23 @@ export function Notifications() {
           </TouchableOpacity>
         </View>
 
-        <Text className="font-sans-bold text-2xl text-sky-900">Notificações</Text>
+        <View className="gap-y-1 px-6">
+          <View className="flex-row items-center justify-between gap-x-4">
+            <Text className="font-sans-bold text-2xl text-sky-900">Notificações</Text>
+            <TagButton
+              className="flex-1"
+              value="Marcar todas como lidas"
+            />
+          </View>
+
+          <Text className="font-sans-regular text-xl text-sky-400">2 novas</Text>
+        </View>
 
         <FlatList
           data={notifications}
           keyExtractor={(item) => item.id.toString()}
           showsVerticalScrollIndicator={false}
-          contentContainerClassName="flex-grow pb-6"
+          contentContainerClassName="flex-grow pb-6 px-6"
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -121,41 +131,19 @@ export function Notifications() {
             />
           }
           renderItem={({ item, index }) => (
-            <TouchableOpacity
-              className={cn('flex-1 flex-row items-center gap-x-6 py-6', {
+            <NotificationCard
+              id={item.id}
+              title={item.title}
+              description={item.description}
+              createdAt={item.createdAt}
+              isVisualised={item.isVisualised}
+              className={cn({
                 'pt-0': index === 0,
                 'pb-0': index + 1 === notifications.length,
               })}
-              activeOpacity={0.7}
               onPress={() => handleTouchNotification(item, index)}
-            >
-              <View className="pointer-events-none flex-1 gap-y-2">
-                <Text
-                  className={cn('font-sans-semibold text-xl text-sky-900', {
-                    'text-sky-900/50': item.isVisualised,
-                  })}
-                  numberOfLines={2}
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  className={cn('font-sans-regular text-xl text-sky-900', {
-                    'text-sky-900/50': item.isVisualised,
-                  })}
-                  numberOfLines={2}
-                >
-                  {item.description}
-                </Text>
-                <Text
-                  className={cn('font-sans-regular text-lg text-sky-900/50', {
-                    'text-sky-900/20': item.isVisualised,
-                  })}
-                >
-                  {formatDateToLocale(item.createdAt, DEFAULT_DATETIME)}
-                </Text>
-              </View>
-              <ChevronRightOutlined className="pointer-events-none h-6 w-6 fill-sky-900 leading-none" />
-            </TouchableOpacity>
+              onRemove={() => {}}
+            />
           )}
           ItemSeparatorComponent={() => <Separator orientation="horizontal" />}
           ListFooterComponentStyle={{ marginTop: 'auto' }}
