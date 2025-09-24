@@ -23,7 +23,8 @@
         "backgroundColor": "#f0f9ff"
       },
       "package": "com.uninove.interno",
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": false,
+      "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
       "favicon": "./assets/favicon.png",

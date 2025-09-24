@@ -9,7 +9,7 @@ export function View({ children, className, ...props }: Props) {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       className={cn('flex-1', className)}
-      keyboardVerticalOffset={10}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       {...props}
     >
       {children}
