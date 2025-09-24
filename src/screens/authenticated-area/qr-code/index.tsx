@@ -78,6 +78,7 @@ export function QRCode() {
                 await Linking.openSettings()
               } catch (error) {
                 Alert.alert('Erro', 'Não foi possível abrir as configurações do aplicativo.')
+                console.error(error)
               }
             },
           },
@@ -97,7 +98,7 @@ export function QRCode() {
     useCallback(() => {
       isBasicInformationsBottomSheetActive.set(false)
       isQRCodeReaderBottomSheetActive.set(false)
-    }, []),
+    }, [isBasicInformationsBottomSheetActive, isQRCodeReaderBottomSheetActive]),
   )
 
   return (

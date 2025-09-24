@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#f0f9ff"
       },
-      "package": "com.uninove.interno"
+      "package": "com.uninove.interno",
+      "edgeToEdgeEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -73,7 +74,10 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera"
         }
-      ]
+      ],
+      "expo-audio",
+      "expo-video",
+      "expo-font"
     ]
   }
 }

@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 
 import VolumeMuteOutlined from '@material-symbols/svg-600/outlined/volume_mute.svg'
 import VolumeUpOutlined from '@material-symbols/svg-600/outlined/volume_up.svg'
 import { useNavigation } from '@react-navigation/native'
-import { Audio } from 'expo-av'
+import { useAudioPlayer } from 'expo-audio'
 
 import VacancieSvg from '@assets/vacancie.svg'
 
@@ -23,7 +23,7 @@ export function EmployeeOnVacation() {
 
   const { auth } = useContext(AuthContext)
 
-  const [sound, setSound] = useState<Audio.Sound>()
+  const player = useAudioPlayer(require('@assets/guitar-on-the-beach.mp3'))
 
   const [isSoundMuted, setIsSoundMuted] = useState(true)
 
@@ -33,45 +33,30 @@ export function EmployeeOnVacation() {
   const svgWidth = windowWidth + windowWidth * 0.25
   const svgHeight = svgWidth * 0.85
 
+  const loadSound = useCallback(() => {
+    player.loop = true
+    player.muted = true
+    player.seekTo(0)
+    player.play()
+  }, [player])
+
   async function handleNavigateToMyProfileScreen() {
     navigation.navigate('my_profile')
   }
 
-  async function loadSound() {
-    await Audio.setAudioModeAsync({
-      playsInSilentModeIOS: true,
-    })
-
-    const { sound } = await Audio.Sound.createAsync(require('@assets/guitar-on-the-beach.mp3'), {
-      isLooping: true,
-      isMuted: true,
-      shouldPlay: false,
-    })
-
-    setSound(sound)
-
-    await sound.playAsync()
-  }
-
   async function handleToggleSoundMutedStatus() {
-    if (!sound) {
+    if (!player) {
       return
     }
 
     setIsSoundMuted(!isSoundMuted)
 
-    await sound.setIsMutedAsync(!isSoundMuted)
+    player.muted = !isSoundMuted
   }
 
   useEffect(() => {
     loadSound()
-
-    return sound
-      ? () => {
-          sound.unloadAsync()
-        }
-      : undefined
-  }, [])
+  }, [loadSound])
 
   return (
     <ScreenScrollView>
@@ -103,7 +88,7 @@ export function EmployeeOnVacation() {
           />
         </View>
 
-        {sound &&
+        {player &&
           (isSoundMuted ? (
             <TouchableOpacity
               className="absolute bottom-0 right-0 ml-auto aspect-square h-14 w-14 items-center justify-center rounded-full bg-sky-50 shadow shadow-sky-900/70"

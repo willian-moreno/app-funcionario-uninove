@@ -57,7 +57,9 @@ export function AuthContextProvider({ children }: Props) {
           nameInitials: userNameInitials,
         },
       })
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (

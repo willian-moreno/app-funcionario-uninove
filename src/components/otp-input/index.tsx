@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
-  NativeSyntheticEvent,
   ReturnKeyTypeOptions,
   TextInput,
-  TextInputKeyPressEventData,
-  TextInputSubmitEditingEventData,
+  TextInputKeyPressEvent,
+  TextInputSubmitEditingEvent,
   View,
 } from 'react-native'
 
@@ -20,7 +19,7 @@ type Props = {
   returnKeyLabel?: string
   returnKeyType?: ReturnKeyTypeOptions
   onChangeText?: (text: string) => void
-  onSubmitEditing?: (e: NativeSyntheticEvent<TextInputSubmitEditingEventData>) => void
+  onSubmitEditing?: (e: TextInputSubmitEditingEvent) => void
 }
 
 const typesConfig: Record<
@@ -77,10 +76,26 @@ export function OTPInput({
 
   const { keyboardType, inputMode, secureTextEntry, sanitizeOnPressing } = typesConfig[type]
 
-  function onInputKeyPress(
-    event: NativeSyntheticEvent<TextInputKeyPressEventData>,
-    currentPosition: number,
-  ) {
+  const reallocateCharacters = useCallback(() => {
+    const newValues = Array.from({ length }).map((_, index) => ({
+      position: index,
+      value: value[index] ?? '',
+    }))
+
+    setValues(newValues)
+  }, [value, length])
+
+  const focusNextEmptyField = useCallback(() => {
+    if (!value.length && focusedInputPosition === null) {
+      return
+    }
+
+    const nextPosition = value.length === length ? length - 1 : value.length
+
+    inputsRef.current.get(nextPosition)?.focus()
+  }, [focusedInputPosition, value, length])
+
+  function onInputKeyPress(event: TextInputKeyPressEvent, currentPosition: number) {
     const currentPositionValue = value[currentPosition] ?? ''
 
     if (event.nativeEvent.key === 'Backspace') {
@@ -112,25 +127,6 @@ export function OTPInput({
     })
   }
 
-  function reallocateCharacters() {
-    const newValues = Array.from({ length }).map((_, index) => ({
-      position: index,
-      value: value[index] ?? '',
-    }))
-
-    setValues(newValues)
-  }
-
-  function focusNextEmptyField() {
-    if (!value.length && focusedInputPosition === null) {
-      return
-    }
-
-    const nextPosition = value.length === length ? length - 1 : value.length
-
-    inputsRef.current.get(nextPosition)?.focus()
-  }
-
   useEffect(() => {
     const newValue = values.map(({ value }) => value).join('')
 
@@ -141,14 +137,16 @@ export function OTPInput({
     reallocateCharacters()
     focusNextEmptyField()
     onChangeText(value)
-  }, [value])
+  }, [value, focusNextEmptyField, onChangeText, reallocateCharacters])
 
   return (
     <View className="flex w-full flex-1 flex-row flex-wrap items-center gap-2">
       {values.map(({ position, value }) => (
         <TextInput
           key={position}
-          ref={(el) => inputsRef.current.set(position, el)}
+          ref={(el) => {
+            inputsRef.current.set(position, el)
+          }}
           value={value}
           className={cn(
             'flex h-14 w-full min-w-9 flex-1 bg-white px-4 text-center text-lg text-sky-900 shadow shadow-sky-900/70',

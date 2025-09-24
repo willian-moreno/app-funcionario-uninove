@@ -19,7 +19,7 @@ export function useAuth() {
         routes: [{ name: 'sign_in' }],
       }),
     )
-  }, [])
+  }, [navigation])
 
   return {
     signOut,

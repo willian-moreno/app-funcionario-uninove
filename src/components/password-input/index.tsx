@@ -10,7 +10,7 @@ import { svgCssInterop } from '@utils/svg-css-interop'
 svgCssInterop([VisibilityOutlined, VisibilityOffOutlined])
 
 type Props = {
-  inputRef?: RefObject<TextInput> | null
+  inputRef?: RefObject<TextInput | null>
 } & TextInputProps
 
 export function PasswordInput({ className, inputRef, readOnly, ...props }: Props) {

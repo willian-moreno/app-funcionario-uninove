@@ -7,7 +7,11 @@ export function svgCssInterop(svgs: React.FC<SvgProps>[]) {
     cssInterop(Svg, {
       className: {
         target: 'style',
-        nativeStyleToProp: { width: true, height: true, fill: true },
+        nativeStyleToProp: {
+          width: true,
+          height: true,
+          fill: true,
+        },
       },
     }),
   )

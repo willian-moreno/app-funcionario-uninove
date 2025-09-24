@@ -1,4 +1,8 @@
-import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
+import {
+  initialWindowMetrics,
+  SafeAreaProvider,
+  SafeAreaView,
+} from 'react-native-safe-area-context'
 
 type Props = {
   children: React.ReactNode
@@ -6,7 +10,7 @@ type Props = {
 
 export function AuthenticatedArea({ children }: Props) {
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <SafeAreaView className="flex-1 bg-white">{children}</SafeAreaView>
     </SafeAreaProvider>
   )

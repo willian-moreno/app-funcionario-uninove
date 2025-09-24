@@ -4,7 +4,7 @@ import { TextInput as NativeTextInput, TextInputProps, View } from 'react-native
 import { cn } from '@utils/cn'
 
 type Props = {
-  inputRef?: RefObject<NativeTextInput> | null
+  inputRef?: RefObject<NativeTextInput | null>
 } & TextInputProps
 
 export function TextInput({ className, inputRef, ...props }: Props) {

@@ -103,7 +103,7 @@ export function ResetPasswordThirdStage() {
     )
   }
 
-  async function onTextInputNextSubmit(textInputRef: RefObject<TextInput>) {
+  async function onTextInputNextSubmit(textInputRef: RefObject<TextInput | null>) {
     await new Promise((resolve) => setTimeout(resolve, 50))
 
     const valueLength = String(textInputRef.current ?? '').length

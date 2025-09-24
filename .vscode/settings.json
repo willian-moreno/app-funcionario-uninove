@@ -1,6 +1,7 @@
 {
   "files.associations": {
-    "*.css": "tailwindcss"
+    "*.css": "tailwindcss",
+    ".config": "properties"
   },
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.expand": false,
@@ -11,6 +12,6 @@
     "*.tsx": "${capture}.ts",
     "tsconfig.json": "tsconfig.*.json",
     "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
-    ".config": ".editorconfig, .eslintrc.js, .gitignore, .prettierrc, app.json, babel.config.js, package-lock.json, package.json, tsconfig.*, metro.config.js, jest.config.js, tailwind.config.js"
+    ".config": ".editorconfig, eslint.config.js, .gitignore, .prettierrc, app.json, babel.config.js, package-lock.json, package.json, tsconfig.*, metro.config.js, jest.config.js, tailwind.config.js"
   }
 }

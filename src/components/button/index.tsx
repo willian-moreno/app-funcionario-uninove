@@ -6,6 +6,7 @@ type Props = {
   value?: string
   variant?: 'primary' | 'secondary'
   isLoading?: boolean
+  size?: 'base' | 'sm'
 } & TouchableOpacityProps
 
 export function Button({
@@ -15,6 +16,7 @@ export function Button({
   value = '',
   variant = 'primary',
   isLoading = false,
+  size = 'base',
   ...props
 }: Props) {
   return (
@@ -27,6 +29,7 @@ export function Button({
           'bg-sky-50': variant === 'secondary' && !disabled,
           'bg-sky-50/70': variant === 'secondary' && disabled,
           'shadow-none': disabled,
+          'h-10 px-2': size === 'sm',
         },
         className,
       )}

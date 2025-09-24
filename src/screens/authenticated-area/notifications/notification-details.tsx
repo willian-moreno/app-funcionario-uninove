@@ -35,7 +35,7 @@ export function NotificationDetails({ isVisible, notification, onClose }: Props)
     }
 
     isVisible.set(false)
-  }, [notification])
+  }, [notification, isVisible])
 
   return (
     <>

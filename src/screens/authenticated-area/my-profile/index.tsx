@@ -90,7 +90,9 @@ export function MyProfile() {
       }
 
       setProfile(profile)
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   async function handleShowFingerprintValidation(isActive: boolean) {
@@ -118,6 +120,7 @@ export function MyProfile() {
       setProfile((state) => ({ ...state, isBiometricActive: isActive }))
       await updateProfileStorage({ ...profile, isBiometricActive: isActive })
     } catch (error) {
+      console.error(error)
     } finally {
       await findStoredProfile()
     }
@@ -128,6 +131,7 @@ export function MyProfile() {
       setProfile((state) => ({ ...state, isNewAnnouncementsActive: isActive }))
       await updateProfileStorage({ ...profile, isNewAnnouncementsActive: isActive })
     } catch (error) {
+      console.error(error)
     } finally {
       await findStoredProfile()
     }
@@ -138,6 +142,7 @@ export function MyProfile() {
       setProfile((state) => ({ ...state, isNewNotificationsActive: isActive }))
       await updateProfileStorage({ ...profile, isNewNotificationsActive: isActive })
     } catch (error) {
+      console.error(error)
     } finally {
       await findStoredProfile()
     }
@@ -170,7 +175,7 @@ export function MyProfile() {
     useCallback(() => {
       isTermsAndConditionsBottomSheetActive.set(false)
       findStoredProfile()
-    }, []),
+    }, [isTermsAndConditionsBottomSheetActive]),
   )
 
   return (

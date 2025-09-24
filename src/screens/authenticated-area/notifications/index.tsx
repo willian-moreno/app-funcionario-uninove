@@ -3,15 +3,18 @@ import { FlatList, RefreshControl, Text, TouchableOpacity, View } from 'react-na
 import { useSharedValue } from 'react-native-reanimated'
 
 import ArrowBackOutlined from '@material-symbols/svg-600/outlined/arrow_back.svg'
+import DeleteOutlined from '@material-symbols/svg-600/outlined/delete.svg'
 import NotificationsOffOutlined from '@material-symbols/svg-600/outlined/notifications_off.svg'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 
 import type { Notification } from '@@types/notification'
 
+import { Button } from '@components/button'
 import { Footer } from '@components/footer'
 import { NotificationCard } from '@components/notification-card'
 import { Separator } from '@components/separator'
 import { TagButton } from '@components/tag-button'
+import { Toast } from '@components/toast'
 
 import { useAuth } from '@hooks/use-auth'
 
@@ -20,7 +23,7 @@ import { svgCssInterop } from '@utils/svg-css-interop'
 
 import { NotificationDetails } from './notification-details'
 
-svgCssInterop([ArrowBackOutlined, NotificationsOffOutlined])
+svgCssInterop([ArrowBackOutlined, DeleteOutlined, NotificationsOffOutlined])
 
 export function Notifications() {
   const { signOut } = useAuth()
@@ -47,6 +50,10 @@ export function Notifications() {
 
   const isBottomSheetActive = useSharedValue(false)
 
+  const isToastVisible = useSharedValue(false)
+
+  const toastAnimationDuration = 500
+
   const onRefresh = useCallback(() => {
     setRefreshing(true)
     setTimeout(() => {
@@ -66,7 +73,13 @@ export function Notifications() {
     navigation.goBack()
   }
 
-  function handleTouchNotification(notification: Notification, index: number) {
+  function handleTouchNotification(id: string) {
+    const notification = notifications.find((item) => item.id === id)
+
+    if (!notification) {
+      return
+    }
+
     if (notification.isVisualised) {
       setActiveNotification({ ...notification })
 
@@ -74,28 +87,34 @@ export function Notifications() {
     }
 
     setNotifications((state) =>
-      state.map((item, i) => {
-        if (i === index) {
+      state.map((item) => {
+        if (item.id === id) {
           item.isVisualised = true
+
+          setActiveNotification({ ...item })
         }
 
         return item
       }),
     )
-
-    setActiveNotification({ ...notifications[index] })
   }
 
   function handleCloseBottomSheet() {
     setActiveNotification(null)
   }
 
+  function handleRemoveNotification(id: string) {
+    isToastVisible.set(false)
+    setTimeout(() => isToastVisible.set(true), toastAnimationDuration)
+  }
+
   useFocusEffect(
     useCallback(() => {
       isBottomSheetActive.set(false)
+      isToastVisible.set(false)
 
       setActiveNotification(null)
-    }, []),
+    }, [isBottomSheetActive, isToastVisible]),
   )
 
   return (
@@ -149,8 +168,8 @@ export function Notifications() {
                 'pt-0': index === 0,
                 'pb-0': index + 1 === notifications.length,
               })}
-              onPress={() => handleTouchNotification(item, index)}
-              onRemove={() => {}}
+              onPress={() => handleTouchNotification(item.id)}
+              onRemove={handleRemoveNotification}
             />
           )}
           ItemSeparatorComponent={() => <Separator orientation="horizontal" />}
@@ -171,6 +190,22 @@ export function Notifications() {
         notification={activeNotification}
         onClose={handleCloseBottomSheet}
       />
+      <Toast.Content
+        className="flex-row items-center justify-between rounded-sm bg-sky-950 p-4"
+        isVisible={isToastVisible}
+        animationDuration={toastAnimationDuration}
+        autoHide
+        onClose={() => isToastVisible.set(false)}
+      >
+        <View className="flex-row items-center gap-2">
+          <DeleteOutlined className="pointer-events-none h-6 w-6 fill-sky-400" />
+          <Text className="text-xl font-bold text-white">Notificação excluída</Text>
+        </View>
+        <Button
+          value="Desfazer"
+          size="sm"
+        />
+      </Toast.Content>
     </>
   )
 }

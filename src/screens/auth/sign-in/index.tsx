@@ -57,7 +57,25 @@ export function SignIn() {
 
   const isSubmitDisabled = !isValid || isSubmitting
 
-  const passwordRef = useRef<NativeTextInput>(null)
+  const passwordRef = useRef<NativeTextInput | null>(null)
+
+  const showFingerprintSignInScreenIfAvailable = useCallback(async () => {
+    if (!isBiometricEnrolled) {
+      return
+    }
+
+    try {
+      const profile = await findProfileStorage()
+
+      if (!profile || !profile.isBiometricActive) {
+        return
+      }
+
+      setIsFingerprintSignInVisible(true)
+    } catch (error) {
+      console.error(error)
+    }
+  }, [isBiometricEnrolled])
 
   async function handleSignIn() {
     if (!isValid) {
@@ -85,6 +103,7 @@ export function SignIn() {
 
       navigation.navigate('home')
     } catch (error) {
+      console.error(error)
     } finally {
     }
   }
@@ -93,22 +112,6 @@ export function SignIn() {
     await findStoredAuth()
 
     navigation.navigate('home')
-  }
-
-  async function showFingerprintSignInScreenIfAvailable() {
-    if (!isBiometricEnrolled) {
-      return
-    }
-
-    try {
-      const profile = await findProfileStorage()
-
-      if (!profile || !profile.isBiometricActive) {
-        return
-      }
-
-      setIsFingerprintSignInVisible(true)
-    } catch (error) {}
   }
 
   function handleNavigateToResetPasswordFirstStageScreen() {
@@ -135,7 +138,7 @@ export function SignIn() {
   useFocusEffect(
     useCallback(() => {
       showFingerprintSignInScreenIfAvailable()
-    }, [isBiometricVerificationLoading]),
+    }, [showFingerprintSignInScreenIfAvailable]),
   )
 
   if (isBiometricVerificationLoading) {

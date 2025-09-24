@@ -80,7 +80,7 @@ export function ResetPasswordFirstStage() {
     setValue('dateOfAdmission', newValue, { shouldValidate: true })
   }
 
-  async function onTextInputNextSubmit(textInputRef: RefObject<NativeTextInput>) {
+  async function onTextInputNextSubmit(textInputRef: RefObject<NativeTextInput | null>) {
     await new Promise((resolve) => setTimeout(resolve, 50))
 
     const valueLength = String(textInputRef.current ?? '').length

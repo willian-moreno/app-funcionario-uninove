@@ -46,7 +46,7 @@ export function Home() {
 
   const { auth } = useContext(AuthContext)
 
-  const [announcements, setAnnouncements] = useState<Announcement[]>(() => {
+  const [announcements] = useState<Announcement[]>(() => {
     return Array.from({ length: 6 }).map((_, index) => ({
       id: index,
       title: 'Renovação de crachá de estacionamento 2025',
@@ -149,7 +149,7 @@ export function Home() {
   }
 
   return (
-    <>
+    <View className="relative flex-1">
       <ScreenScrollView
         contentContainerClassName="p-0 py-6"
         refreshControl={
@@ -264,6 +264,6 @@ export function Home() {
       >
         <QrCodeOutlined className="pointer-events-none h-12 w-12 fill-white" />
       </Pressable>
-    </>
+    </View>
   )
 }
